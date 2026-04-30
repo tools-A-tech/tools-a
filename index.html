@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>tools_A 石垢料金表</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #15202B; padding: 20px 16px 40px; color: #E7E9EA; }
+        .site-header { text-align: center; margin-bottom: 20px; }
+        .site-name { font-size: 26px; font-weight: 700; background: linear-gradient(135deg, #1DA1F2, #0D8BD9); background-clip: text; -webkit-background-clip: text; color: transparent; }
+        .site-desc { font-size: 14px; color: #8899A6; margin-top: 6px; }
+        
+        .info-accordion { background: #1E2A38; border-radius: 20px; margin-bottom: 24px; overflow: hidden; border: 1px solid #2D3A48; }
+        .accordion-header { padding: 16px 20px; background: #192734; font-weight: 600; display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: #E7E9EA; }
+        .accordion-icon { transition: transform 0.2s; color: #8899A6; }
+        .accordion-body { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .accordion-body.open { max-height: 800px; padding: 16px 20px; overflow-y: auto; }
+        .info-section { margin-bottom: 16px; }
+        .info-title { font-weight: 600; color: #1DA1F2; margin-bottom: 6px; font-size: 14px; }
+        .info-content { font-size: 13px; color: #8899A6; line-height: 1.5; }
+        .info-content a { color: #1DA1F2; text-decoration: none; }
+        
+        .sns-item { background: #192734; border-radius: 16px; padding: 12px; border: 1px solid #2D3A48; margin-bottom: 8px; }
+        .sns-item h4 { color: #1DA1F2; margin-bottom: 12px; font-size: 15px; }
+        
+        .game-grid { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 550px; margin: 0 auto; }
+        .game-card { background: #1E2A38; border-radius: 24px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); border: 1px solid #2D3A48; cursor: pointer; transition: 0.2s; width: calc(50% - 12px); min-width: 130px; }
+        .game-card:hover { transform: translateY(-3px); border-color: #1DA1F2; background: #253341; }
+        .game-icon-img { width: 36px; height: 36px; object-fit: cover; border-radius: 10px; flex-shrink: 0; }
+        .game-name { font-weight: 600; font-size: 13px; line-height: 1.3; color: #E7E9EA; word-break: break-word; }
+        
+        .inquiry-card { background: #1E2A38; border-radius: 24px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; border: 1px solid #1DA1F2; width: calc(50% - 12px); min-width: 130px; cursor: pointer; }
+        .inquiry-card .game-name { color: #1DA1F2; font-weight: 600; font-size: 12px; line-height: 1.3; text-align: center; width: 100%; }
+        
+        .modal-popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3000; overflow-y: auto; padding: 20px; }
+        .modal-popup-content { background: #1E2A38; max-width: 500px; margin: 40px auto; border-radius: 32px; padding: 20px; border: 1px solid #2D3A48; }
+        .modal-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .modal-header-img { width: 48px; height: 48px; object-fit: cover; border-radius: 16px; }
+        .modal-header-name { font-size: 20px; font-weight: 700; color: #E7E9EA; }
+        .popup-product-list { display: flex; flex-direction: column; gap: 16px; margin: 20px 0; }
+        .popup-product-item { background: #192734; border: 1px solid #2D3A48; border-radius: 20px; padding: 16px; }
+        .popup-product-title { font-weight: 800; font-size: 17px; color: #E7E9EA; margin-bottom: 8px; }
+        .popup-product-desc { font-size: 13px; color: #8899A6; margin: 8px 0; line-height: 1.5; white-space: pre-wrap; }
+        .popup-product-price { font-weight: 800; margin: 8px 0; font-size: 18px; color: #1DA1F2; }
+        .popup-contact-btn { display: inline-block; background: #1DA1F2; color: white; padding: 10px 16px; border-radius: 40px; text-decoration: none; font-size: 14px; margin-top: 8px; width: 100%; text-align: center; }
+        .popup-contact-btn:hover { background: #0D8BD9; }
+        .close-popup { background: #2D3A48; color: #E7E9EA; border: none; padding: 10px 20px; border-radius: 40px; width: 100%; margin-top: 12px; font-size: 16px; cursor: pointer; }
+        .footer { text-align: center; margin-top: 48px; font-size: 12px; color: #8899A6; border-top: 1px solid #2D3A48; padding-top: 24px; }
+    </style>
+</head>
+<body>
+<div class="site-header">
+    <div class="site-name">tools_A 石垢料金表</div>
+    <div class="site-desc">ゲームタイトルをタップして商品を見る</div>
+</div>
+<meta property="og:title" content="tools_A 石垢料金表" />
+<meta property="og:description" content="【即日対応】モンスト、FGOなど100タイトル以上の石垢を販売中。10年以上の実績。まずはDMでお問い合わせください。" />
+<meta property="og:image" content="https://i.imgur.com/WjP4hD1.png" />
+<meta property="og:url" content="https://tools-a-tech.github.io/tools-a/" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@14akat" />
+<!-- アコーディオン1：お問い合わせ前にお読みください -->
+<div class="info-accordion">
+    <div class="accordion-header" id="accordionHeader1">
+        <span>📌 お問い合わせ前にお読みください</span>
+        <span class="accordion-icon icon1">▼</span>
+    </div>
+    <div class="accordion-body" id="accordionBody1">
+        <div class="info-section"><div class="info-title">📢 更新状況</div><div class="info-content" id="updateInfo"></div></div>
+        <div class="info-section"><div class="info-title">🔗 SNS</div><div class="info-content" id="snsInfo"></div></div>
+        <div class="info-section"><div class="info-title">💳 支払い方法</div><div class="info-content" id="paymentInfo"></div></div>
+    </div>
+</div>
+
+<!-- ゲームタイトル一覧 -->
+<div class="game-grid" id="gameContainer"></div>
+
+<!-- アコーディオン2：注意事項 -->
+<div class="info-accordion">
+    <div class="accordion-header" id="accordionHeader2">
+        <span>⚠️ 当方の販売実績やお取り引きについての注意事項</span>
+        <span class="accordion-icon icon2">▼</span>
+    </div>
+    <div class="accordion-body" id="accordionBody2">
+        <div class="info-content" id="noticeInfo"></div>
+    </div>
+</div>
+
+<!-- アコーディオン3：インスタ実績投稿まとめ（一番下） -->
+<div class="info-accordion">
+    <div class="accordion-header" id="accordionHeader3">
+        <span>📷 インスタ 実績投稿まとめ</span>
+        <span class="accordion-icon icon3">▼</span>
+    </div>
+    <div class="accordion-body" id="accordionBody3">
+        <div class="sns-item">
+            <h4>📷 Instagram @tools.a_</h4>
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/tools.a_/" data-instgrm-version="14" style="width: 100%;"></blockquote>
+            <script async src="//www.instagram.com/embed.js"></script>
+        </div>
+    </div>
+</div>
+
+<div class="footer">© tools_A</div>
+
+<div id="productPopupModal" class="modal-popup">
+    <div class="modal-popup-content">
+        <div class="modal-header"><img id="popupGameIconImg" class="modal-header-img" src=""><span class="modal-header-name" id="popupGameName"></span></div>
+        <div id="popupProductList" class="popup-product-list"></div>
+        <button class="close-popup" id="closePopupBtn">閉じる</button>
+    </div>
+</div>
+
+<script>
+    const commonContactUrl = "https://x.com/messages/compose?recipient_id=1641057230408540163";
+    
+    const titleImageMap = {
+        "モンスト": "https://i.imgur.com/3m0t0yL.png", "ファンパレ": "https://i.imgur.com/Vo9OmpJ.png", "バウンティラッシュ": "https://i.imgur.com/T8uBNWo.png",
+        "アイドリッシュセブン": "https://i.imgur.com/QPeWwzk.png", "IDOLY PRIDE": "https://i.imgur.com/l7RCd1I.png", "アズレン": "https://i.imgur.com/attWJZV.png",
+        "あんスタ！！Music": "https://i.imgur.com/HMr5WTx.png", "アークナイツ": "https://i.imgur.com/4afLGbA.png", "アークナイツエンドフィールド": "https://i.imgur.com/aj4XPud.png",
+        "アナザーエデン": "https://i.imgur.com/8p26r22.png", "アウプレ": "https://i.imgur.com/9yn1TZs.png", "efootball": "https://i.imgur.com/LKrLLZe.png",
+        "ウマ娘": "https://i.imgur.com/dqqHpky.png", "ウィンヒロ": "https://i.imgur.com/r3Vtcza.png", "ウィズダフネ": "https://i.imgur.com/k6WvEnm.png",
+        "SDガンダムGジェネエターナル": "https://i.imgur.com/rwUZpWy.png", "エレスト": "https://i.imgur.com/FobOB8k.png", "エイトリ 18TRIP": "https://i.imgur.com/LwWmw5Y.png",
+        "MLB RIVALS": "https://i.imgur.com/LJk27fO.png", "俺アラ": "https://i.imgur.com/JJjP3RJ.png", "オバマス": "https://i.imgur.com/rbWXzwk.png",
+        "オセロニア": "https://i.imgur.com/K53OeuJ.png", "怪獣8号 THE GAME": "https://i.imgur.com/Pp043Rw.png", "学園アイドルマスター": "https://i.imgur.com/M0Cg7fY.png",
+        "カゲマス": "https://i.imgur.com/zZYivnZ.png", "ガデテル": "https://i.imgur.com/aSUvJux.png", "キングダム頂点": "https://i.imgur.com/QPUspju.png",
+        "グラクロ": "https://i.imgur.com/6ZWwi4v.png", "グラブル": "https://i.imgur.com/2CqYBIs.png", "グラサマ": "https://i.imgur.com/a8MifJI.png",
+        "クッキーランキングダム": "https://i.imgur.com/GnxIIfG.png", "原神": "https://i.imgur.com/5sA4rYW.png", "剣と魔法のログレス": "https://i.imgur.com/7eykuf3.png",
+        "コトダマン": "https://i.imgur.com/u6Wrb6i.png", "このファン": "https://i.imgur.com/xED0R2o.png", "サモンズボード": "https://i.imgur.com/OpYqcwK.png",
+        "実況パワフルプロ野球": "https://i.imgur.com/EFqCp9R.png", "シャドバビヨンド": "https://i.imgur.com/qWkeuvo.png", "白猫プロジェクト": "https://i.imgur.com/MBCqieU.png",
+        "城ドラ": "https://i.imgur.com/yKtDKQP.png", "シャニマス": "https://i.imgur.com/oF2UFqb.png", "シャニソン": "https://i.imgur.com/Wq6kZIM.png",
+        "スーパーロボット大戦DD": "https://i.imgur.com/nJACodb.png", "進撃の巨人ブレオダ": "https://i.imgur.com/yKIh6x4.png", "ツイステ": "https://i.imgur.com/LRrjcGk.png",
+        "デュエプレ": "https://i.imgur.com/TCJySEO.png", "デレステ": "https://i.imgur.com/TSGV4Ru.png", "ティンクルスターナイツ": "https://i.imgur.com/XaTjpqP.png",
+        "天啓パラドクス": "https://i.imgur.com/P4Y2BWM.png", "D4DJグルミク": "https://i.imgur.com/7XP7g4U.png", "DQタクト": "https://i.imgur.com/WEqfzDr.png",
+        "ドカバト": "https://i.imgur.com/4JLHKwG.png", "ドラゴンボールレジェンズ": "https://i.imgur.com/EaTAJzJ.png", "トレクル": "https://i.imgur.com/ZfbPVAw.png",
+        "東方ロストワード": "https://i.imgur.com/aZlAnRt.png", "ドルフィンウェーブ": "https://i.imgur.com/njp6E2t.png", "にゃんこ大戦争": "https://i.imgur.com/hAS1aOP.png",
+        "NIKKE": "https://i.imgur.com/oyiLc2j.png", "パズドラ": "https://i.imgur.com/PzopAL4.png", "バンドリ": "https://i.imgur.com/OaQWt3J.png",
+        "ハイキュー!! TOUCH THE DREAM": "https://i.imgur.com/7uKbOtO.png", "ぱずりべ": "https://i.imgur.com/eg3vWvd.png", "ヒプマイ": "https://i.imgur.com/Fc3FxBm.png",
+        "ひぐらしのなく頃に 命": "https://i.imgur.com/N6aW0ip.png", "FGO": "https://i.imgur.com/tNe0I5L.png", "プロセカ": "https://i.imgur.com/6LNoZmg.png",
+        "プリコネ": "https://i.imgur.com/zkIBFYg.png", "ブルアカ": "https://i.imgur.com/tTWnEHA.png", "ブレソル": "https://i.imgur.com/IzjTjDh.png",
+        "プロスピ": "https://i.imgur.com/XgbW3Sx.png", "ブルーロック Project: World Champion": "https://i.imgur.com/3jpOeYm.png", "ブレイクマイケース": "https://i.imgur.com/u25wQ26.png",
+        "FF7 EVER CRISIS": "https://i.imgur.com/ycGoksj.png", "ファイアーエムブレム ヒーローズ": "https://i.imgur.com/sAAoWsx.png", "ヘブバン": "https://i.imgur.com/NmkIHv5.png",
+        "崩壊スターレイル": "https://i.imgur.com/ef3yJv0.png", "ポコダン": "https://i.imgur.com/hFp2kOX.png", "ポケポケ": "https://i.imgur.com/VeVm5BN.png",
+        "ポケマス": "https://i.imgur.com/P7GXHjT.png", "ポケモンユナイト": "https://i.imgur.com/ObYkBR4.png", "まどドラ": "https://i.imgur.com/kXcmgDu.png",
+        "まおりゅう": "https://i.imgur.com/G4MQYqE.png", "魔法使いの約束": "https://i.imgur.com/VbyAvTT.png", "メメントモリ": "https://i.imgur.com/X10QKtP.png",
+        "メジャスピ": "https://i.imgur.com/0IVqXxu.png", "鳴潮": "https://i.imgur.com/m9CbYkd.png", "ユメステ": "https://i.imgur.com/rCZdW32.png",
+        "UCエンゲージ": "https://i.imgur.com/AVXyGnE.png", "遊戯王マスターデュエル": "https://i.imgur.com/sDRWWrw.png", "妖怪ウォッチぷにぷに": "https://i.imgur.com/anLvOA2.png",
+        "ラストクラウディア": "https://i.imgur.com/zocU07m.png", "リリステ": "https://i.imgur.com/EAoo1MF.png", "りばりば": "https://i.imgur.com/yp7mPzP.png",
+        "Limbus Company": "https://i.imgur.com/IeZt6MJ.png", "龍が如くオンライン": "https://i.imgur.com/aPQNFbR.png", "レスレリ": "https://i.imgur.com/fKhfWjR.png",
+        "れじぇくろ！": "https://i.imgur.com/v4n1m5k.png", "ロマサガRS": "https://i.imgur.com/MNpnx1h.png", "ロススト": "https://i.imgur.com/sz9JG9h.png"
+    };
+    
+    const titleNames = [
+        "モンスト", "ファンパレ", "バウンティラッシュ", "アイドリッシュセブン", "IDOLY PRIDE",
+        "アズレン", "あんスタ！！Music", "アークナイツ", "アークナイツエンドフィールド", "アナザーエデン",
+        "アウプレ", "efootball", "ウマ娘", "ウィンヒロ", "ウィズダフネ",
+        "SDガンダムGジェネエターナル", "エレスト", "エイトリ 18TRIP", "MLB RIVALS", "俺アラ",
+        "オバマス", "オセロニア", "怪獣8号 THE GAME", "学園アイドルマスター", "カゲマス",
+        "ガデテル", "キングダム頂点", "グラクロ", "グラブル", "グラサマ",
+        "クッキーランキングダム", "原神", "剣と魔法のログレス", "コトダマン", "このファン",
+        "サモンズボード", "実況パワフルプロ野球", "シャドバビヨンド", "白猫プロジェクト", "城ドラ",
+        "シャニマス", "シャニソン", "スーパーロボット大戦DD", "進撃の巨人ブレオダ", "ツイステ",
+        "デュエプレ", "デレステ", "ティンクルスターナイツ", "天啓パラドクス", "D4DJグルミク",
+        "DQタクト", "ドカバト", "ドラゴンボールレジェンズ", "トレクル", "東方ロストワード",
+        "ドルフィンウェーブ", "にゃんこ大戦争", "NIKKE", "パズドラ", "バンドリ",
+        "ハイキュー!! TOUCH THE DREAM", "ぱずりべ", "ヒプマイ", "ひぐらしのなく頃に 命", "FGO",
+        "プロセカ", "プリコネ", "ブルアカ", "ブレソル", "プロスピ",
+        "ブルーロック Project: World Champion", "ブレイクマイケース", "FF7 EVER CRISIS", "ファイアーエムブレム ヒーローズ", "ヘブバン",
+        "崩壊スターレイル", "ポコダン", "ポケポケ", "ポケマス", "ポケモンユナイト",
+        "まどドラ", "まおりゅう", "魔法使いの約束", "メメントモリ", "メジャスピ",
+        "鳴潮", "ユメステ", "UCエンゲージ", "遊戯王マスターデュエル", "妖怪ウォッチぷにぷに",
+        "ラストクラウディア", "リリステ", "りばりば", "Limbus Company", "龍が如くオンライン",
+        "レスレリ", "れじぇくろ！", "ロマサガRS", "ロススト"
+    ];
+    
+    const siteInfo = {
+        updateInfo: "最終更新 2026/4/29<br>100タイトル以上の石垢料金を掲載中",
+        snsInfo: '🐦 <a href="https://x.com/14akat" target="_blank">X (旧Twitter)</a> │ 📷 <a href="https://www.instagram.com/tools.a_/" target="_blank">Instagram</a>',
+        paymentInfo: "【支払い方法】<br>■ コンビニ支払い<br>ファミマ / セブン / ローソン / ミニストップ / セイコーマート / デイリーヤマザキ など<br><br>■ PayPay送金<br><br>■ ギフトカード<br>Amazonギフトカードのみ対応（料金表の価格+手数料）<br><br>※1万円以上の商品の場合、コンビニ支払いでお願いしております<br>※PayPayの場合は+10％～いただいております"
+    };
+    
+    const noticeInfo = `ヤフオクなど各種サイトでの取引も含め10年以上活動しております
+全て合計すると取引件数は25000件を超えております
+スムーズなお取引を心がけておりますので安心してご依頼ください
+
+ワンクリックで実績用インスタを見ることが出来なくなりました
+11月時点までの実績投稿をスクショでまとめております
+インスタで tools.a_ を検索お願いします
+https://www.instagram.com/tools.a_/
+
+【注意】
+悪意あるユーザーによって使用していた実績タグが荒らされました
+そのため#tools実績は現在使用しておりません
+
+現在は購入していただいたお客様に実績ツイートをお願いしておりません
+配布企画に参加した方のみにお願いしております
+身バレの心配は一切ありません
+
+お気軽にお問合せ下さい
+
+お取引終了後はいかなる場合も返金不可です
+引き継ぎは電波状況の良い所で行ってください
+引継ぎ完了後パスワードの変更などはトラブル防止のため必ずお願いします
+お渡し後はこちらは一切ノータッチです
+トラブルの際はゲーム運営へお問い合わせ下さい
+(通信エラーでのデータ消失してもこちらは一切責任を負えません)
+
+当方は「アカウントの販売」です
+石垢の購入は記載の数所持したアカウントをお渡ししています
+ご自分のアカウントに石が追加されるサービスではありません
+お取引前にご理解をお願いいたします`;
+    
+    const products = [];
+    function addProduct(cat, title, desc, price) {
+        products.push({ category: cat, title: title, description: desc, price: price, contactUrl: commonContactUrl, imageUrl: "" });
+    }
+    
+    // ===== 全商品データ（完全版） =====
+    // モンスト (cat_0)
+    addProduct("cat_0", "ガチャ星5~6キャラ数ランダム", "ルシファー確定\nオーブ1500個以上～/1000円\nオーブ2000個以上～/2000円", "1000円～2000円");
+    addProduct("cat_0", "ガチャ星5~6キャラ数ランダム", "オーブ2500個以上～/3000円\nオーブ5000個以上～/15000円", "3000円～15000円");
+    addProduct("cat_0", "リンネ確定星5~6キャラ数ランダム", "オーブ4100個以上～/10000円", "10000円");
+    addProduct("cat_0", "エル+ルシファー ガチャ限130以上", "オーブ4000個以上～/7000円", "7000円");
+    addProduct("cat_0", "エル+ルシファー ガチャ限160以上", "オーブ4300個以上～ /10000円", "10000円");
+    addProduct("cat_0", "記載以上のオーブ多数垢用意可能", "DMまでお問い合わせをお願いします", "1000～10000円");
+    
+    // ファンパレ (cat_1)
+    addProduct("cat_1", "初期垢", "石130000個前後 /2000円\n石90000個前後 /1000円\n石90000個前後+1体指定 2000円\n石90000個前後+2体指定 3000円", "1000円～3000円");
+    addProduct("cat_1", "進行済み", "石130000個前後 キャラランダム/2000円\n石150000個前後+キャラ指定 /3000円～\n詳細や希望をDMまでお願いします", "2000円～");
+    addProduct("cat_1", "キャラ指定", "学生七海 影夏油 脹相 行家入 覚醒五条\n影乙骨 2周年キャラ各種 0.2秒五条 など\n詳細はDMまでお願いいたします", "1000円～");
+    
+    // バウンティラッシュ (cat_2)
+    addProduct("cat_2", "iOS版 石5000個前後+かけら1100前後", "", "1000円");
+    addProduct("cat_2", "クザン確定(数量限定)", "石5000個前後+かけら2600前後", "3000円");
+    addProduct("cat_2", "黒ガープ確定", "石5000個前後+かけら1700前後", "2000円");
+    addProduct("cat_2", "勝者島ロー 白ニカ 黄猿 黒ひげ 1体指定", "石5000個前後+かけら1800以上", "4000円");
+    addProduct("cat_2", "上記以外の超フェス1体指定", "石5000個前後+かけら1200前後", "2000円");
+    addProduct("cat_2", "超フェス1体指定（かけら多め）", "石5000個前後+かけら1800前後", "4000円");
+    addProduct("cat_2", "iOS 超フェス2体指定", "石5000個前後+かけら1200前後", "4000円");
+    addProduct("cat_2", "iOS 超フェス4体~指定", "石5000個前後+かけら大量垢 /金額相談\nお問い合わせ時は必ず予算をお伝えください", "相談");
+    addProduct("cat_2", "iOS 超フェス多数石垢（参考）", "超フェス8体 石5000+かけら2500", "10000円");
+    addProduct("cat_2", "Android版", "石5000個前後+かけら6000～7000程度\niOS版へのガチャ代行は+1000円で対応\n(代行の場合は石は0でのお渡しとなります)", "1000円～");
+    
+    // アイドリッシュセブン (cat_3)
+    addProduct("cat_3", "Android版のみ", "石2700前後", "3000円");
+    addProduct("cat_4", "石垢", "石17万前後", "2000円");
+    addProduct("cat_5", "ダイヤ+キューブ", "ダイヤ3700 キューブ1200\nダイヤ4600 キューブ1200\nサーバーはお問い合わせください", "2000円～3000円");
+    addProduct("cat_6", "石垢", "石7400個前後\n石10000個前後", "3000円～5000円");
+    addProduct("cat_7", "石垢（純正原石換算分含む）", "石70000前後/1000円\n石160000前後/4000円\n石300000前後/7000円\n石400000前後/11000円", "1000円～11000円");
+    addProduct("cat_8", "キャラ指定リセマラ垢", "進行済み石垢もありますがBANリスク大\nDMにてご相談下さい", "金額要相談");
+    addProduct("cat_9", "石垢", "石80000前後/2000円\n石120000前後/7000円", "2000～7000円");
+    addProduct("cat_10", "石垢", "石52000前後+チケット", "2000円");
+    addProduct("cat_11", "iOS版", "コイン6000前後+GP600万程度 /3000円\nコイン12000前後+GP1400万程度 /7000円", "3000円～7000円");
+    addProduct("cat_11", "Android版", "コイン4100前後+GP500万程度 /2000円\nコイン8000前後+GP600万程度 /5000円", "2000円～5000円");
+    addProduct("cat_12", "SSRチケ計3枚+星3引換券1枚付き", "石140000前後 /1000円\n石200000前後 /2000円", "1000円～2000円");
+    addProduct("cat_12", "サポカ完凸共存垢", "キタサンブラック完凸 石20万前後 /3000円\nその他キャラ指定もご相談下さい", "1000円～");
+    addProduct("cat_13", "石垢", "石89000+チケット", "1000円");
+    addProduct("cat_14", "石垢", "石70000前後", "2000円～");
+    addProduct("cat_15", "未進行石垢", "石110000前後", "1000円");
+    addProduct("cat_15", "進行済石垢", "石200000前後\nその他キャラ機体指定初期リセ垢・完凸指定可能", "1000円～");
+    addProduct("cat_16", "石垢", "石25000前後 /2000円\n石60000前後 /8000円", "2000円～8000円");
+    addProduct("cat_17", "石垢", "石8500+SSR5", "2000円");
+    addProduct("cat_18", "石垢", "石150000前後+チケット合計300以上", "10000円");
+    addProduct("cat_19", "進行済石垢", "石34000前後+チケット350程度 /1000円\n石80000前後+チケット500程度 /2000円\n石110000前後+チケット1100程度 /3000円\n石190000前後+チケット1600程度 /7000円", "1000円～7000円");
+    addProduct("cat_20", "石垢", "石12万前後", "4000円");
+    addProduct("cat_21", "石垢", "石800前後 /2000円\n石1500前後 /3000円\n石2500前後 /5000円\n石3400前後 /7000円\n石4500前後 /12000円", "2000円～12000円");
+    addProduct("cat_22", "石垢", "石25000+チケット合計100程度", "2000円");
+    addProduct("cat_23", "石垢", "石117000前後 内容ランダム/1000円\n石116000前後+SSR7 /2000円", "1000円～");
+    addProduct("cat_24", "石垢", "石14万前後+SSR15確定 /2000円\n石27万前後+SSR18確定 /3000円\n石33万前後+SSR20確定 /5000円", "2000円～5000円");
+    addProduct("cat_25", "初期垢", "石20000前後", "2000円");
+    addProduct("cat_26", "石垢", "石45000前後", "1000円");
+    addProduct("cat_27", "確定垢", "アルティメットエスカノール+背信者メリオダス確定\n+石700個 /1000円\n+石1200個 /2000円", "1000円～");
+    addProduct("cat_27", "UR24以上所持", "石2200個", "6000円");
+    addProduct("cat_28", "SSR90前後", "石+チケット合計650連相当 /2000円\n合計1000連相当 /3000円", "2000円～3000円");
+    addProduct("cat_29", "石垢", "石5000前後 /5000円\n石10000前後 /10000円", "5000円～10000円");
+    addProduct("cat_30", "石垢", "石400000前後（石数変動多いため要問合せ）", "2000円");
+    addProduct("cat_31", "進行済み石垢", "石48000前後 緑90+運命60 /5000円\n石59000前後 緑130+運命60 /6000円", "5000円～6000円");
+    addProduct("cat_32", "石垢", "石2000個前後 w14 /1000円\n石3100個前後 w14 /2000円\n石4600個前後 w14 /3000円", "1000円～3000円");
+    addProduct("cat_33", "石垢", "石75000前後 /1000円\n石120000前後 /2000円\n石190000前後 /4000円\n石230000前後 /6000円", "1000円～6000円");
+    addProduct("cat_34", "石垢", "石120000前後 /1000円\n石200000前後 /2000円", "1000円～2000円");
+    addProduct("cat_35", "石垢", "石800前後 /2000円\n石1550前後 /3000円\n石2000前後 /5000円", "2000円～5000円");
+    addProduct("cat_36", "石垢", "石550+PSR3 /2000円\n石1000+PSR20 /3000円", "2000円～3000円");
+    addProduct("cat_37", "スキン指定リセ垢", "スキン1種指定 /2000円～\nスキン2種指定 /4000円～", "2000円～");
+    addProduct("cat_38", "初期垢", "ジュエル9000 /3000円\nジュエル23000 /9000円", "3000円～9000円");
+    addProduct("cat_38", "進行済み", "ジュエル16000 /5000円\nジュエル25000 /7000円", "5000円～7000円");
+    addProduct("cat_39", "ルビー垢", "ルビー28万前後+CP7万 ※要在庫確認", "7000円");
+    addProduct("cat_40", "石垢", "石73万前後", "3000円");
+    addProduct("cat_41", "石垢", "石98000前後+チケット /2000円\n石140000前後+チケット /5000円", "2000円～5000円");
+    addProduct("cat_42", "iOS版", "石18000前後 /2000円\n石30000前後 /4000円", "2000円～4000円");
+    addProduct("cat_43", "石垢", "石16万前後 星6×10以上 /2000円\n石19万前後 星6×18以上 /3000円", "2000円～3000円");
+    addProduct("cat_44", "石+チケット", "合計900連程度 /1000円\n合計1700連程度 /2000円", "1000円～2000円");
+    addProduct("cat_45", "Facebookアカウント付き", "石10000前後+チケット各種 /8000円\n石20000前後+チケット各種 /13000円", "8000円～13000円");
+    addProduct("cat_46", "石垢", "石60000個前後 /2000円\n石130000個前後 /4000円\n石180000個前後 /6000円", "2000円～6000円");
+    addProduct("cat_47", "石垢", "石24万前後 /2000円\n石69万前後 /5000円", "2000円～5000円");
+    addProduct("cat_48", "石垢", "石25万前後", "3000円");
+    addProduct("cat_49", "石垢", "石140000前後", "1000円");
+    addProduct("cat_50", "石垢", "石16万前後 /2000円\n石38万前後 /3000円\n石52万前後 /15000円", "2000円～15000円");
+    addProduct("cat_51", "iOS進行済み石垢", "石12000前後 /4000円", "4000円～");
+    addProduct("cat_52", "iOS SP100前後 初期垢", "73000個前後 /6000円\n143000個前後 /17000円\n167000個以上 /26000円", "6000円～26000円");
+    addProduct("cat_52", "Android 初期垢", "40000個前後 /2000円\n50000個前後 /3000円\n80000個前後 /5000円\n95000個前後 /6000円", "2000円～6000円");
+    addProduct("cat_53", "iOS専用 初期垢", "石4600個/2000円\n石5500個/3000円\n石6500個/6000円\n石8600個/11000円", "2000円～11000円");
+    addProduct("cat_54", "石垢", "封結晶2200前後 神結晶2300前後 賽銭50万程度", "1000円");
+    addProduct("cat_55", "石垢", "石30000前後+キャラランダム/1000円\n石145000前後+UR50前後 /3000円", "1000円～3000円");
+    addProduct("cat_56", "進行垢", "キャラ複数所持 ほぼ全てのステージクリア済み", "3000円");
+    addProduct("cat_57", "進行済み石垢", "石3万前後+チケット合計250前後 /2000円\n石5万前後+チケット合計350前後 /3000円", "2000円～3000円");
+    addProduct("cat_57", "微進行(石チケット無し)", "クラウン紅蓮シンデレラなど所持垢", "2000円");
+    addProduct("cat_58", "石垢", "魔法石1700前後 /1000円\n魔法石3000前後 /3000円\n魔法石3500前後 /5000円\n魔法石4100前後 /9000円\n魔法石5700前後 /15000円", "1000円～15000円");
+    addProduct("cat_59", "石垢", "スター17万~ 星4ランダム /1000円\nスター29万~ 星4×50前後 /2000円", "1000円～2000円");
+    addProduct("cat_59", "進行済みランク130前後", "スター45万~ 星4×50前後", "14000円");
+    addProduct("cat_60", "石垢", "アイコニック75枚以上所持 石140000個前後", "2000円");
+    addProduct("cat_61", "石垢", "石150000前後", "5000円");
+    addProduct("cat_62", "石垢", "石230000前後", "2000円");
+    addProduct("cat_63", "石垢", "石130000前後 /2000円\n石250000前後 /4000円", "2000円～4000円");
+    addProduct("cat_64", "初期垢", "石1400前後 キャストリア+オベロン+マーリン", "1000円");
+    addProduct("cat_64", "進行済み 奏2", "キャストリア+オベロン+コヤンスカヤなど 石5000個前後相当", "3000円");
+    addProduct("cat_64", "進行済み 奏4", "キャストリア+オベロン+コヤンスカヤなど 石6000個前後相当", "5000円");
+    addProduct("cat_65", "石垢", "石180000前後 星4×10前後/1000円\n石240000前後 星4×25以上/3000円\n石280000以上 星4×25以上/4000円", "1000円～4000円");
+    addProduct("cat_65", "進行済みランクランダム(50以上)", "石290000～ 星4×25前後/4000円\n石360000～ 星4×35前後/7000円\n石440000～ 星4×23前後/10000円", "4000円～10000円");
+    addProduct("cat_66", "石垢", "ジュエル125000前後/1000円\nジュエル190000前後/4000円", "1000円～4000円");
+    addProduct("cat_67", "石垢", "石85000個前後", "1000円");
+    addProduct("cat_68", "石垢", "石11000個前後/3000円\n石40000個前後/5000円", "3000円～");
+    addProduct("cat_69", "初期垢(Vロード未進行)", "エナジー2500前後 S選手40前後 /2000円\nエナジー3000前後 S選手45前後 /4000円\nエナジー3800前後 S選手40前後 /7000円\nエナジー4300前後 S選手45前後 /10000円", "2000円～10000円");
+    addProduct("cat_70", "石垢", "石200000個前後+星3×40体 /1000円\n石290000個前後+星3×60体 /3000円", "1000円～3000円");
+    addProduct("cat_71", "石垢", "石13000前後 チケ140", "1000円");
+    addProduct("cat_72", "石垢", "石19万前後 星5武器160前後", "3000円");
+    addProduct("cat_73", "石垢", "石2300前後", "2000円");
+    addProduct("cat_74", "石垢", "石80000前後 /2000円\n石170000前後 /17000円", "2000円～17000円");
+    addProduct("cat_75", "進行済み石垢", "石74000前後+チケット100前後", "6000円");
+    addProduct("cat_76", "石垢", "石2400個前後 /1000円\n石6800個前後 /3000円", "1000円～3000円");
+    addProduct("cat_77", "日本語版石垢", "パック砂時計5000前後 /2000円\nパック砂時計6300前後 /3000円", "2000円～3000円");
+    addProduct("cat_77", "トレード販売", "星2トレーナー 1枚 2000円\n星2トレーナー 2枚 3000円", "2000円～");
+    addProduct("cat_78", "Androidのみ", "石26万前後 /4000円\n石40万前後 /8000円", "4000円～8000円");
+    addProduct("cat_79", "エオスコイン+チケット", "エオスコイン100000前後 エオスチケット90000前後", "5000円");
+    addProduct("cat_80", "進行済み石垢", "キャラランダム 石200000前後 /2000円\nアルまど確定 石130000前後 /2000円\n眼鏡ほむら確定 石200000前後 /2000円", "2000円");
+    addProduct("cat_81", "iOS/Android対応", "石13000前後+星5×30前後/2000円\n石16000前後+星5×60前後/3000円", "2000円～3000円");
+    addProduct("cat_82", "石垢", "石10000前後 SSR4前後 /1000円\n石18000前後 SSR21前後 /4000円", "1000円～4000円");
+    addProduct("cat_83", "石垢", "石130000前後+チケット /1000円\n石320000前後+チケット /5000円", "1000円～5000円");
+    addProduct("cat_84", "石垢", "石990前後 星4×10前後 /2000円\n石6000前後 星4×50前後 /4000円\n石9000前後 星4×50前後 /5000円", "2000円～5000円");
+    addProduct("cat_85", "進行済み石垢(スマホのみ PS不可)", "石70000前後", "2000円");
+    addProduct("cat_86", "石垢", "石13万前後+星4×4", "1000円");
+    addProduct("cat_87", "石垢", "石35万前後 UR80以上", "4000円");
+    addProduct("cat_88", "石垢", "石30000前後 URクラフトポイント750前後 /1000円\nURクラフトポイント950前後 /3000円", "1000円～3000円");
+    addProduct("cat_89", "初期垢", "Yポイント120000+Yマネー120000", "3000円");
+    addProduct("cat_90", "石垢", "石140000前後 /1000円\n石370000前後 /6000円", "1000円～6000円");
+    addProduct("cat_91", "iOS/Android両対応", "石70000前後+チケット多数", "2000円");
+    addProduct("cat_92", "石垢", "石80000前後 キャラランダム所持/1000円\n石80000前後 オバフロ(聖典)所持/2000円", "1000円～2000円");
+    addProduct("cat_93", "石垢", "石30000前後 /2000円\n石79000前後 /5000円", "2000円～5000円");
+    addProduct("cat_94", "石垢", "石41000前後 /3000円\n石75000前後 /8000円", "3000円～8000円");
+    addProduct("cat_95", "石垢", "石77000+チケット+星3×24前後", "3000円");
+    addProduct("cat_96", "石垢", "石43万前後", "6000円");
+    addProduct("cat_97", "iOS", "石148万前後 /4000円\n石200万前後 /7000円", "4000円～7000円");
+    addProduct("cat_98", "石垢", "石120000前後 /2000円\n石220000前後 /5000円", "2000円～5000円");
+    
+    function nl2br(str) { if (!str) return ''; return str.replace(/\n/g, '<br>'); }
+    
+    function renderSiteInfo() {
+        document.getElementById('updateInfo').innerHTML = siteInfo.updateInfo;
+        document.getElementById('snsInfo').innerHTML = siteInfo.snsInfo;
+        document.getElementById('paymentInfo').innerHTML = siteInfo.paymentInfo;
+    }
+    
+    function renderNoticeInfo() {
+        document.getElementById('noticeInfo').innerHTML = nl2br(escapeHtml(noticeInfo));
+    }
+    
+    function renderGameTitles() {
+        const container = document.getElementById('gameContainer');
+        if (!container) return;
+        container.innerHTML = '';
+        for (let i = 0; i < titleNames.length; i++) {
+            const card = document.createElement('div'); card.className = 'game-card';
+            const iconUrl = titleImageMap[titleNames[i]] || "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%238899A6%22%3E%3Cpath%20d%3D%22M12%202C6.48%202%202%206.48%202%2012s4.48%2010%2010%2010%2010-4.48%2010-10S17.52%202%2012%202zm0%203c1.66%200%203%201.34%203%203s-1.34%203-3%203-3-1.34-3-3%201.34-3%203-3zm0%2014.2c-2.5%200-4.71-1.28-6-3.22.03-1.99%204-3.08%206-3.08%201.99%200%205.97%201.09%206%203.08-1.29%201.94-3.5%203.22-6%203.22z%22%2F%3E%3C%2Fsvg%3E";
+            card.innerHTML = `<img class="game-icon-img" src="${iconUrl}" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%238899A6%22%3E%3Cpath%20d%3D%22M12%202C6.48%202%202%206.48%202%2012s4.48%2010%2010%2010%2010-4.48%2010-10S17.52%202%2012%202zm0%203c1.66%200%203%201.34%203%203s-1.34%203-3%203-3-1.34-3-3%201.34-3%203-3zm0%2014.2c-2.5%200-4.71-1.28-6-3.22.03-1.99%204-3.08%206-3.08%201.99%200%205.97%201.09%206%203.08-1.29%201.94-3.5%203.22-6%203.22z%22%2F%3E%3C%2Fsvg%3E'"><span class="game-name">${escapeHtml(titleNames[i])}</span>`;
+            card.addEventListener('click', () => showProductPopup(i, titleNames[i], titleImageMap[titleNames[i]]));
+            container.appendChild(card);
+        }
+        const inquiryCard = document.createElement('div');
+        inquiryCard.className = 'inquiry-card';
+        inquiryCard.innerHTML = `<span class="game-name">📩 記載のないタイトルはDMまで</span>`;
+        inquiryCard.addEventListener('click', () => { window.open(commonContactUrl, '_blank'); });
+        container.appendChild(inquiryCard);
+    }
+    
+    function showProductPopup(catIndex, displayName, iconUrl) {
+        const filtered = products.filter(p => p.category === "cat_" + catIndex);
+        const headerIconUrl = (iconUrl && iconUrl.trim() !== '') ? iconUrl : "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2248%22%20height%3D%2248%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%238899A6%22%3E%3Cpath%20d%3D%22M12%202C6.48%202%202%206.48%202%2012s4.48%2010%2010%2010%2010-4.48%2010-10S17.52%202%2012%202zm0%203c1.66%200%203%201.34%203%203s-1.34%203-3%203-3-1.34-3-3%201.34-3%203-3zm0%2014.2c-2.5%200-4.71-1.28-6-3.22.03-1.99%204-3.08%206-3.08%201.99%200%205.97%201.09%206%203.08-1.29%201.94-3.5%203.22-6%203.22z%22%2F%3E%3C%2Fsvg%3E";
+        document.getElementById('popupGameIconImg').src = headerIconUrl;
+        document.getElementById('popupGameName').innerHTML = escapeHtml(displayName);
+        const listContainer = document.getElementById('popupProductList');
+        if (filtered.length === 0) listContainer.innerHTML = '<div style="text-align:center; padding:20px;">まだ商品がありません。</div>';
+        else {
+            listContainer.innerHTML = '';
+            filtered.forEach(p => {
+                const itemDiv = document.createElement('div'); itemDiv.className = 'popup-product-item';
+                itemDiv.innerHTML = `<div class="popup-product-title">${escapeHtml(p.title)}</div><div class="popup-product-desc">${nl2br(escapeHtml(p.description))}</div><div class="popup-product-price">${escapeHtml(p.price)}</div><a href="${escapeHtml(p.contactUrl)}" target="_blank" class="popup-contact-btn">📩 問い合わせる</a>`;
+                listContainer.appendChild(itemDiv);
+            });
+        }
+        document.getElementById('productPopupModal').style.display = 'block';
+    }
+    
+    document.getElementById('accordionHeader1').addEventListener('click', () => { document.getElementById('accordionBody1').classList.toggle('open'); document.querySelector('.icon1').style.transform = document.getElementById('accordionBody1').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
+    document.getElementById('accordionHeader2').addEventListener('click', () => { document.getElementById('accordionBody2').classList.toggle('open'); document.querySelector('.icon2').style.transform = document.getElementById('accordionBody2').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
+    document.getElementById('accordionHeader3').addEventListener('click', () => { document.getElementById('accordionBody3').classList.toggle('open'); document.querySelector('.icon3').style.transform = document.getElementById('accordionBody3').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
+    
+    document.getElementById('closePopupBtn').addEventListener('click', () => { document.getElementById('productPopupModal').style.display = 'none'; });
+    window.addEventListener('click', (e) => { if (e.target === document.getElementById('productPopupModal')) document.getElementById('productPopupModal').style.display = 'none'; });
+    
+    function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); }
+    
+    renderSiteInfo();
+    renderNoticeInfo();
+    renderGameTitles();
+</script>
+</body>
+</html>
