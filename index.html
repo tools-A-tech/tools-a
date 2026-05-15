@@ -15,11 +15,20 @@
         .accordion-header { padding: 16px 20px; background: #192734; font-weight: 600; display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: #E7E9EA; }
         .accordion-icon { transition: transform 0.2s; color: #8899A6; }
         .accordion-body { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-        .accordion-body.open { max-height: 800px; padding: 16px 20px; overflow-y: auto; }
+        .accordion-body.open { max-height: 2000px; padding: 16px 20px; overflow-y: auto; }
         .info-section { margin-bottom: 16px; }
         .info-title { font-weight: 600; color: #1DA1F2; margin-bottom: 6px; font-size: 14px; }
         .info-content { font-size: 13px; color: #8899A6; line-height: 1.5; }
         .info-content a { color: #1DA1F2; text-decoration: none; }
+        
+        /* FAQ専用スタイル（アコーディオン内の各Q&A用） */
+        .faq-item { margin-bottom: 12px; border-bottom: 1px solid #2D3A48; padding-bottom: 4px; }
+        .faq-question { font-weight: 600; color: #1DA1F2; cursor: pointer; padding: 8px 0; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+        .faq-question:hover { opacity: 0.8; }
+        .faq-answer { font-size: 12px; color: #8899A6; line-height: 1.5; padding: 0 0 8px 12px; max-height: 0; overflow: hidden; transition: max-height 0.2s ease; }
+        .faq-answer.open { max-height: 300px; padding: 0 0 8px 12px; }
+        .faq-icon { font-size: 11px; transition: transform 0.2s; }
+        .faq-icon.open { transform: rotate(90deg); }
         
         .sns-item { background: #192734; border-radius: 16px; padding: 12px; border: 1px solid #2D3A48; margin-bottom: 8px; }
         .sns-item h4 { color: #1DA1F2; margin-bottom: 12px; font-size: 15px; }
@@ -41,7 +50,6 @@
         .popup-product-list { display: flex; flex-direction: column; gap: 16px; margin: 20px 0; }
         .popup-product-item { background: #192734; border: 1px solid #2D3A48; border-radius: 20px; padding: 16px; }
         .popup-product-title { font-weight: 800; font-size: 17px; color: #E7E9EA; margin-bottom: 8px; }
-        /* 変更点：商品詳細の文字色を白に */
         .popup-product-desc { font-size: 13px; color: #E7E9EA; margin: 8px 0; line-height: 1.5; white-space: pre-wrap; }
         .popup-product-price { font-weight: 800; margin: 8px 0; font-size: 18px; color: #1DA1F2; }
         .popup-contact-btn { display: inline-block; background: #1DA1F2; color: white; padding: 10px 16px; border-radius: 40px; text-decoration: none; font-size: 14px; margin-top: 8px; width: 100%; text-align: center; }
@@ -62,6 +70,7 @@
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content="@14akat" />
+
 <!-- アコーディオン1：お問い合わせ前にお読みください -->
 <div class="info-accordion">
     <div class="accordion-header" id="accordionHeader1">
@@ -75,10 +84,23 @@
     </div>
 </div>
 
+<!-- アコーディオン2：よくある質問（独立） -->
+<div class="info-accordion">
+    <div class="accordion-header" id="accordionHeaderFaq">
+        <span>❓ よくある質問</span>
+        <span class="accordion-icon iconFaq">▼</span>
+    </div>
+    <div class="accordion-body" id="accordionBodyFaq">
+        <div id="faqContainer">
+            <!-- FAQはJSで動的に生成（初期状態はすべて閉じています） -->
+        </div>
+    </div>
+</div>
+
 <!-- ゲームタイトル一覧 -->
 <div class="game-grid" id="gameContainer"></div>
 
-<!-- アコーディオン2：注意事項 -->
+<!-- アコーディオン3：注意事項 -->
 <div class="info-accordion">
     <div class="accordion-header" id="accordionHeader2">
         <span>⚠️ 当方の販売実績やお取り引きについての注意事項</span>
@@ -89,7 +111,7 @@
     </div>
 </div>
 
-<!-- アコーディオン3：インスタ実績投稿まとめ（一番下） -->
+<!-- アコーディオン4：インスタ実績投稿まとめ -->
 <div class="info-accordion">
     <div class="accordion-header" id="accordionHeader3">
         <span>📷 インスタ 実績投稿まとめ</span>
@@ -116,6 +138,55 @@
 
 <script>
     const commonContactUrl = "https://x.com/messages/compose?recipient_id=1641057230408540163";
+    
+    // ========== FAQデータ（完全版・初期はすべて閉じている） ==========
+    const faqData = [
+        { q: "PayPay使えますか？", a: "はい。PayPay対応しております。お取引時にこちらのPayPayIDをお知らせいたします。そのIDまで直接送金をお願いしています。（わからない場合はDMまでのリンク送信でも対応いたします）" },
+        { q: "Amazonギフトは使えますか？", a: "はい。一部商品を除きAmazonギフトコードでの支払いも承ります。料金表の価格からプラスで手数料をいただいております、詳細はDMまでお問い合わせください。" },
+        { q: "コンビニ支払いはどこでもいいですか？", a: "ファミマやミニストップであれば機械にコード入力しレジで精算していただければ完了です。セイコーマートやデイリーヤマザキもレジで精算です。セブンやローソンの場合はATMからの入金になるため少し難しく感じられる方もいらっしゃいますが対応可能です。" },
+        { q: "キャラの指定をお願いしたい。", a: "希望タイトルによってはお探し可能です。お問い合わせ時はゲームタイトルと希望キャラ名、希望キャラの画像を添えてお問い合わせください。必ず予算を添えてお問い合わせお願いします。" },
+        { q: "探している商品が一覧にない。", a: "DMまでお問い合わせください、お探しいたします。" },
+        { q: "サービス開始したばかりの新タイトルを探している", a: "石垢はログインを繰り返し、そのログインボーナスを貯めることで作成されます。サービス直後のタイトルは石垢存在しないものとお考え下さい。新規タイトルに関してはキャラ指定でのリセマラ垢が用意可能な場合があります。まずはお問い合わせください。" },
+        { q: "アカウント買取や交換は対応していますか？", a: "現在は買取交換や下取りでの値引きは一切お受けしておりません。" },
+        { q: "支払い後納品まで時間かかりますか？", a: "ご入金確認後即お渡しいたします。時間がかかってしまう場合はこちらより先にお知らせいたしますのでご安心ください。" },
+        { q: "自分のアカウントに石を追加したい。", a: "当方はアカウントの販売です。既存のアカウントにガチャ石を追加するサービスは行っておりません。" },
+        { q: "実績はありますか？", a: "インスタで確認出来るようにしております。注意事項欄にも記載していますが10年以上アカウントの販売をしております。総取引件数は25000を超えております。安心してご依頼ください。" },
+        { q: "購入実績ポスト不要？", a: "当方から購入の場合、実績ポストは一切不要です。鍵垢の方や捨て垢の方、シャドウバンなどで制限されている方でも誰でも対応可能です。身バレの心配もありませんので日常本垢からでも安心してお問い合わせください。" },
+        { q: "トラブル時の対応は？", a: "アカウントの譲渡という性質上、お取引終了後はすべてご自分で管理をお願いしています。引継ぎ完了後に問題が発生した場合はゲーム運営へのお問い合わせをお願いしております。お渡しした情報で引き継ぎができないなどこちら都合でのトラブル以外で返金返品は一切対応できません。" },
+        { q: "日本人ですか？", a: "めちゃくちゃ日本人です。寿司とラーメンとハンバーガー大好きです。" }
+    ];
+    
+    // FAQをレンダリング（初期はすべて閉じた状態）
+    function renderFAQ() {
+        const container = document.getElementById('faqContainer');
+        if (!container) return;
+        container.innerHTML = '';
+        faqData.forEach((item, idx) => {
+            const faqItem = document.createElement('div');
+            faqItem.className = 'faq-item';
+            faqItem.innerHTML = `
+                <div class="faq-question" data-idx="${idx}">
+                    <span>❓ ${escapeHtml(item.q)}</span>
+                    <span class="faq-icon">▶</span>
+                </div>
+                <div class="faq-answer" id="faqAnswer${idx}">${nl2br(escapeHtml(item.a))}</div>
+            `;
+            container.appendChild(faqItem);
+        });
+        // 質問クリックで開閉
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const idx = this.getAttribute('data-idx');
+                const answer = document.getElementById(`faqAnswer${idx}`);
+                const icon = this.querySelector('.faq-icon');
+                if (answer) {
+                    answer.classList.toggle('open');
+                    if (icon) icon.classList.toggle('open');
+                }
+            });
+        });
+    }
     
     const titleImageMap = {
         "モンスト": "https://i.imgur.com/3m0t0yL.png", "ファンパレ": "https://i.imgur.com/Vo9OmpJ.png", "バウンティラッシュ": "https://i.imgur.com/T8uBNWo.png",
@@ -151,7 +222,6 @@
         "ラストクラウディア": "https://i.imgur.com/zocU07m.png", "リリステ": "https://i.imgur.com/EAoo1MF.png", "りばりば": "https://i.imgur.com/yp7mPzP.png",
         "Limbus Company": "https://i.imgur.com/IeZt6MJ.png", "龍が如くオンライン": "https://i.imgur.com/aPQNFbR.png", "レスレリ": "https://i.imgur.com/fKhfWjR.png",
         "れじぇくろ！": "https://i.imgur.com/v4n1m5k.png", "ロマサガRS": "https://i.imgur.com/MNpnx1h.png", "ロススト": "https://i.imgur.com/sz9JG9h.png",
-        // 新規10タイトル
         "オラドラ": "https://i.imgur.com/FTEC3N2.png",
         "カオスゼロナイトメア": "https://i.imgur.com/lgbmMvF.png",
         "ジャンブラ": "https://i.imgur.com/ZaSE64J.png",
@@ -185,7 +255,6 @@
         "鳴潮", "ユメステ", "UCエンゲージ", "遊戯王マスターデュエル", "妖怪ウォッチぷにぷに",
         "ラストクラウディア", "リリステ", "りばりば", "Limbus Company", "龍が如くオンライン",
         "レスレリ", "れじぇくろ！", "ロマサガRS", "ロススト",
-        // 新規10タイトル（末尾に追加）
         "オラドラ", "カオスゼロナイトメア", "ジャンブラ", "ステラソラ", "スマグロ",
         "トリッカル もちもちほっペ大作戦", "ナナオリ", "ネバエバ (NTE)", "東京ディバンカー", "リヴリーアイランド"
     ];
@@ -232,7 +301,7 @@ https://www.instagram.com/tools.a_/
         products.push({ category: cat, title: title, description: desc, price: price, contactUrl: commonContactUrl, imageUrl: "" });
     }
     
-    // ===== 全商品データ（完全版） =====
+    // ===== 全商品データ（完全版・省略） =====
     // モンスト (cat_0)
     addProduct("cat_0", "ガチャ星5~6キャラ数ランダム", "ルシファー確定\nオーブ1500個以上～/1000円\nオーブ2000個以上～/2000円", "1000円～2000円");
     addProduct("cat_0", "ガチャ星5~6キャラ数ランダム", "オーブ2500個以上～/3000円\nオーブ5000個以上～/15000円", "3000円～15000円");
@@ -368,7 +437,7 @@ https://www.instagram.com/tools.a_/
     addProduct("cat_97", "iOS", "石148万前後 /4000円\n石200万前後 /7000円", "4000円～7000円");
     addProduct("cat_98", "石垢", "石120000前後 /2000円\n石220000前後 /5000円", "2000円～5000円");
     
-    // ===== 新規10タイトルの商品データ =====
+    // 新規10タイトルの商品データ
     addProduct("cat_99", "石25000前後+チケット", "", "1000円");
     addProduct("cat_100", "石30000前後+チケット合計200以上", "", "3000円");
     addProduct("cat_101", "石19000前後", "", "1000円");
@@ -428,7 +497,9 @@ https://www.instagram.com/tools.a_/
         document.getElementById('productPopupModal').style.display = 'block';
     }
     
+    // アコーディオンイベント
     document.getElementById('accordionHeader1').addEventListener('click', () => { document.getElementById('accordionBody1').classList.toggle('open'); document.querySelector('.icon1').style.transform = document.getElementById('accordionBody1').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
+    document.getElementById('accordionHeaderFaq').addEventListener('click', () => { document.getElementById('accordionBodyFaq').classList.toggle('open'); document.querySelector('.iconFaq').style.transform = document.getElementById('accordionBodyFaq').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
     document.getElementById('accordionHeader2').addEventListener('click', () => { document.getElementById('accordionBody2').classList.toggle('open'); document.querySelector('.icon2').style.transform = document.getElementById('accordionBody2').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
     document.getElementById('accordionHeader3').addEventListener('click', () => { document.getElementById('accordionBody3').classList.toggle('open'); document.querySelector('.icon3').style.transform = document.getElementById('accordionBody3').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
     
@@ -437,9 +508,11 @@ https://www.instagram.com/tools.a_/
     
     function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); }
     
+    // レンダリング実行
     renderSiteInfo();
     renderNoticeInfo();
     renderGameTitles();
+    renderFAQ();
 </script>
 </body>
 </html>
