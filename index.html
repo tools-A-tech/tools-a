@@ -21,14 +21,11 @@
         .info-content { font-size: 13px; color: #8899A6; line-height: 1.5; }
         .info-content a { color: #1DA1F2; text-decoration: none; }
         
-        /* FAQ専用スタイル（アコーディオン内の各Q&A用） */
-        .faq-item { margin-bottom: 12px; border-bottom: 1px solid #2D3A48; padding-bottom: 4px; }
-        .faq-question { font-weight: 600; color: #1DA1F2; cursor: pointer; padding: 8px 0; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
-        .faq-question:hover { opacity: 0.8; }
-        .faq-answer { font-size: 12px; color: #8899A6; line-height: 1.5; padding: 0 0 8px 12px; max-height: 0; overflow: hidden; transition: max-height 0.2s ease; }
-        .faq-answer.open { max-height: 300px; padding: 0 0 8px 12px; }
-        .faq-icon { font-size: 11px; transition: transform 0.2s; }
-        .faq-icon.open { transform: rotate(90deg); }
+        /* FAQ内のQ&A表示用（アコーディオンの中身） */
+        .faq-item { margin-bottom: 20px; border-bottom: 1px solid #2D3A48; padding-bottom: 16px; }
+        .faq-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .faq-question { font-weight: 600; color: #1DA1F2; margin-bottom: 8px; font-size: 14px; }
+        .faq-answer { font-size: 13px; color: #8899A6; line-height: 1.5; }
         
         .sns-item { background: #192734; border-radius: 16px; padding: 12px; border: 1px solid #2D3A48; margin-bottom: 8px; }
         .sns-item h4 { color: #1DA1F2; margin-bottom: 12px; font-size: 15px; }
@@ -84,23 +81,10 @@
     </div>
 </div>
 
-<!-- アコーディオン2：よくある質問（独立） -->
-<div class="info-accordion">
-    <div class="accordion-header" id="accordionHeaderFaq">
-        <span>❓ よくある質問</span>
-        <span class="accordion-icon iconFaq">▼</span>
-    </div>
-    <div class="accordion-body" id="accordionBodyFaq">
-        <div id="faqContainer">
-            <!-- FAQはJSで動的に生成（初期状態はすべて閉じています） -->
-        </div>
-    </div>
-</div>
-
 <!-- ゲームタイトル一覧 -->
 <div class="game-grid" id="gameContainer"></div>
 
-<!-- アコーディオン3：注意事項 -->
+<!-- アコーディオン2：注意事項 -->
 <div class="info-accordion">
     <div class="accordion-header" id="accordionHeader2">
         <span>⚠️ 当方の販売実績やお取り引きについての注意事項</span>
@@ -111,7 +95,7 @@
     </div>
 </div>
 
-<!-- アコーディオン4：インスタ実績投稿まとめ -->
+<!-- アコーディオン3：インスタ実績投稿まとめ -->
 <div class="info-accordion">
     <div class="accordion-header" id="accordionHeader3">
         <span>📷 インスタ 実績投稿まとめ</span>
@@ -122,6 +106,19 @@
             <h4>📷 Instagram @tools.a_</h4>
             <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/tools.a_/" data-instgrm-version="14" style="width: 100%;"></blockquote>
             <script async src="//www.instagram.com/embed.js"></script>
+        </div>
+    </div>
+</div>
+
+<!-- アコーディオン4：よくある質問（アコーディオン化・中身はそのまま） -->
+<div class="info-accordion">
+    <div class="accordion-header" id="accordionHeaderFaq">
+        <span>❓ よくある質問</span>
+        <span class="accordion-icon iconFaq">▼</span>
+    </div>
+    <div class="accordion-body" id="accordionBodyFaq">
+        <div id="faqContainer">
+            <!-- FAQはJSで動的に生成 -->
         </div>
     </div>
 </div>
@@ -139,7 +136,7 @@
 <script>
     const commonContactUrl = "https://x.com/messages/compose?recipient_id=1641057230408540163";
     
-    // ========== FAQデータ（完全版・初期はすべて閉じている） ==========
+    // ========== FAQデータ（中身はそのまま） ==========
     const faqData = [
         { q: "PayPay使えますか？", a: "はい。PayPay対応しております。お取引時にこちらのPayPayIDをお知らせいたします。そのIDまで直接送金をお願いしています。（わからない場合はDMまでのリンク送信でも対応いたします）" },
         { q: "Amazonギフトは使えますか？", a: "はい。一部商品を除きAmazonギフトコードでの支払いも承ります。料金表の価格からプラスで手数料をいただいております、詳細はDMまでお問い合わせください。" },
@@ -156,35 +153,19 @@
         { q: "日本人ですか？", a: "めちゃくちゃ日本人です。寿司とラーメンとハンバーガー大好きです。" }
     ];
     
-    // FAQをレンダリング（初期はすべて閉じた状態）
+    // FAQをレンダリング（アコーディオンの中身・Q&Aはそのまま）
     function renderFAQ() {
         const container = document.getElementById('faqContainer');
         if (!container) return;
         container.innerHTML = '';
-        faqData.forEach((item, idx) => {
+        faqData.forEach((item) => {
             const faqItem = document.createElement('div');
             faqItem.className = 'faq-item';
             faqItem.innerHTML = `
-                <div class="faq-question" data-idx="${idx}">
-                    <span>❓ ${escapeHtml(item.q)}</span>
-                    <span class="faq-icon">▶</span>
-                </div>
-                <div class="faq-answer" id="faqAnswer${idx}">${nl2br(escapeHtml(item.a))}</div>
+                <div class="faq-question">❓ ${escapeHtml(item.q)}</div>
+                <div class="faq-answer">${nl2br(escapeHtml(item.a))}</div>
             `;
             container.appendChild(faqItem);
-        });
-        // 質問クリックで開閉
-        document.querySelectorAll('.faq-question').forEach(q => {
-            q.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const idx = this.getAttribute('data-idx');
-                const answer = document.getElementById(`faqAnswer${idx}`);
-                const icon = this.querySelector('.faq-icon');
-                if (answer) {
-                    answer.classList.toggle('open');
-                    if (icon) icon.classList.toggle('open');
-                }
-            });
         });
     }
     
@@ -301,7 +282,7 @@ https://www.instagram.com/tools.a_/
         products.push({ category: cat, title: title, description: desc, price: price, contactUrl: commonContactUrl, imageUrl: "" });
     }
     
-    // ===== 全商品データ（完全版・省略） =====
+    // ===== 全商品データ =====
     // モンスト (cat_0)
     addProduct("cat_0", "ガチャ星5~6キャラ数ランダム", "ルシファー確定\nオーブ1500個以上～/1000円\nオーブ2000個以上～/2000円", "1000円～2000円");
     addProduct("cat_0", "ガチャ星5~6キャラ数ランダム", "オーブ2500個以上～/3000円\nオーブ5000個以上～/15000円", "3000円～15000円");
@@ -499,16 +480,15 @@ https://www.instagram.com/tools.a_/
     
     // アコーディオンイベント
     document.getElementById('accordionHeader1').addEventListener('click', () => { document.getElementById('accordionBody1').classList.toggle('open'); document.querySelector('.icon1').style.transform = document.getElementById('accordionBody1').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
-    document.getElementById('accordionHeaderFaq').addEventListener('click', () => { document.getElementById('accordionBodyFaq').classList.toggle('open'); document.querySelector('.iconFaq').style.transform = document.getElementById('accordionBodyFaq').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
     document.getElementById('accordionHeader2').addEventListener('click', () => { document.getElementById('accordionBody2').classList.toggle('open'); document.querySelector('.icon2').style.transform = document.getElementById('accordionBody2').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
     document.getElementById('accordionHeader3').addEventListener('click', () => { document.getElementById('accordionBody3').classList.toggle('open'); document.querySelector('.icon3').style.transform = document.getElementById('accordionBody3').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
+    document.getElementById('accordionHeaderFaq').addEventListener('click', () => { document.getElementById('accordionBodyFaq').classList.toggle('open'); document.querySelector('.iconFaq').style.transform = document.getElementById('accordionBodyFaq').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
     
     document.getElementById('closePopupBtn').addEventListener('click', () => { document.getElementById('productPopupModal').style.display = 'none'; });
     window.addEventListener('click', (e) => { if (e.target === document.getElementById('productPopupModal')) document.getElementById('productPopupModal').style.display = 'none'; });
     
     function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); }
     
-    // レンダリング実行
     renderSiteInfo();
     renderNoticeInfo();
     renderGameTitles();
