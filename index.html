@@ -101,7 +101,352 @@
         <div class="info-section"><div class="info-title">💳 支払い方法</div><div class="info-content" id="paymentInfo"></div></div>
     </div>
 </div>
+<div class="info-accordion">
+    <div class="accordion-header" id="accordionHeaderGame">
+        <span>🎲 ポチっと今日の診断（ミニゲーム）</span>
+        <span class="accordion-icon iconGame">▼</span>
+    </div>
+    <div class="accordion-body" id="accordionBodyGame">
+        <!-- 占いゲームのコンテンツ -->
+        <div class="fortune-mini-card">
+            <!-- すでにプレイ済みの場合の画面 -->
+            <div id="panel-already" class="step-panel">
+                <p class="notice-text">本日の運試しは既に終了しています。<br>また明日お待ちしております。</p>
+            </div>
 
+            <!-- ステップ1：星座選択 -->
+            <div id="panel-step1" class="step-panel active">
+                <p class="question-text">あなたの星座を選択してください</p>
+                <select id="zodiac-select">
+                    <option value="割愛">選択してください</option>
+                    <option value="牡羊座">牡羊座（おひつじざ）</option>
+                    <option value="牡牛座">牡牛座（おうしざ）</option>
+                    <option value="双子座">双子座（ふたござ）</option>
+                    <option value="蟹座">蟹座（かにざ）</option>
+                    <option value="獅子座">獅子座（ししざ）</option>
+                    <option value="乙女座">乙女座（おとめざ）</option>
+                    <option value="天秤座">天秤座（てんびんざ）</option>
+                    <option value="蠍座">蠍座（さそりざ）</option>
+                    <option value="射手座">射手座（いてざ）</option>
+                    <option value="山羊座">山羊座（やぎざ）</option>
+                    <option value="水瓶座">水瓶座（みずがめざ）</option>
+                    <option value="魚座">魚座（うおざ）</option>
+                </select>
+                <button class="action-btn" onclick="nextStep(1)">次へ進む</button>
+            </div>
+
+            <!-- ステップ2：質問1 -->
+            <div id="panel-step2" class="step-panel">
+                <p class="question-text" id="q1-text">質問1</p>
+                <div class="btn-list">
+                    <button onclick="nextStep(2)">そう思う</button>
+                    <button onclick="nextStep(2)">そう思わない</button>
+                </div>
+            </div>
+
+            <!-- ステップ3：質問2 -->
+            <div id="panel-step3" class="step-panel">
+                <p class="question-text" id="q2-text">質問2</p>
+                <div class="btn-list">
+                    <button onclick="nextStep(3)">YES</button>
+                    <button onclick="nextStep(3)">NO</button>
+                </div>
+            </div>
+
+            <!-- ステップ4：質問3 -->
+            <div id="panel-step4" class="step-panel">
+                <p class="question-text" id="q3-text">質問3</p>
+                <div class="btn-list">
+                    <button onclick="nextStep(4)">直感で選ぶ</button>
+                    <button onclick="nextStep(4)">深く考えて選ぶ</button>
+                </div>
+            </div>
+
+            <!-- ステップ5：結果を見るボタンの待機画面 -->
+            <div id="panel-step5" class="step-panel">
+                <p class="question-text">すべての診断の準備が整いました。</p>
+                <button class="action-btn" onclick="startLoading()">結果を見る</button>
+            </div>
+
+            <!-- ローディング画面 -->
+            <div id="panel-loading" class="step-panel">
+                <div class="loader-content">
+                    <div class="spinner"></div>
+                    <p id="loading-message">確率変動をチェック中...</p>
+                </div>
+            </div>
+
+            <!-- 結果画面 -->
+            <div id="panel-result" class="step-panel">
+                <div class="result-rank" id="result-rank-text">大吉</div>
+                <div class="quote-box">
+                    <div class="quote-text" id="result-quote-text">名言</div>
+                    <div class="quote-author" id="result-author-text">偉人名</div>
+                </div>
+                <p class="notice-text" style="font-size:0.75rem; margin-top:15px;">※占いは1日1回のみ有効です。明日また結果が変わります。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* ゲームアコーディオン内の専用スタイル（既存の.info-accordionに合わせる） */
+.fortune-mini-card {
+    background-color: #1E2A38;
+    border-radius: 16px;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.step-panel { display: none; }
+.step-panel.active { display: block; }
+
+.fortune-mini-card select {
+    width: 100%;
+    padding: 10px;
+    background-color: #192734;
+    color: #E7E9EA;
+    border: 1px solid #2D3A48;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    outline: none;
+}
+
+.fortune-mini-card select:focus {
+    border-color: #1DA1F2;
+}
+
+.fortune-mini-card .question-text {
+    font-size: 0.95rem;
+    color: #E7E9EA;
+    line-height: 1.5;
+    margin: 0 0 15px 0;
+}
+
+.fortune-mini-card .btn-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.fortune-mini-card button {
+    background-color: #192734;
+    color: #E7E9EA;
+    border: 1px solid #2D3A48;
+    padding: 10px;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.fortune-mini-card button:hover {
+    background-color: #253341;
+    border-color: #1DA1F2;
+}
+
+.fortune-mini-card .action-btn {
+    background-color: #1DA1F2;
+    color: white;
+    font-weight: bold;
+    border: none;
+    width: 100%;
+}
+
+.fortune-mini-card .action-btn:hover {
+    background-color: #0D8BD9;
+}
+
+/* ローディングスピナー */
+.spinner {
+    width: 35px;
+    height: 35px;
+    border: 3px solid #2D3A48;
+    border-top: 3px solid #1DA1F2;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    animation: fortune-spin 1s linear infinite;
+}
+@keyframes fortune-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 運勢ランクの色 */
+.result-rank {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.rank-大吉 { color: #FF4444; }
+.rank-中吉 { color: #FF9500; }
+.rank-吉 { color: #FFD700; }
+.rank-小吉 { color: #4CD964; }
+.rank-末吉 { color: #5AC8FA; }
+.rank-凶 { color: #8899A6; }
+
+.quote-box {
+    background-color: #192734;
+    border-left: 3px solid #1DA1F2;
+    padding: 12px;
+    text-align: left;
+    border-radius: 0 12px 12px 0;
+}
+.quote-text {
+    font-size: 0.85rem;
+    color: #E7E9EA;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+.quote-author {
+    font-size: 0.75rem;
+    color: #8899A6;
+    text-align: right;
+}
+.notice-text {
+    color: #8899A6;
+    font-size: 0.85rem;
+}
+</style>
+
+<script>
+// アコーディオン開閉（既存の.info-accordionと統一）
+document.addEventListener('DOMContentLoaded', function() {
+    const header = document.getElementById('accordionHeaderGame');
+    const body = document.getElementById('accordionBodyGame');
+    const icon = document.querySelector('.iconGame');
+    if (header && body && icon) {
+        header.addEventListener('click', function() {
+            body.classList.toggle('open');
+            icon.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+        });
+    }
+});
+
+// ========== 以下、ゲームのロジック ==========
+const questions = [
+    "直近のガチャでいわゆる「爆死」を経験した？", "新しいイベントが始まると、まずガチャ画面を開いてしまう？", "推しキャラの実装が決まった瞬間、財布の紐が緩む感覚がある？", "ゲームのローディング画面のTipsをじっくり読んでしまうタイプだ？", "ぶっちゃけ、自分の運の強さにはそこそこ自信がある？",
+    "ガチャを引くとき、独自のオカルト（時間帯、引く場所等）を持っている？", "限定という言葉を聞くと、性能に関わらず手に入れたくなる？", "目当てのキャラが出なくても「天井があるから大丈夫」と安心しがちだ？", "配布石が大量に配られると、使わずに貯めるよりすぐ引いてしまう？", "ゲーム内のフレンドが神引きしているのを見ると、少し焦る？",
+    "スキップ機能がある周回は、完全に脳を空っぽにして回している？", "ゲームのBGMや演出は、常にオンにして楽しみたい派だ？", "「これで最後の10連…」と思ってから、本当の勝負が始まることが多い？", "対人戦（PvP）要素があるソシャゲでは、負けるとかなり悔しい？", "リセマラ（初期設定のやり直し）を、苦にせず何度も繰り返せる根気がある？",
+    "アップデートのメンテナンス延長は、むしろワクワクして待てる？", "推しキャラのグッズが発売されたら、迷わずチェックする？", "ガチャを引くボタンを押す指に、毎回妙な力が入ってしまう？", "ゲーム内の攻略情報を調べるのが、プレイするのと同じくらい好きだ？", "ログインボーナスを受け取るためだけにアプリを起動することがよくある？",
+    "他のプレイヤーの評価を見る前に、自分でキャラの強さを試したい？", "最高レアリティの演出が出た瞬間、脳内で勝利の音楽が流れる？", "すり抜けで目当てじゃない最高レアが来た時、複雑な気持ちになる？", "ガチャの確率表記（0.7%など）は、意外と引ける数字だと感じる？", "ソシャゲのストーリーは、スキップせずに細部まで読み込む方だ？",
+    "朝起きて一番に、スマホでソシャゲの画面を開く習慣がある？", "期間限定イベントの報酬は、初日に全力で回収しに行くタイプだ？", "ギルドやマルチプレイなど、他のプレイヤーとの協力が楽しい？", "推しキャラがボイス付きで喋ると、それだけで満足感がある？", "ゲームの運営に対して、心の中で密かに感謝したことがある？",
+    "ガチャの演出が渋い時でも、最後の最高で大逆転が起きる気がする？", "フレンド枠のサポートキャラ選びには、かなりのこだわりがある？", "イベント限定の称号やアイコンは、何が何でも手に入れたい？", "ソシャゲのせいで寝不足になった経験が、過去に一度でもある？", "新しいプレイスタイルを試すのが、既存のテンプレより面白い？",
+    "ぶっちゃけ、石が大量にあるアカウントの画面を見るだけで癒やされる？", "キャラ育成のための素材周回は、好きな音楽を聴きながらやる？", "お気に入りのパーティ編成には、名前をしっかり付ける派だ？", "コラボイベントが開催されると、その作品を知らなくても熱くなる？", "ガチャチケットは、手に入れたら1枚ずつすぐに使ってしまう？",
+    "ゲーム内のチャット機能で、スタンプを連発するのが好きだ？", "高難易度クエストをギリギリでクリアした時の快感は忘れられない？", "アップデート予告の画像を、何度も拡大して観察してしまう？", "ゲームの記念日（〇周年など）は、自分の誕生日並みに楽しみだ？", "推しキャラの属性や武器種は、なんとなく偏りがちだと思う？",
+    "ガチャ画面の「提供割合」ボタンを、一度も押したことがない？", "ソシャゲ友達とのゲーム談義は、何時間でも続けていられる？", "周回マクロや自動プレイを見ている時間が、意外と心地よい？", "新しいアカウントでゲームを始めるときの、あの新鮮な感覚が好きだ？", "今日の自分の直感は、いつもより冴えている気がする？"
+];
+
+const quotesPositive = [
+    { text: "好機は、準備された心にのみ訪れる。", author: "ルイ・パスツール" },
+    { text: "来た、見た、勝った。", author: "ジュリアス・シーザー" },
+    { text: "乗るべき列車は、一度しか来ない。", author: "マルセル・パニョル" },
+    { text: "チャンスが出会うのは、それを迎える準備ができている心だけである。", author: "ルイ・パスツール" },
+    { text: "運命は勇者を好む。", author: "ヴァージル" },
+    { text: "行動を伴わない想像力は、何の意味も持たない。", author: "チャーリー・チャップリン" },
+    { text: "幸運とは、準備がチャンスと出会うことである。", author: "セネカ" },
+    { text: "大いなる成果は、一時的な衝動によってではなく、一連の小さな仕事が積み重なって生み出される。", author: "フィンセント・ファン・ゴッホ" },
+    { text: "前進し続けなさい。あなたが思いもしなかった素晴らしいことが待っている。", author: "不詳" }
+];
+
+const quotesNegative = [
+    { text: "失敗すればするほど、我々は成功に近づいている。", author: "トーマス・エジソン" },
+    { text: "最大の名誉は決して倒れないことではない。倒れるたびに起き上がることである。", author: "ネルソン・マンデラ" },
+    { text: "金がないから何もできないという人間は、金があっても何もできない。", author: "小林一三" },
+    { text: "困難の中にこそ、好機が潜んでいる。", author: "アルベルト・アインシュタイン" },
+    { text: "下を向いていたら、虹を見つけることは出来ないよ。", author: "チャーリー・チャップリン" },
+    { text: "失ったものを数えるな。残されたものを数えよ。", author: "不詳" },
+    { text: "最も深い夜も、やがては明けて朝になる。", author: "ヴィクトル・ユーゴー" },
+    { text: "どん底に落ちたなら、あとは這い上がるだけだ。", author: "不詳" }
+];
+
+function getTodayString() {
+    const d = new Date();
+    return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const savedDate = localStorage.getItem('fortune_played_date');
+    if (savedDate === getTodayString()) {
+        const step1 = document.getElementById('panel-step1');
+        const already = document.getElementById('panel-already');
+        if(step1) step1.classList.remove('active');
+        if(already) already.classList.add('active');
+    } else {
+        setupRandomQuestions();
+    }
+});
+
+function setupRandomQuestions() {
+    const shuffled = [...questions].sort(() => 0.5 - Math.random());
+    const q1 = document.getElementById('q1-text');
+    const q2 = document.getElementById('q2-text');
+    const q3 = document.getElementById('q3-text');
+    if(q1) q1.innerText = shuffled[0];
+    if(q2) q2.innerText = shuffled[1];
+    if(q3) q3.innerText = shuffled[2];
+}
+
+function nextStep(currentStep) {
+    if(currentStep === 1) {
+        const select = document.getElementById('zodiac-select');
+        if(!select || select.value === "割愛") { alert("星座を選択してください。"); return; }
+    }
+    const current = document.getElementById(`panel-step${currentStep}`);
+    const next = document.getElementById(`panel-step${currentStep + 1}`);
+    if(current) current.classList.remove('active');
+    if(next) next.classList.add('active');
+}
+
+function startLoading() {
+    const step5 = document.getElementById('panel-step5');
+    const loading = document.getElementById('panel-loading');
+    if(step5) step5.classList.remove('active');
+    if(loading) loading.classList.add('active');
+    setTimeout(() => { showResult(); }, 1200);
+}
+
+function showResult() {
+    const rand = Math.floor(Math.random() * 100);
+    let rank = "吉";
+    let selectedQuote = {};
+
+    if (rand < 10) {
+        rank = "凶";
+        selectedQuote = quotesNegative[Math.floor(Math.random() * quotesNegative.length)];
+    } else {
+        selectedQuote = quotesPositive[Math.floor(Math.random() * quotesPositive.length)];
+        if (rand < 25) rank = "大吉";
+        else if (rand < 45) rank = "中吉";
+        else if (rand < 70) rank = "吉";
+        else if (rand < 85) rank = "小吉";
+        else rank = "末吉";
+    }
+
+    const rankEl = document.getElementById('result-rank-text');
+    if(rankEl) {
+        rankEl.innerText = rank;
+        rankEl.className = `result-rank rank-${rank}`;
+    }
+    const quoteText = document.getElementById('result-quote-text');
+    const quoteAuthor = document.getElementById('result-author-text');
+    if(quoteText) quoteText.innerText = selectedQuote.text;
+    if(quoteAuthor) quoteAuthor.innerText = `— ${selectedQuote.author}`;
+
+    const loading = document.getElementById('panel-loading');
+    const result = document.getElementById('panel-result');
+    if(loading) loading.classList.remove('active');
+    if(result) result.classList.add('active');
+
+    localStorage.setItem('fortune_played_date', getTodayString());
+}
+</script>
 <!-- ゲームタイトル一覧 -->
 <div class="game-grid" id="gameContainer"></div>
 
