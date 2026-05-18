@@ -49,8 +49,29 @@
         .popup-product-title { font-weight: 800; font-size: 17px; color: #E7E9EA; margin-bottom: 8px; }
         .popup-product-desc { font-size: 13px; color: #E7E9EA; margin: 8px 0; line-height: 1.5; white-space: pre-wrap; }
         .popup-product-price { font-weight: 800; margin: 8px 0; font-size: 18px; color: #1DA1F2; }
-        .popup-contact-btn { display: inline-block; background: #1DA1F2; color: white; padding: 10px 16px; border-radius: 40px; text-decoration: none; font-size: 14px; margin-top: 8px; width: 100%; text-align: center; }
-        .popup-contact-btn:hover { background: #0D8BD9; }
+        
+        /* ボタン横並び用 */
+        .contact-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .contact-btn {
+            flex: 1;
+            display: inline-block;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-size: 14px;
+            text-align: center;
+            transition: 0.2s;
+        }
+        .contact-btn-x { background: #1DA1F2; }
+        .contact-btn-x:hover { background: #0D8BD9; }
+        .contact-btn-line { background: #06C755; }
+        .contact-btn-line:hover { background: #05a848; }
+        
         .close-popup { background: #2D3A48; color: #E7E9EA; border: none; padding: 10px 20px; border-radius: 40px; width: 100%; margin-top: 12px; font-size: 16px; cursor: pointer; }
         .footer { text-align: center; margin-top: 48px; font-size: 12px; color: #8899A6; border-top: 1px solid #2D3A48; padding-top: 24px; }
     </style>
@@ -134,9 +155,10 @@
 </div>
 
 <script>
-    const commonContactUrl = "https://x.com/messages/compose?recipient_id=1641057230408540163";
+    const xContactUrl = "https://x.com/messages/compose?recipient_id=1641057230408540163";
+    const lineContactUrl = "https://line.me/ti/p/9v4gGIz11z";
     
-    // ========== FAQデータ（中身はそのまま） ==========
+    // ========== FAQデータ ==========
     const faqData = [
         { q: "PayPay使えますか？", a: "はい。PayPay対応しております。お取引時にこちらのPayPayIDをお知らせいたします。そのIDまで直接送金をお願いしています。（わからない場合はDMまでのリンク送信でも対応いたします）" },
         { q: "Amazonギフトは使えますか？", a: "はい。一部商品を除きAmazonギフトコードでの支払いも承ります。料金表の価格からプラスで手数料をいただいております、詳細はDMまでお問い合わせください。" },
@@ -153,7 +175,6 @@
         { q: "日本人ですか？", a: "めちゃくちゃ日本人です。寿司とラーメンとハンバーガー大好きです。" }
     ];
     
-    // FAQをレンダリング（アコーディオンの中身・Q&Aはそのまま）
     function renderFAQ() {
         const container = document.getElementById('faqContainer');
         if (!container) return;
@@ -279,7 +300,7 @@ https://www.instagram.com/tools.a_/
     
     const products = [];
     function addProduct(cat, title, desc, price) {
-        products.push({ category: cat, title: title, description: desc, price: price, contactUrl: commonContactUrl, imageUrl: "" });
+        products.push({ category: cat, title: title, description: desc, price: price, contactUrlX: xContactUrl, contactUrlLine: lineContactUrl, imageUrl: "" });
     }
     
     // ===== 全商品データ =====
@@ -431,6 +452,7 @@ https://www.instagram.com/tools.a_/
     addProduct("cat_108", "iosのみ対応\n在庫変動が多いためDMで確認お願いします", "", "3000円～");
     
     function nl2br(str) { if (!str) return ''; return str.replace(/\n/g, '<br>'); }
+    function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); }
     
     function renderSiteInfo() {
         document.getElementById('updateInfo').innerHTML = siteInfo.updateInfo;
@@ -456,7 +478,7 @@ https://www.instagram.com/tools.a_/
         const inquiryCard = document.createElement('div');
         inquiryCard.className = 'inquiry-card';
         inquiryCard.innerHTML = `<span class="game-name">📩 記載のないタイトルはDMまで</span>`;
-        inquiryCard.addEventListener('click', () => { window.open(commonContactUrl, '_blank'); });
+        inquiryCard.addEventListener('click', () => { window.open(xContactUrl, '_blank'); });
         container.appendChild(inquiryCard);
     }
     
@@ -471,7 +493,15 @@ https://www.instagram.com/tools.a_/
             listContainer.innerHTML = '';
             filtered.forEach(p => {
                 const itemDiv = document.createElement('div'); itemDiv.className = 'popup-product-item';
-                itemDiv.innerHTML = `<div class="popup-product-title">${escapeHtml(p.title)}</div><div class="popup-product-desc">${nl2br(escapeHtml(p.description))}</div><div class="popup-product-price">${escapeHtml(p.price)}</div><a href="${escapeHtml(p.contactUrl)}" target="_blank" class="popup-contact-btn">📩 問い合わせる</a>`;
+                itemDiv.innerHTML = `
+                    <div class="popup-product-title">${escapeHtml(p.title)}</div>
+                    <div class="popup-product-desc">${nl2br(escapeHtml(p.description))}</div>
+                    <div class="popup-product-price">${escapeHtml(p.price)}</div>
+                    <div class="contact-buttons">
+                        <a href="${xContactUrl}" target="_blank" class="contact-btn contact-btn-x">📩 Xで問い合わせ</a>
+                        <a href="${lineContactUrl}" target="_blank" class="contact-btn contact-btn-line">💬 LINEで問い合わせ</a>
+                    </div>
+                `;
                 listContainer.appendChild(itemDiv);
             });
         }
@@ -486,8 +516,6 @@ https://www.instagram.com/tools.a_/
     
     document.getElementById('closePopupBtn').addEventListener('click', () => { document.getElementById('productPopupModal').style.display = 'none'; });
     window.addEventListener('click', (e) => { if (e.target === document.getElementById('productPopupModal')) document.getElementById('productPopupModal').style.display = 'none'; });
-    
-    function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); }
     
     renderSiteInfo();
     renderNoticeInfo();
