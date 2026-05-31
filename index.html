@@ -11,6 +11,60 @@
         .site-name { font-size: 26px; font-weight: 700; background: linear-gradient(135deg, #1DA1F2, #0D8BD9); background-clip: text; -webkit-background-clip: text; color: transparent; }
         .site-desc { font-size: 14px; color: #8899A6; margin-top: 6px; }
         
+        /* 警告バナー */
+        .alert-banner {
+            background: linear-gradient(135deg, #7f1a1a, #991b1b);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid #ef4444;
+        }
+        .alert-title {
+            font-weight: 700;
+            font-size: 15px;
+            color: #fecaca;
+            margin-bottom: 8px;
+        }
+        .alert-text {
+            font-size: 13px;
+            color: #fca5a5;
+            margin-bottom: 14px;
+        }
+        .button-group {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .alert-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .alert-btn-line {
+            background: #06C755;
+            color: white;
+        }
+        .alert-btn-line:hover {
+            background: #05a348;
+            transform: scale(0.98);
+        }
+        .alert-btn-x {
+            background: #1DA1F2;
+            color: white;
+        }
+        .alert-btn-x:hover {
+            background: #0D8BD9;
+            transform: scale(0.98);
+        }
+        
         .info-accordion { background: #1E2A38; border-radius: 20px; margin-bottom: 24px; overflow: hidden; border: 1px solid #2D3A48; }
         .accordion-header { padding: 16px 20px; background: #192734; font-weight: 600; display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: #E7E9EA; }
         .accordion-icon { transition: transform 0.2s; color: #8899A6; }
@@ -81,6 +135,17 @@
     <div class="site-name">tools_A 石垢料金表</div>
     <div class="site-desc">ゲームタイトルをタップして商品を見る</div>
 </div>
+
+<!-- 警告バナー（新規追加） -->
+<div class="alert-banner">
+    <div class="alert-title">⚠️ 現在14akatの利用が制限されています</div>
+    <div class="alert-text">お問い合わせはLINEか@tools_AのDMまでお願いします</div>
+    <div class="button-group">
+        <a href="https://line.me/ti/p/9v4gGIz11z" target="_blank" rel="noopener noreferrer" class="alert-btn alert-btn-line">📱 LINEで問い合わせる</a>
+        <a href="https://x.com/messages/compose?recipient_id=838420526867468288" target="_blank" rel="noopener noreferrer" class="alert-btn alert-btn-x">🐦 XのDMで問い合わせる</a>
+    </div>
+</div>
+
 <meta property="og:title" content="tools_A 石垢料金表" />
 <meta property="og:description" content="【即日対応】モンスト、FGOなど100タイトル以上の石垢を販売中。10年以上の実績。まずはDMでお問い合わせください。" />
 <meta property="og:image" content="https://i.imgur.com/FEBq8KN.jpeg" />
@@ -500,7 +565,8 @@ function showResult() {
 </div>
 
 <script>
-    const xContactUrl = "https://x.com/messages/compose?recipient_id=1641057230408540163";
+    // XのDMリンク先を新しいIDに変更
+    const xContactUrl = "https://x.com/messages/compose?recipient_id=838420526867468288";
     const lineContactUrl = "https://line.me/ti/p/9v4gGIz11z";
     
     // ========== FAQデータ ==========
@@ -703,7 +769,7 @@ https://www.instagram.com/tools.a_/
     addProduct("cat_25", "初期垢", "石20000前後", "2000円");
     addProduct("cat_26", "石垢", "石45000前後", "1000円");
     addProduct("cat_27", "確定垢", "アルティメットエスカノール+背信者メリオダス確定\n+石700個 /1000円\n+石1200個 /2000円", "1000円～");
-    addProduct("cat_27", "UR24以上所持", "\石1500個 /4000円\n石2200個 /6000円", "4000～円");
+    addProduct("cat_27", "UR24以上所持", "石1500個 /4000円\n石2200個 /6000円", "4000～円");
     addProduct("cat_28", "SSR90前後", "石+チケット合計650連相当 /2000円\n合計1000連相当 /3000円", "2000円～3000円");
     addProduct("cat_29", "石垢", "石5000前後 /5000円\n石10000前後 /10000円", "5000円～10000円");
     addProduct("cat_30", "石垢", "石400000前後（石数変動多いため要問合せ）", "2000円");
