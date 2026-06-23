@@ -89,6 +89,32 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content="@14akat" />
 
+<!-- アコーディオン：買取募集中 -->
+<div class="info-accordion">
+    <div class="accordion-header" id="accordionHeaderBuy">
+        <span>💰 買取募集中</span>
+        <span class="accordion-icon iconBuy">▼</span>
+    </div>
+    <div class="accordion-body" id="accordionBodyBuy">
+        <div class="info-content">
+            <p style="margin-bottom: 12px;">検索に出るXアカウント買取中です。<br>
+            作成後数年以上<br>
+            ポスト数最低数百以上<br>
+            フォロワー数は問いませんが検索に完全に出るアカウントを募集しています。<br>
+            高額で買い取りはできませんが、余っているアカウントがあればご相談ください。</p>
+            
+            <p style="margin-bottom: 12px;"><strong>お問い合わせ方法</strong><br>
+            ・X垢買取希望<br>
+            ・ID<br>
+            ・希望額<br>
+            この3点をお知らせください。<br>
+            LINEにてご連絡でも問題ありません。</p>
+            
+            <p>よろしくお願いいたします。</p>
+        </div>
+    </div>
+</div>
+
 <!-- アコーディオン1：お問い合わせ前にお読みください -->
 <div class="info-accordion">
     <div class="accordion-header" id="accordionHeader1">
@@ -855,6 +881,7 @@ https://www.instagram.com/tools.a_/
     }
     
     // アコーディオンイベント
+    document.getElementById('accordionHeaderBuy').addEventListener('click', () => { document.getElementById('accordionBodyBuy').classList.toggle('open'); document.querySelector('.iconBuy').style.transform = document.getElementById('accordionBodyBuy').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
     document.getElementById('accordionHeader1').addEventListener('click', () => { document.getElementById('accordionBody1').classList.toggle('open'); document.querySelector('.icon1').style.transform = document.getElementById('accordionBody1').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
     document.getElementById('accordionHeader2').addEventListener('click', () => { document.getElementById('accordionBody2').classList.toggle('open'); document.querySelector('.icon2').style.transform = document.getElementById('accordionBody2').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
     document.getElementById('accordionHeader3').addEventListener('click', () => { document.getElementById('accordionBody3').classList.toggle('open'); document.querySelector('.icon3').style.transform = document.getElementById('accordionBody3').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
