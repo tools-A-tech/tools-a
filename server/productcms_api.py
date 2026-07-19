@@ -319,7 +319,7 @@ class Handler(BaseHTTPRequestHandler):
                 self._send_json(200, {
                     "ok": True,
                     "filename": filename,
-                    "path": "/images/" + filename,
+                    "path": "images/" + filename,
                     "size": len(content)
                 })
                 return
