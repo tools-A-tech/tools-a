@@ -1,0 +1,1879 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>tools_A 石垢料金表｜編集ページ</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #15202B; padding: 20px 16px 40px; color: #E7E9EA; }
+        .site-header { text-align: center; margin-bottom: 20px; }
+        .site-name { font-size: 26px; font-weight: 700; background: linear-gradient(135deg, #1DA1F2, #0D8BD9); background-clip: text; -webkit-background-clip: text; color: transparent; }
+        .site-desc { font-size: 14px; color: #8899A6; margin-top: 6px; }
+        
+        .info-accordion { background: #1E2A38; border-radius: 20px; margin-bottom: 24px; overflow: hidden; border: 1px solid #2D3A48; }
+        .accordion-header { padding: 16px 20px; background: #192734; font-weight: 600; display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: #E7E9EA; }
+        .accordion-icon { transition: transform 0.2s; color: #8899A6; }
+        .accordion-body { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .accordion-body.open { max-height: 2000px; padding: 16px 20px; overflow-y: auto; }
+        .info-section { margin-bottom: 16px; }
+        .info-title { font-weight: 600; color: #1DA1F2; margin-bottom: 6px; font-size: 14px; }
+        .info-content { font-size: 13px; color: #8899A6; line-height: 1.5; }
+        .info-content a { color: #1DA1F2; text-decoration: none; }
+        
+        /* FAQ内のQ&A表示用（アコーディオンの中身） */
+        .faq-item { margin-bottom: 20px; border-bottom: 1px solid #2D3A48; padding-bottom: 16px; }
+        .faq-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .faq-question { font-weight: 600; color: #1DA1F2; margin-bottom: 8px; font-size: 14px; }
+        .faq-answer { font-size: 13px; color: #8899A6; line-height: 1.5; }
+        
+        .sns-item { background: #192734; border-radius: 16px; padding: 12px; border: 1px solid #2D3A48; margin-bottom: 8px; }
+        .sns-item h4 { color: #1DA1F2; margin-bottom: 12px; font-size: 15px; }
+        
+        .game-grid { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 550px; margin: 0 auto; }
+        .game-card { background: #1E2A38; border-radius: 24px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); border: 1px solid #2D3A48; cursor: pointer; transition: 0.2s; width: calc(50% - 12px); min-width: 130px; }
+        .game-card:hover { transform: translateY(-3px); border-color: #1DA1F2; background: #253341; }
+        .game-icon-img { width: 36px; height: 36px; object-fit: cover; border-radius: 10px; flex-shrink: 0; }
+        .game-name { font-weight: 600; font-size: 13px; line-height: 1.3; color: #E7E9EA; word-break: break-word; }
+        
+        .inquiry-card { background: #1E2A38; border-radius: 24px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; border: 1px solid #1DA1F2; width: calc(50% - 12px); min-width: 130px; cursor: pointer; }
+        .inquiry-card .game-name { color: #1DA1F2; font-weight: 600; font-size: 12px; line-height: 1.3; text-align: center; width: 100%; }
+        
+        .modal-popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3000; overflow-y: auto; padding: 20px; }
+        .modal-popup-content { background: #1E2A38; max-width: 500px; margin: 40px auto; border-radius: 32px; padding: 20px; border: 1px solid #2D3A48; }
+        .modal-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .modal-header-img { width: 48px; height: 48px; object-fit: cover; border-radius: 16px; }
+        .modal-header-name { font-size: 20px; font-weight: 700; color: #E7E9EA; }
+        .popup-product-list { display: flex; flex-direction: column; gap: 16px; margin: 20px 0; }
+        .popup-product-item { background: #192734; border: 1px solid #2D3A48; border-radius: 20px; padding: 16px; }
+        .popup-product-title { font-weight: 800; font-size: 17px; color: #E7E9EA; margin-bottom: 8px; }
+        .popup-product-desc { font-size: 13px; color: #E7E9EA; margin: 8px 0; line-height: 1.5; white-space: pre-wrap; }
+        .popup-product-price { font-weight: 800; margin: 8px 0; font-size: 18px; color: #1DA1F2; }
+        
+        /* ボタン横並び用 */
+        .contact-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .contact-btn {
+            flex: 1;
+            display: inline-block;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-size: 14px;
+            text-align: center;
+            transition: 0.2s;
+        }
+        .contact-btn-x { background: #1DA1F2; }
+        .contact-btn-x:hover { background: #0D8BD9; }
+        .contact-btn-line { background: #06C755; }
+        .contact-btn-line:hover { background: #05a848; }
+        
+        .close-popup { background: #2D3A48; color: #E7E9EA; border: none; padding: 10px 20px; border-radius: 40px; width: 100%; margin-top: 12px; font-size: 16px; cursor: pointer; }
+        .footer { text-align: center; margin-top: 48px; font-size: 12px; color: #8899A6; border-top: 1px solid #2D3A48; padding-top: 24px; }
+    
+        /* ===== ProductSiteCMS V1.1：公開サイト型編集UI ===== */
+        body { padding-top: 82px; }
+        .admin-fixed-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 4500;
+            min-height: 62px;
+            padding: 10px 14px;
+            background: rgba(15, 25, 35, 0.97);
+            border-bottom: 1px solid #2D3A48;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .admin-bar-title {
+            min-width: 0;
+        }
+        .admin-bar-title strong {
+            display: block;
+            color: #E7E9EA;
+            font-size: 14px;
+        }
+        .admin-bar-title span {
+            display: block;
+            margin-top: 2px;
+            color: #8899A6;
+            font-size: 11px;
+        }
+        .admin-bar-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        .admin-bar-btn {
+            appearance: none;
+            border: 1px solid #2D3A48;
+            border-radius: 999px;
+            background: #1E2A38;
+            color: #E7E9EA;
+            padding: 9px 13px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .admin-bar-btn.primary {
+            background: #1DA1F2;
+            border-color: #1DA1F2;
+            color: #fff;
+        }
+        .admin-bar-state {
+            color: #16C784;
+            font-size: 11px;
+            white-space: nowrap;
+        }
+        .admin-edit-btn {
+            width: 100%;
+            margin-top: 12px;
+            padding: 10px 14px;
+            border: 1px solid #1DA1F2;
+            border-radius: 999px;
+            background: rgba(29, 161, 242, 0.12);
+            color: #64C4FF;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        .admin-edit-btn:hover {
+            background: rgba(29, 161, 242, 0.22);
+        }
+        .admin-add-item {
+            width: 100%;
+            padding: 15px;
+            border: 2px dashed #3B5268;
+            border-radius: 20px;
+            background: rgba(29, 161, 242, 0.05);
+            color: #64C4FF;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        .admin-add-item:hover {
+            border-color: #1DA1F2;
+            background: rgba(29, 161, 242, 0.12);
+        }
+        .admin-product-hidden {
+            opacity: 0.62;
+            border-style: dashed;
+        }
+        .admin-status-note {
+            display: inline-block;
+            margin: 2px 0 8px;
+            padding: 4px 9px;
+            border-radius: 999px;
+            background: #2D3A48;
+            color: #BBC6D0;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        .admin-edit-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 5000;
+            padding: 20px;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.88);
+        }
+        .admin-edit-panel {
+            max-width: 520px;
+            margin: 24px auto;
+            padding: 20px;
+            border: 1px solid #2D3A48;
+            border-radius: 28px;
+            background: #1E2A38;
+        }
+        .admin-edit-panel h2 {
+            margin: 0 0 6px;
+            color: #E7E9EA;
+            font-size: 20px;
+        }
+        .admin-edit-sub {
+            margin-bottom: 18px;
+            color: #8899A6;
+            font-size: 12px;
+        }
+        .admin-field {
+            margin-bottom: 14px;
+        }
+        .admin-field label {
+            display: block;
+            margin-bottom: 6px;
+            color: #8FCFFF;
+            font-size: 12px;
+            font-weight: 800;
+        }
+        .admin-field input,
+        .admin-field textarea,
+        .admin-field select {
+            width: 100%;
+            border: 1px solid #36495B;
+            border-radius: 13px;
+            background: #15202B;
+            color: #E7E9EA;
+            padding: 11px 12px;
+            font-size: 14px;
+            outline: none;
+        }
+        .admin-field textarea {
+            min-height: 120px;
+            resize: vertical;
+            line-height: 1.55;
+        }
+        .admin-field input:focus,
+        .admin-field textarea:focus,
+        .admin-field select:focus {
+            border-color: #1DA1F2;
+        }
+        .admin-form-row {
+            display: grid;
+            grid-template-columns: 1fr 120px;
+            gap: 10px;
+        }
+        .admin-edit-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 18px;
+        }
+        .admin-form-btn {
+            border: none;
+            border-radius: 999px;
+            padding: 12px 14px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        .admin-form-btn.save {
+            background: #1DA1F2;
+            color: #fff;
+        }
+        .admin-form-btn.cancel {
+            background: #2D3A48;
+            color: #E7E9EA;
+        }
+        .admin-form-btn.delete {
+            grid-column: 1 / -1;
+            margin-top: 2px;
+            border: 1px solid rgba(255, 107, 107, .55);
+            background: rgba(255, 107, 107, .08);
+            color: #FF8B8B;
+        }
+        .admin-help {
+            max-width: 550px;
+            margin: 20px auto 0;
+            padding: 13px 16px;
+            border: 1px solid #2D3A48;
+            border-radius: 16px;
+            background: #192734;
+            color: #8899A6;
+            font-size: 12px;
+            line-height: 1.6;
+            text-align: center;
+        }
+        @media (max-width: 560px) {
+            body { padding-top: 104px; }
+            .admin-fixed-bar { align-items: flex-start; }
+            .admin-bar-actions { flex-wrap: wrap; justify-content: flex-end; }
+            .admin-bar-state { width: 100%; text-align: right; }
+            .admin-form-row { grid-template-columns: 1fr; }
+        }
+
+    
+        .admin-new-title-area {
+            max-width: 550px;
+            margin: 22px auto 0;
+            padding: 18px;
+            border: 1px solid #2D3A48;
+            border-radius: 22px;
+            background: #1E2A38;
+        }
+        .admin-new-title-area h3 {
+            margin: 0 0 6px;
+            color: #E7E9EA;
+            font-size: 17px;
+        }
+        .admin-new-title-area p {
+            margin: 0 0 14px;
+            color: #8899A6;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+        .admin-new-title-btn {
+            width: 100%;
+            padding: 15px;
+            border: 2px dashed #1DA1F2;
+            border-radius: 18px;
+            background: rgba(29,161,242,.08);
+            color: #64C4FF;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        .admin-new-title-btn:hover {
+            background: rgba(29,161,242,.16);
+        }
+        .admin-icon-preview {
+            width: 72px;
+            height: 72px;
+            margin-top: 9px;
+            border: 1px solid #36495B;
+            border-radius: 16px;
+            object-fit: cover;
+            background: #15202B;
+        }
+        .admin-save-note {
+            margin-top: 12px;
+            color: #F4A340;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+    
+        .admin-icon-drop-zone {
+            min-height: 158px;
+            padding: 20px;
+            border: 2px dashed #3B5268;
+            border-radius: 18px;
+            background: rgba(29,161,242,.045);
+            text-align: center;
+            cursor: pointer;
+            transition: .18s ease;
+            outline: none;
+        }
+        .admin-icon-drop-zone:hover,
+        .admin-icon-drop-zone:focus,
+        .admin-icon-drop-zone.dragover {
+            border-color: #1DA1F2;
+            background: rgba(29,161,242,.12);
+        }
+        .admin-drop-icon {
+            width: 44px;
+            height: 44px;
+            margin: 0 auto 9px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: #1DA1F2;
+            color: white;
+            font-size: 28px;
+        }
+        .admin-drop-main { color:#E7E9EA; font-size:14px; font-weight:800; }
+        .admin-drop-sub { margin-top:5px; color:#9DB0C2; font-size:12px; }
+        .admin-drop-types { margin-top:8px; color:#60778D; font-size:10px; }
+        .admin-icon-selection {
+            margin-top: 12px;
+            padding: 12px;
+            border: 1px solid #36495B;
+            border-radius: 15px;
+            background: #15202B;
+            display: grid;
+            grid-template-columns: 78px minmax(0,1fr) auto;
+            gap: 12px;
+            align-items: center;
+        }
+        .admin-icon-preview.large { width:72px; height:72px; margin:0; }
+        .admin-icon-file-info { min-width:0; display:grid; gap:4px; }
+        .admin-icon-file-info strong { color:#E7E9EA; font-size:13px; overflow-wrap:anywhere; }
+        .admin-icon-file-info span { color:#8899A6; font-size:11px; overflow-wrap:anywhere; }
+        .admin-small-btn {
+            border:1px solid #3D5266;
+            border-radius:999px;
+            padding:8px 10px;
+            background:#25384A;
+            color:#DCE5EC;
+            font-size:11px;
+            font-weight:700;
+            cursor:pointer;
+        }
+        .admin-icon-fallback { margin-top:12px; }
+        .admin-icon-fallback label { color:#7F94A8; font-size:11px; }
+
+    
+        .admin-api-state {
+            font-size: 11px;
+            font-weight: 800;
+            color: #FF6B6B;
+            white-space: nowrap;
+        }
+        .admin-bar-btn.upload { background:#6F42C1; }
+        .admin-bar-btn.server-save { background:#16A36A; }
+        .admin-bar-btn:disabled { opacity:.45; cursor:not-allowed; }
+        .admin-delete-title {
+            width:100%;
+            margin-top:12px;
+            padding:12px 16px;
+            border:1px solid #D94343;
+            border-radius:999px;
+            background:rgba(217,67,67,.12);
+            color:#FF7B7B;
+            font-weight:800;
+            cursor:pointer;
+        }
+        .admin-delete-title:hover { background:rgba(217,67,67,.24); }
+
+    
+        .admin-git-state {
+            font-size: 11px;
+            font-weight: 800;
+            color: #F4A340;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+<div class="admin-fixed-bar">
+    <div class="admin-bar-title">
+        <strong>石垢料金表・編集ページ V1.1</strong>
+        <span>公開サイトと同じ表示から商品を選んで編集</span>
+    </div>
+    <div class="admin-bar-actions">
+        <span class="admin-bar-state" id="adminSaveState">JSON読込中...</span>
+        <span class="admin-api-state" id="adminApiState">API確認中...</span>
+        <span class="admin-git-state" id="adminGitState">Git確認中...</span>
+        <button class="admin-bar-btn upload" id="adminUploadBtn" type="button">画像アップロード</button>
+        <button class="admin-bar-btn server-save" id="adminServerSaveBtn" type="button">保存してGitHub公開</button>
+        <button class="admin-bar-btn" id="adminPreviewBtn" type="button">公開サイト確認</button>
+        <button class="admin-bar-btn" id="adminGamesDownloadBtn" type="button">games.json予備保存</button>
+        <button class="admin-bar-btn primary" id="adminDownloadBtn" type="button">products.json予備保存</button>
+    </div>
+</div>
+
+<div class="site-header">
+    <div class="site-name">tools_A 石垢料金表</div>
+    <div class="site-desc">ゲームタイトルをタップして商品を見る</div>
+</div>
+<meta property="og:title" content="tools_A 石垢料金表" />
+<meta property="og:description" content="【即日対応】モンスト、FGOなど100タイトル以上の石垢を販売中。10年以上の実績。まずはDMでお問い合わせください。" />
+<meta property="og:image" content="https://i.imgur.com/FEBq8KN.jpeg" />
+<meta property="og:url" content="https://tools-a-tech.github.io/tools-a/" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@14akat" />
+
+<!-- アコーディオン：買取募集中 -->
+<div class="info-accordion">
+    <div class="accordion-header" id="accordionHeaderBuy">
+        <span>💰 買取募集中</span>
+        <span class="accordion-icon iconBuy">▼</span>
+    </div>
+    <div class="accordion-body" id="accordionBodyBuy">
+        <div class="info-content">
+            <p style="margin-bottom: 12px;">検索に出るXアカウント買取中です。<br>
+            作成後数年以上<br>
+            ポスト数最低数百以上<br>
+            フォロワー数は問いませんが検索に完全に出るアカウントを募集しています。<br>
+            高額で買い取りはできませんが、余っているアカウントがあればご相談ください。</p>
+            
+            <p style="margin-bottom: 12px;"><strong>お問い合わせ方法</strong><br>
+            ・X垢買取希望<br>
+            ・ID<br>
+            ・希望額<br>
+            この3点をお知らせください。<br>
+            LINEにてご連絡でも問題ありません。</p>
+            
+            <p>よろしくお願いいたします。</p>
+        </div>
+    </div>
+</div>
+
+<!-- アコーディオン1：お問い合わせ前にお読みください -->
+<div class="info-accordion">
+    <div class="accordion-header" id="accordionHeader1">
+        <span>📌 お問い合わせ前にお読みください</span>
+        <span class="accordion-icon icon1">▼</span>
+    </div>
+    <div class="accordion-body" id="accordionBody1">
+        <div class="info-section"><div class="info-title">📢 更新状況</div><div class="info-content" id="updateInfo"></div></div>
+        <div class="info-section"><div class="info-title">🔗 SNS</div><div class="info-content" id="snsInfo"></div></div>
+        <div class="info-section"><div class="info-title">💳 支払い方法</div><div class="info-content" id="paymentInfo"></div></div>
+    </div>
+</div>
+<div class="info-accordion">
+    <div class="accordion-header" id="accordionHeaderGame">
+        <span>🎲 ポチっと今日の診断（ミニゲーム）</span>
+        <span class="accordion-icon iconGame">▼</span>
+    </div>
+    <div class="accordion-body" id="accordionBodyGame">
+        <!-- 占いゲームのコンテンツ -->
+        <div class="fortune-mini-card">
+            <!-- すでにプレイ済みの場合の画面 -->
+            <div id="panel-already" class="step-panel">
+                <p class="notice-text">本日の運試しは既に終了しています。<br>また明日お待ちしております。</p>
+            </div>
+
+            <!-- ステップ1：星座選択 -->
+            <div id="panel-step1" class="step-panel active">
+                <p class="question-text">あなたの星座を選択してください</p>
+                <select id="zodiac-select">
+                    <option value="割愛">選択してください</option>
+                    <option value="牡羊座">牡羊座（おひつじざ）</option>
+                    <option value="牡牛座">牡牛座（おうしざ）</option>
+                    <option value="双子座">双子座（ふたござ）</option>
+                    <option value="蟹座">蟹座（かにざ）</option>
+                    <option value="獅子座">獅子座（ししざ）</option>
+                    <option value="乙女座">乙女座（おとめざ）</option>
+                    <option value="天秤座">天秤座（てんびんざ）</option>
+                    <option value="蠍座">蠍座（さそりざ）</option>
+                    <option value="射手座">射手座（いてざ）</option>
+                    <option value="山羊座">山羊座（やぎざ）</option>
+                    <option value="水瓶座">水瓶座（みずがめざ）</option>
+                    <option value="魚座">魚座（うおざ）</option>
+                </select>
+                <button class="action-btn" onclick="nextStep(1)">次へ進む</button>
+            </div>
+
+            <!-- ステップ2：質問1 -->
+            <div id="panel-step2" class="step-panel">
+                <p class="question-text" id="q1-text">質問1</p>
+                <div class="btn-list">
+                    <button onclick="nextStep(2)">そう思う</button>
+                    <button onclick="nextStep(2)">そう思わない</button>
+                </div>
+            </div>
+
+            <!-- ステップ3：質問2 -->
+            <div id="panel-step3" class="step-panel">
+                <p class="question-text" id="q2-text">質問2</p>
+                <div class="btn-list">
+                    <button onclick="nextStep(3)">YES</button>
+                    <button onclick="nextStep(3)">NO</button>
+                </div>
+            </div>
+
+            <!-- ステップ4：質問3 -->
+            <div id="panel-step4" class="step-panel">
+                <p class="question-text" id="q3-text">質問3</p>
+                <div class="btn-list">
+                    <button onclick="nextStep(4)">はい</button>
+                    <button onclick="nextStep(4)">いいえ</button>
+                </div>
+            </div>
+
+            <!-- ステップ5：結果を見るボタンの待機画面 -->
+            <div id="panel-step5" class="step-panel">
+                <p class="question-text">すべての診断の準備が整いました。</p>
+                <button class="action-btn" onclick="startLoading()">結果を見る</button>
+            </div>
+
+            <!-- ローディング画面 -->
+            <div id="panel-loading" class="step-panel">
+                <div class="loader-content">
+                    <div class="spinner"></div>
+                    <p id="loading-message">診断中...</p>
+                </div>
+            </div>
+
+            <!-- 結果画面 -->
+            <div id="panel-result" class="step-panel">
+                <div class="result-rank" id="result-rank-text">大吉</div>
+                <div class="quote-box">
+                    <div class="quote-text" id="result-quote-text">名言</div>
+                    <div class="quote-author" id="result-author-text">偉人名</div>
+                </div>
+                <p class="notice-text" style="font-size:0.75rem; margin-top:15px;">※占いは1日1回のみ有効です。明日また結果が変わります。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* ゲームアコーディオン内の専用スタイル（既存の.info-accordionに合わせる） */
+.fortune-mini-card {
+    background-color: #1E2A38;
+    border-radius: 16px;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.step-panel { display: none; }
+.step-panel.active { display: block; }
+
+.fortune-mini-card select {
+    width: 100%;
+    padding: 10px;
+    background-color: #192734;
+    color: #E7E9EA;
+    border: 1px solid #2D3A48;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    outline: none;
+}
+
+.fortune-mini-card select:focus {
+    border-color: #1DA1F2;
+}
+
+.fortune-mini-card .question-text {
+    font-size: 0.95rem;
+    color: #E7E9EA;
+    line-height: 1.5;
+    margin: 0 0 15px 0;
+}
+
+.fortune-mini-card .btn-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.fortune-mini-card button {
+    background-color: #192734;
+    color: #E7E9EA;
+    border: 1px solid #2D3A48;
+    padding: 10px;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.fortune-mini-card button:hover {
+    background-color: #253341;
+    border-color: #1DA1F2;
+}
+
+.fortune-mini-card .action-btn {
+    background-color: #1DA1F2;
+    color: white;
+    font-weight: bold;
+    border: none;
+    width: 100%;
+}
+
+.fortune-mini-card .action-btn:hover {
+    background-color: #0D8BD9;
+}
+
+/* ローディングスピナー */
+.spinner {
+    width: 35px;
+    height: 35px;
+    border: 3px solid #2D3A48;
+    border-top: 3px solid #1DA1F2;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    animation: fortune-spin 1s linear infinite;
+}
+@keyframes fortune-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 運勢ランクの色 */
+.result-rank {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.rank-大吉 { color: #FF4444; }
+.rank-中吉 { color: #FF9500; }
+.rank-吉 { color: #FFD700; }
+.rank-小吉 { color: #4CD964; }
+.rank-末吉 { color: #5AC8FA; }
+.rank-凶 { color: #8899A6; }
+
+.quote-box {
+    background-color: #192734;
+    border-left: 3px solid #1DA1F2;
+    padding: 12px;
+    text-align: left;
+    border-radius: 0 12px 12px 0;
+}
+.quote-text {
+    font-size: 0.85rem;
+    color: #E7E9EA;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+.quote-author {
+    font-size: 0.75rem;
+    color: #8899A6;
+    text-align: right;
+}
+.notice-text {
+    color: #8899A6;
+    font-size: 0.85rem;
+}
+</style>
+
+<script>
+// アコーディオン開閉（既存の.info-accordionと統一）
+document.addEventListener('DOMContentLoaded', function() {
+    const header = document.getElementById('accordionHeaderGame');
+    const body = document.getElementById('accordionBodyGame');
+    const icon = document.querySelector('.iconGame');
+    if (header && body && icon) {
+        header.addEventListener('click', function() {
+            body.classList.toggle('open');
+            icon.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+        });
+    }
+});
+
+// ========== 以下、ゲームのロジック ==========
+const questions = [
+    "直近のガチャでいわゆる「爆死」を経験した？", "新しいイベントが始まると、まずガチャ画面を開いてしまう？", "推しキャラの実装が決まった瞬間、財布の紐が緩む感覚がある？", "ゲームのローディング画面のTipsをじっくり読んでしまうタイプだ？", "ぶっちゃけ、自分の運の強さにはそこそこ自信がある？",
+    "ガチャを引くとき、独自のオカルト（時間帯、引く場所等）を持っている？", "限定という言葉を聞くと、性能に関わらず手に入れたくなる？", "目当てのキャラが出なくても「天井があるから大丈夫」と安心しがちだ？", "配布石が大量に配られると、使わずに貯めるよりすぐ引いてしまう？", "ゲーム内のフレンドが神引きしているのを見ると、少し焦る？",
+    "スキップ機能がある周回は、完全に脳を空っぽにして回している？", "ゲームのBGMや演出は、常にオンにして楽しみたい派だ？", "「これで最後の10連…」と思ってから、本当の勝負が始まることが多い？", "対人戦（PvP）要素があるソシャゲでは、負けるとかなり悔しい？", "リセマラ（初期設定のやり直し）を、苦にせず何度も繰り返せる根気がある？",
+    "アップデートのメンテナンス延長は、むしろワクワクして待てる？", "推しキャラのグッズが発売されたら、迷わずチェックする？", "ガチャを引くボタンを押す指に、毎回妙な力が入ってしまう？", "ゲーム内の攻略情報を調べるのが、プレイするのと同じくらい好きだ？", "ログインボーナスを受け取るためだけにアプリを起動することがよくある？",
+    "他のプレイヤーの評価を見る前に、自分でキャラの強さを試したい？", "最高レアリティの演出が出た瞬間、脳内で勝利の音楽が流れる？", "すり抜けで目当てじゃない最高レアが来た時、複雑な気持ちになる？", "ガチャの確率表記（0.7%など）は、意外と引ける数字だと感じる？", "ソシャゲのストーリーは、スキップせずに細部まで読み込む方だ？",
+    "朝起きて一番に、スマホでソシャゲの画面を開く習慣がある？", "期間限定イベントの報酬は、初日に全力で回収しに行くタイプだ？", "ギルドやマルチプレイなど、他のプレイヤーとの協力が楽しい？", "推しキャラがボイス付きで喋ると、それだけで満足感がある？", "ゲームの運営に対して、心の中で密かに感謝したことがある？",
+    "ガチャの演出が渋い時でも、最後の最高で大逆転が起きる気がする？", "フレンド枠のサポートキャラ選びには、かなりのこだわりがある？", "イベント限定の称号やアイコンは、何が何でも手に入れたい？", "ソシャゲのせいで寝不足になった経験が、過去に一度でもある？", "新しいプレイスタイルを試すのが、既存のテンプレより面白い？",
+    "ぶっちゃけ、石が大量にあるアカウントの画面を見るだけで癒やされる？", "キャラ育成のための素材周回は、好きな音楽を聴きながらやる？", "お気に入りのパーティ編成には、名前をしっかり付ける派だ？", "コラボイベントが開催されると、その作品を知らなくても熱くなる？", "ガチャチケットは、手に入れたら1枚ずつすぐに使ってしまう？",
+    "ゲーム内のチャット機能で、スタンプを連発するのが好きだ？", "高難易度クエストをギリギリでクリアした時の快感は忘れられない？", "アップデート予告の画像を、何度も拡大して観察してしまう？", "ゲームの記念日（〇周年など）は、自分の誕生日並みに楽しみだ？", "推しキャラの属性や武器種は、なんとなく偏りがちだと思う？",
+    "ガチャ画面の「提供割合」ボタンを、一度も押したことがない？", "ソシャゲ友達とのゲーム談義は、何時間でも続けていられる？", "周回マクロや自動プレイを見ている時間が、意外と心地よい？", "新しいアカウントでゲームを始めるときの、あの新鮮な感覚が好きだ？", "今日の自分の直感は、いつもより冴えている気がする？"
+];
+
+const quotesPositive = [
+    { text: "好機は、準備された心にのみ訪れる。", author: "ルイ・パスツール" },
+    { text: "来た、見た、勝った。", author: "ジュリアス・シーザー" },
+    { text: "乗るべき列車は、一度しか来ない。", author: "マルセル・パニョル" },
+    { text: "チャンスが出会うのは、それを迎える準備ができている心だけである。", author: "ルイ・パスツール" },
+    { text: "運命は勇者を好む。", author: "ヴァージル" },
+    { text: "行動を伴わない想像力は、何の意味も持たない。", author: "チャーリー・チャップリン" },
+    { text: "幸運とは、準備がチャンスと出会うことである。", author: "セネカ" },
+    { text: "大いなる成果は、一時的な衝動によってではなく、一連の小さな仕事が積み重なって生み出される。", author: "フィンセント・ファン・ゴッホ" },
+    { text: "前進し続けなさい。あなたが思いもしなかった素晴らしいことが待っている。", author: "不詳" }
+];
+
+const quotesNegative = [
+    { text: "失敗すればするほど、我々は成功に近づいている。", author: "トーマス・エジソン" },
+    { text: "最大の名誉は決して倒れないことではない。倒れるたびに起き上がることである。", author: "ネルソン・マンデラ" },
+    { text: "金がないから何もできないという人間は、金があっても何もできない。", author: "小林一三" },
+    { text: "困難の中にこそ、好機が潜んでいる。", author: "アルベルト・アインシュタイン" },
+    { text: "下を向いていたら、虹を見つけることは出来ないよ。", author: "チャーリー・チャップリン" },
+    { text: "失ったものを数えるな。残されたものを数えよ。", author: "不詳" },
+    { text: "最も深い夜も、やがては明けて朝になる。", author: "ヴィクトル・ユーゴー" },
+    { text: "どん底に落ちたなら、あとは這い上がるだけだ。", author: "不詳" }
+];
+
+function getTodayString() {
+    const d = new Date();
+    return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const savedDate = localStorage.getItem('fortune_played_date');
+    if (savedDate === getTodayString()) {
+        const step1 = document.getElementById('panel-step1');
+        const already = document.getElementById('panel-already');
+        if(step1) step1.classList.remove('active');
+        if(already) already.classList.add('active');
+    } else {
+        setupRandomQuestions();
+    }
+});
+
+function setupRandomQuestions() {
+    const shuffled = [...questions].sort(() => 0.5 - Math.random());
+    const q1 = document.getElementById('q1-text');
+    const q2 = document.getElementById('q2-text');
+    const q3 = document.getElementById('q3-text');
+    if(q1) q1.innerText = shuffled[0];
+    if(q2) q2.innerText = shuffled[1];
+    if(q3) q3.innerText = shuffled[2];
+}
+
+function nextStep(currentStep) {
+    if(currentStep === 1) {
+        const select = document.getElementById('zodiac-select');
+        if(!select || select.value === "割愛") { alert("星座を選択してください。"); return; }
+    }
+    const current = document.getElementById(`panel-step${currentStep}`);
+    const next = document.getElementById(`panel-step${currentStep + 1}`);
+    if(current) current.classList.remove('active');
+    if(next) next.classList.add('active');
+}
+
+function startLoading() {
+    const step5 = document.getElementById('panel-step5');
+    const loading = document.getElementById('panel-loading');
+    if(step5) step5.classList.remove('active');
+    if(loading) loading.classList.add('active');
+    setTimeout(() => { showResult(); }, 1200);
+}
+
+function showResult() {
+    const rand = Math.floor(Math.random() * 100);
+    let rank = "吉";
+    let selectedQuote = {};
+
+    if (rand < 10) {
+        rank = "凶";
+        selectedQuote = quotesNegative[Math.floor(Math.random() * quotesNegative.length)];
+    } else {
+        selectedQuote = quotesPositive[Math.floor(Math.random() * quotesPositive.length)];
+        if (rand < 25) rank = "大吉";
+        else if (rand < 45) rank = "中吉";
+        else if (rand < 70) rank = "吉";
+        else if (rand < 85) rank = "小吉";
+        else rank = "末吉";
+    }
+
+    const rankEl = document.getElementById('result-rank-text');
+    if(rankEl) {
+        rankEl.innerText = rank;
+        rankEl.className = `result-rank rank-${rank}`;
+    }
+    const quoteText = document.getElementById('result-quote-text');
+    const quoteAuthor = document.getElementById('result-author-text');
+    if(quoteText) quoteText.innerText = selectedQuote.text;
+    if(quoteAuthor) quoteAuthor.innerText = `— ${selectedQuote.author}`;
+
+    const loading = document.getElementById('panel-loading');
+    const result = document.getElementById('panel-result');
+    if(loading) loading.classList.remove('active');
+    if(result) result.classList.add('active');
+
+    localStorage.setItem('fortune_played_date', getTodayString());
+}
+</script>
+<!-- ゲームタイトル一覧 -->
+<div class="game-grid" id="gameContainer"></div>
+
+<!-- アコーディオン2：注意事項 -->
+<div class="info-accordion">
+    <div class="accordion-header" id="accordionHeader2">
+        <span>⚠️ 当方の販売実績やお取り引きについての注意事項</span>
+        <span class="accordion-icon icon2">▼</span>
+    </div>
+    <div class="accordion-body" id="accordionBody2">
+        <div class="info-content" id="noticeInfo"></div>
+    </div>
+</div>
+
+<!-- アコーディオン3：インスタ実績投稿まとめ -->
+<div class="info-accordion">
+    <div class="accordion-header" id="accordionHeader3">
+        <span>📷 インスタ 実績投稿まとめ</span>
+        <span class="accordion-icon icon3">▼</span>
+    </div>
+    <div class="accordion-body" id="accordionBody3">
+        <div class="sns-item">
+            <h4>📷 Instagram @tools.a_</h4>
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/tools.a_/" data-instgrm-version="14" style="width: 100%;"></blockquote>
+            <script async src="//www.instagram.com/embed.js"></script>
+        </div>
+    </div>
+</div>
+
+<!-- アコーディオン4：よくある質問（アコーディオン化・中身はそのまま） -->
+<div class="info-accordion">
+    <div class="accordion-header" id="accordionHeaderFaq">
+        <span>❓ よくある質問</span>
+        <span class="accordion-icon iconFaq">▼</span>
+    </div>
+    <div class="accordion-body" id="accordionBodyFaq">
+        <div id="faqContainer">
+            <!-- FAQはJSで動的に生成 -->
+        </div>
+    </div>
+</div>
+
+<div class="footer">© tools_A</div>
+
+<div id="productPopupModal" class="modal-popup">
+    <div class="modal-popup-content">
+        <div class="modal-header"><img id="popupGameIconImg" class="modal-header-img" src=""><span class="modal-header-name" id="popupGameName"></span></div>
+        <div id="popupProductList" class="popup-product-list"></div>
+        <button class="close-popup" id="closePopupBtn">閉じる</button>
+    </div>
+</div>
+
+<script src="admin-data-loader.js"></script>
+
+
+
+
+<script>
+    window.xContactUrl = "https://x.com/messages/compose?recipient_id=1641057230408540163";
+    window.lineContactUrl = "https://line.me/ti/p/9v4gGIz11z";
+    // FAQデータは data/faq.json から読み込みます。
+    // 読み込み処理: js/faq-loader.js
+    
+    function renderFAQ() {
+        const container = document.getElementById('faqContainer');
+        if (!container) return;
+        container.innerHTML = '';
+        faqData.forEach((item) => {
+            const faqItem = document.createElement('div');
+            faqItem.className = 'faq-item';
+            faqItem.innerHTML = `
+                <div class="faq-question">❓ ${escapeHtml(item.question)}</div>
+                <div class="faq-answer">${nl2br(escapeHtml(item.answer))}</div>
+            `;
+            container.appendChild(faqItem);
+        });
+    }
+
+    // ゲームタイトルとアイコンは data/games.json から読み込みます。
+    // 読み込み処理: js/games-loader.js
+    // サイト情報は data/siteinfo.json から読み込みます。
+    // 読み込み処理: js/siteinfo-loader.js
+    // 注意事項も data/siteinfo.json の noticeInfo から読み込みます。
+    
+    // 商品データは data/products.json から読み込みます。
+    // 読み込み処理: js/products-loader.js
+
+    function nl2br(str) { if (!str) return ''; return str.replace(/\n/g, '<br>'); }
+    function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); }
+    
+    function renderSiteInfo() {
+
+    const siteNameElement = document.querySelector('.site-name');
+    const siteDescriptionElement = document.querySelector('.site-desc');
+    if (siteNameElement && window.siteInfo.siteName) {
+        siteNameElement.textContent = window.siteInfo.siteName;
+        document.title = window.siteInfo.siteName;
+    }
+    if (siteDescriptionElement && window.siteInfo.siteDescription) {
+        siteDescriptionElement.textContent = window.siteInfo.siteDescription;
+    }
+        document.getElementById('updateInfo').innerHTML = window.siteInfo.updateInfo || '';
+        document.getElementById('snsInfo').innerHTML = window.siteInfo.snsInfo || '';
+        document.getElementById('paymentInfo').innerHTML = window.siteInfo.paymentInfo || '';
+    }
+    
+    function renderNoticeInfo() {
+        document.getElementById('noticeInfo').innerHTML = nl2br(escapeHtml(window.siteInfo.noticeInfo || ''));
+    }
+    
+
+    function normalizeGameImagePath(path) {
+        const value = String(path || '').trim();
+        if (!value) return DEFAULT_GAME_ICON;
+        if (/^(https?:)?\/\//i.test(value) || value.startsWith('data:') || value.startsWith('blob:')) {
+            return value;
+        }
+        if (value.startsWith('/')) return value;
+        if (value.startsWith('../')) return value.replace(/^\.\.\//, '/');
+        if (value.startsWith('./')) return '/' + value.slice(2);
+        return '/' + value;
+    }
+
+    function renderGameTitles() {
+        const container = document.getElementById('gameContainer');
+        if (!container) return;
+        container.innerHTML = '';
+
+        games.forEach((game) => {
+            const card = document.createElement('div');
+            card.className = 'game-card';
+            const iconUrl = normalizeGameImagePath(game.image);
+            card.innerHTML = `<img class="game-icon-img" src="${iconUrl}" onerror="this.src='${DEFAULT_GAME_ICON}'"><span class="game-name">${escapeHtml(game.name)}</span>`;
+            card.addEventListener('click', () => showProductPopup(game.category, game.name, normalizeGameImagePath(game.image)));
+            container.appendChild(card);
+        });
+
+        const inquiryCard = document.createElement('div');
+        inquiryCard.className = 'inquiry-card';
+        inquiryCard.innerHTML = `<span class="game-name">📩 記載のないタイトルはDMまで</span>`;
+        inquiryCard.addEventListener('click', () => { window.open(xContactUrl, '_blank'); });
+        container.appendChild(inquiryCard);
+    }
+
+    function showProductPopup(category, displayName, iconUrl) {
+        const filtered = products
+            .filter(p => p.category === category && p.status !== "hide")
+            .sort((a, b) => Number(a.sort || 0) - Number(b.sort || 0));
+        const headerIconUrl = (iconUrl && iconUrl.trim() !== '') ? iconUrl : "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2248%22%20height%3D%2248%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%238899A6%22%3E%3Cpath%20d%3D%22M12%202C6.48%202%202%206.48%202%2012s4.48%2010%2010%2010%2010-4.48%2010-10S17.52%202%2012%202zm0%203c1.66%200%203%201.34%203%203s-1.34%203-3%203-3-1.34-3-3%201.34-3%203-3zm0%2014.2c-2.5%200-4.71-1.28-6-3.22.03-1.99%204-3.08%206-3.08%201.99%200%205.97%201.09%206%203.08-1.29%201.94-3.5%203.22-6%203.22z%22%2F%3E%3C%2Fsvg%3E";
+        document.getElementById('popupGameIconImg').src = headerIconUrl;
+        document.getElementById('popupGameName').innerHTML = escapeHtml(displayName);
+        const listContainer = document.getElementById('popupProductList');
+        if (filtered.length === 0) listContainer.innerHTML = '<div style="text-align:center; padding:20px;">まだ商品がありません。</div>';
+        else {
+            listContainer.innerHTML = '';
+            filtered.forEach(p => {
+                const itemDiv = document.createElement('div'); itemDiv.className = 'popup-product-item';
+                itemDiv.innerHTML = `
+                    <div class="popup-product-title">${escapeHtml(p.title)}</div>
+                    <div class="popup-product-desc">${nl2br(escapeHtml(p.description))}</div>
+                    <div class="popup-product-price">${escapeHtml(p.price)}</div>
+                    ${p.status === 'sold' ? '<div style="color:#FF6B6B;font-weight:700;margin:8px 0;">売り切れ</div>' : ''}
+                    ${p.status === 'sold' ? '' : `
+                    <div class="contact-buttons">
+                        <a href="${window.xContactUrl}" target="_blank" class="contact-btn contact-btn-x">📩 Xで連絡</a>
+                        <a href="${window.lineContactUrl}" target="_blank" class="contact-btn contact-btn-line">💬 LINEで連絡</a>
+                    </div>
+                    `}
+                `;
+                listContainer.appendChild(itemDiv);
+            });
+        }
+        document.getElementById('productPopupModal').style.display = 'block';
+    }
+    
+    // アコーディオンイベント
+    document.getElementById('accordionHeaderBuy').addEventListener('click', () => { document.getElementById('accordionBodyBuy').classList.toggle('open'); document.querySelector('.iconBuy').style.transform = document.getElementById('accordionBodyBuy').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
+    document.getElementById('accordionHeader1').addEventListener('click', () => { document.getElementById('accordionBody1').classList.toggle('open'); document.querySelector('.icon1').style.transform = document.getElementById('accordionBody1').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
+    document.getElementById('accordionHeader2').addEventListener('click', () => { document.getElementById('accordionBody2').classList.toggle('open'); document.querySelector('.icon2').style.transform = document.getElementById('accordionBody2').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
+    document.getElementById('accordionHeader3').addEventListener('click', () => { document.getElementById('accordionBody3').classList.toggle('open'); document.querySelector('.icon3').style.transform = document.getElementById('accordionBody3').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
+    document.getElementById('accordionHeaderFaq').addEventListener('click', () => { document.getElementById('accordionBodyFaq').classList.toggle('open'); document.querySelector('.iconFaq').style.transform = document.getElementById('accordionBodyFaq').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
+    
+    document.getElementById('closePopupBtn').addEventListener('click', () => { document.getElementById('productPopupModal').style.display = 'none'; });
+    window.addEventListener('click', (e) => { if (e.target === document.getElementById('productPopupModal')) document.getElementById('productPopupModal').style.display = 'none'; });
+    
+    Promise.all([loadGames(), loadProducts(), loadFAQ(), loadSiteInfo()])
+        .then(() => {
+            renderSiteInfo();
+            renderNoticeInfo();
+            renderGameTitles();
+            renderFAQ();
+        })
+        .catch((error) => {
+            console.error(error);
+            const container = document.getElementById('gameContainer');
+            if (container) {
+                container.innerHTML = '<div style="padding:20px;text-align:center;color:#FF6B6B;">ゲーム・商品・FAQ・サイト情報を読み込めませんでした。IIS経由で開いているか確認してください。</div>';
+            }
+        });
+</script>
+
+<div id="adminEditModal" class="admin-edit-modal">
+    <div class="admin-edit-panel">
+        <h2 id="adminEditHeading">商品を編集</h2>
+        <div class="admin-edit-sub" id="adminEditGameName"></div>
+
+        <form id="adminProductForm">
+            <input type="hidden" id="adminProductId">
+            <input type="hidden" id="adminProductCategory">
+
+            <div class="admin-field">
+                <label for="adminProductTitle">商品タイトル</label>
+                <input id="adminProductTitle" type="text" required>
+            </div>
+
+            <div class="admin-field">
+                <label for="adminProductDescription">商品詳細</label>
+                <textarea id="adminProductDescription"></textarea>
+            </div>
+
+            <div class="admin-field">
+                <label for="adminProductPrice">金額</label>
+                <input id="adminProductPrice" type="text" placeholder="例：1000円～2000円">
+            </div>
+
+            <div class="admin-form-row">
+                <div class="admin-field">
+                    <label for="adminProductStatus">販売状態</label>
+                    <select id="adminProductStatus">
+                        <option value="sale">販売中</option>
+                        <option value="sold">売り切れ</option>
+                        <option value="hide">非表示</option>
+                    </select>
+                </div>
+                <div class="admin-field">
+                    <label for="adminProductSort">並び順</label>
+                    <input id="adminProductSort" type="number" min="0" step="1">
+                </div>
+            </div>
+
+            <div class="admin-field">
+                <label for="adminProductImage">商品画像URL（未使用の場合は空欄）</label>
+                <input id="adminProductImage" type="text">
+            </div>
+
+            <div class="admin-edit-actions">
+                <button class="admin-form-btn save" type="submit">変更を反映</button>
+                <button class="admin-form-btn cancel" id="adminCancelEdit" type="button">キャンセル</button>
+                <button class="admin-form-btn delete" id="adminDeleteProduct" type="button">この商品を完全削除</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="adminNewTitleModal" class="admin-edit-modal">
+    <div class="admin-edit-panel">
+        <h2>新規タイトルを追加</h2>
+        <div class="admin-edit-sub">ゲームタイトルと最初の商品を同時に登録します。</div>
+
+        <form id="adminNewTitleForm">
+            <div class="admin-field">
+                <label for="adminNewGameName">ゲームタイトル</label>
+                <input id="adminNewGameName" type="text" required placeholder="例：モンスターストライク">
+            </div>
+
+            <div class="admin-field">
+                <label>アイコン画像</label>
+                <div id="adminIconDropZone" class="admin-icon-drop-zone" tabindex="0">
+                    <input id="adminNewGameIconFile" type="file" accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp" hidden>
+                    <div class="admin-drop-icon">＋</div>
+                    <div class="admin-drop-main">画像をここへドラッグ＆ドロップ</div>
+                    <div class="admin-drop-sub">またはクリックしてフォルダから選択</div>
+                    <div class="admin-drop-types">PNG / JPG / JPEG / WebP</div>
+                </div>
+
+                <div id="adminIconSelection" class="admin-icon-selection" hidden>
+                    <img id="adminNewGameIconPreview" class="admin-icon-preview large" alt="アイコンプレビュー">
+                    <div class="admin-icon-file-info">
+                        <strong id="adminIconFileName">未選択</strong>
+                        <span id="adminIconFileSize"></span>
+                        <span id="adminIconOutputPath"></span>
+                    </div>
+                    <button id="adminClearIconFile" class="admin-small-btn" type="button">画像を解除</button>
+                </div>
+
+                <div class="admin-icon-fallback">
+                    <label for="adminNewGameIcon">既存画像パスを直接入力する場合</label>
+                    <input id="adminNewGameIcon" type="text" placeholder="例：images/monster-strike.png">
+                </div>
+            </div>
+
+            <div class="admin-field">
+                <label for="adminNewProductTitle">商品タイトル</label>
+                <input id="adminNewProductTitle" type="text" required placeholder="例：オーブ1600個以上">
+            </div>
+
+            <div class="admin-field">
+                <label for="adminNewProductPrice">価格</label>
+                <input id="adminNewProductPrice" type="text" required placeholder="例：2000円～3000円">
+            </div>
+
+            <div class="admin-field">
+                <label for="adminNewProductDescription">商品説明</label>
+                <textarea id="adminNewProductDescription" placeholder="商品内容や注意事項を入力"></textarea>
+            </div>
+
+            <div class="admin-form-row">
+                <div class="admin-field">
+                    <label for="adminNewProductStatus">販売状態</label>
+                    <select id="adminNewProductStatus">
+                        <option value="sale">販売中</option>
+                        <option value="sold">売り切れ</option>
+                        <option value="hide">非表示</option>
+                    </select>
+                </div>
+                <div class="admin-field">
+                    <label for="adminNewGameSort">タイトル並び順</label>
+                    <input id="adminNewGameSort" type="number" min="0" step="1">
+                </div>
+            </div>
+
+            <div class="admin-edit-actions">
+                <button class="admin-form-btn save" type="submit">タイトル・商品・画像を追加</button>
+                <button class="admin-form-btn cancel" id="adminCancelNewTitle" type="button">キャンセル</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="admin-new-title-area">
+    <h3>ゲームタイトルを追加</h3>
+    <p>一覧に存在しない新しいゲームを追加し、最初の商品も同時に登録します。</p>
+    <button id="adminOpenNewTitle" class="admin-new-title-btn" type="button">＋ 新規タイトルを追加</button>
+    <div class="admin-save-note">
+        追加後は画面上部の「保存してGitHub公開」を押してください。画像保存とGitHub公開をまとめて実行します。
+    </div>
+</div>
+
+<div class="admin-help">
+    編集内容は画面上へ即時反映されます。「保存してGitHub公開」を押すと、Win7へ保存後、GitHub Pagesへ自動送信します。
+</div>
+
+
+<script>
+(function () {
+    'use strict';
+
+    let currentCategory = '';
+    let currentGameName = '';
+    let currentGameIcon = '';
+    let editingProductId = null;
+    let selectedIconFile = null;
+    let selectedIconObjectUrl = null;
+    const pendingImageUploads = new Map();
+    const API_BASE = `${location.protocol}//${location.hostname}:8765`;
+
+    const getGameByCategory = (category) =>
+        window.games.find(game => game.category === category) || null;
+
+    function nextProductId() {
+        return window.products.reduce((max, product) => {
+            const id = Number(product.id);
+            return Number.isFinite(id) ? Math.max(max, id) : max;
+        }, 0) + 1;
+    }
+
+    function nextSortForCategory(category) {
+        const categoryProducts = window.products.filter(product => product.category === category);
+        return categoryProducts.reduce((max, product) => {
+            const sort = Number(product.sort);
+            return Number.isFinite(sort) ? Math.max(max, sort) : max;
+        }, 0) + 1;
+    }
+
+    function statusLabel(status) {
+        if (status === 'sold') return '売り切れ';
+        if (status === 'hide') return '非表示';
+        return '販売中';
+    }
+
+    window.showProductPopup = function showProductPopupAdmin(category, displayName, iconUrl) {
+        currentCategory = category;
+        currentGameName = displayName;
+        currentGameIcon = iconUrl || '';
+
+        const filtered = window.products
+            .filter(product => product.category === category)
+            .sort((a, b) =>
+                Number(a.sort || 0) - Number(b.sort || 0) ||
+                Number(a.id || 0) - Number(b.id || 0)
+            );
+
+        const headerIconUrl = (iconUrl && iconUrl.trim() !== '') ? iconUrl : window.DEFAULT_GAME_ICON;
+        document.getElementById('popupGameIconImg').src = headerIconUrl;
+        document.getElementById('popupGameName').textContent = displayName;
+
+        const listContainer = document.getElementById('popupProductList');
+        listContainer.innerHTML = '';
+
+        if (filtered.length === 0) {
+            const empty = document.createElement('div');
+            empty.style.cssText = 'text-align:center;padding:20px;color:#8899A6;';
+            empty.textContent = 'まだ商品がありません。';
+            listContainer.appendChild(empty);
+        }
+
+        filtered.forEach(product => {
+            const item = document.createElement('div');
+            item.className = 'popup-product-item' + (product.status === 'hide' ? ' admin-product-hidden' : '');
+
+            const contactButtons = product.status === 'sale' ? `
+                <div class="contact-buttons">
+                    <a href="${window.xContactUrl}" target="_blank" class="contact-btn contact-btn-x">📩 Xで連絡</a>
+                    <a href="${window.lineContactUrl}" target="_blank" class="contact-btn contact-btn-line">💬 LINEで連絡</a>
+                </div>
+            ` : '';
+
+            item.innerHTML = `
+                <div class="popup-product-title">${escapeHtml(product.title)}</div>
+                <div class="admin-status-note">${statusLabel(product.status)}</div>
+                <div class="popup-product-desc">${nl2br(escapeHtml(product.description))}</div>
+                <div class="popup-product-price">${escapeHtml(product.price)}</div>
+                ${contactButtons}
+                <button class="admin-edit-btn" type="button" data-product-id="${product.id}">編集</button>
+            `;
+            listContainer.appendChild(item);
+        });
+
+        const addButton = document.createElement('button');
+        addButton.type = 'button';
+        addButton.className = 'admin-add-item';
+        addButton.textContent = '＋ 新規項目を追加';
+        addButton.addEventListener('click', () => openProductEditor(null, category));
+        listContainer.appendChild(addButton);
+
+        const deleteTitleButton = document.createElement('button');
+        deleteTitleButton.type = 'button';
+        deleteTitleButton.className = 'admin-delete-title';
+        deleteTitleButton.textContent = 'このタイトルを削除';
+        deleteTitleButton.addEventListener('click', () => deleteCurrentTitle(category));
+        listContainer.appendChild(deleteTitleButton);
+
+        listContainer.querySelectorAll('.admin-edit-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                openProductEditor(Number(button.dataset.productId), category);
+            });
+        });
+
+        document.getElementById('productPopupModal').style.display = 'block';
+    };
+
+
+    function deleteCurrentTitle(category) {
+        const game = getGameByCategory(category);
+        if (!game) return;
+
+        const count = window.products.filter(product => product.category === category).length;
+        const message =
+            `「${game.name}」を削除しますか？\n\n` +
+            `このタイトルに登録されている商品 ${count}件 も同時に削除されます。`;
+
+        if (!confirm(message)) return;
+
+        window.games = window.games.filter(item => item.category !== category);
+        window.products = window.products.filter(item => item.category !== category);
+
+        document.getElementById('productPopupModal').style.display = 'none';
+        renderGameTitles();
+        markUnsaved('タイトルと配下商品を削除しました。保存してGitHub公開してください');
+    }
+
+    function openProductEditor(productId, category) {
+        editingProductId = productId;
+        const game = getGameByCategory(category);
+        const product = productId == null
+            ? null
+            : window.products.find(item => Number(item.id) === Number(productId));
+
+        document.getElementById('adminEditHeading').textContent =
+            product ? '商品を編集' : '新規項目を追加';
+        document.getElementById('adminEditGameName').textContent =
+            `${game ? game.name : currentGameName}の商品`;
+
+        document.getElementById('adminProductId').value = product ? product.id : '';
+        document.getElementById('adminProductCategory').value = category;
+        document.getElementById('adminProductTitle').value = product ? product.title || '' : '';
+        document.getElementById('adminProductDescription').value = product ? product.description || '' : '';
+        document.getElementById('adminProductPrice').value = product ? product.price || '' : '';
+        document.getElementById('adminProductStatus').value = product ? product.status || 'sale' : 'sale';
+        document.getElementById('adminProductSort').value =
+            product ? Number(product.sort || 0) : nextSortForCategory(category);
+        document.getElementById('adminProductImage').value = product ? product.image || '' : '';
+
+        document.getElementById('adminDeleteProduct').style.display = product ? 'block' : 'none';
+        document.getElementById('adminEditModal').style.display = 'block';
+        document.getElementById('adminProductTitle').focus();
+    }
+
+    function closeProductEditor() {
+        document.getElementById('adminEditModal').style.display = 'none';
+        editingProductId = null;
+    }
+
+
+    function markUnsaved(message = '未保存の変更あり') {
+        const state = document.getElementById('adminSaveState');
+        state.textContent = message;
+        state.style.color = '#F4A340';
+    }
+
+    function setBusy(isBusy) {
+        document.getElementById('adminUploadBtn').disabled = isBusy;
+        document.getElementById('adminServerSaveBtn').disabled = isBusy;
+    }
+
+    async function apiRequest(path, options = {}) {
+        const response = await fetch(`${API_BASE}${path}`, {
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...(options.headers || {})
+            }
+        });
+
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || data.ok === false) {
+            throw new Error(data.error || `HTTP ${response.status}`);
+        }
+        return data;
+    }
+
+    async function checkApiStatus() {
+        const state = document.getElementById('adminApiState');
+        const gitState = document.getElementById('adminGitState');
+
+        try {
+            const data = await apiRequest('/api/status', { method: 'GET', headers: {} });
+            state.textContent = '● Win7 API接続中';
+            state.style.color = '#16C784';
+
+            if (data.git && data.git.ready) {
+                gitState.textContent = `● GitHub接続準備済み (${data.git.branch || 'main'})`;
+                gitState.style.color = '#16C784';
+            } else {
+                gitState.textContent = `● GitHub未設定${data.git && data.git.message ? ': ' + data.git.message : ''}`;
+                gitState.style.color = '#F4A340';
+            }
+            return true;
+        } catch (error) {
+            state.textContent = `● API未接続 (${location.hostname}:8765)`;
+            state.style.color = '#FF6B6B';
+            gitState.textContent = '● Git状態確認不可';
+            gitState.style.color = '#FF6B6B';
+            return false;
+        }
+    }
+
+    function fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const result = String(reader.result || '');
+                resolve(result.includes(',') ? result.split(',')[1] : result);
+            };
+            reader.onerror = () => reject(reader.error || new Error('画像読込失敗'));
+            reader.readAsDataURL(file);
+        });
+    }
+
+    async function uploadPendingImages() {
+        if (pendingImageUploads.size === 0) return { uploaded: 0 };
+
+        let uploaded = 0;
+        const total = pendingImageUploads.size;
+
+        for (const [filename, file] of pendingImageUploads.entries()) {
+            document.getElementById('adminSaveState').textContent =
+                `画像アップロード中 ${uploaded + 1}/${total}`;
+
+            const contentBase64 = await fileToBase64(file);
+            await apiRequest('/api/upload', {
+                method: 'POST',
+                body: JSON.stringify({
+                    filename,
+                    content_base64: contentBase64
+                })
+            });
+            uploaded += 1;
+        }
+
+        pendingImageUploads.clear();
+        return { uploaded };
+    }
+
+    async function saveAllToServer() {
+        setBusy(true);
+        try {
+            await uploadPendingImages();
+            document.getElementById('adminSaveState').textContent = 'JSONをサーバーへ保存中...';
+
+            const orderedGames = window.games
+                .map(game => ({
+                    ...game,
+                    image: String(game.image || '').trim().startsWith('images/')
+                        ? '/' + String(game.image).trim()
+                        : game.image
+                }))
+                .sort((a, b) =>
+                    Number(a.sort || 999999) - Number(b.sort || 999999) ||
+                    Number(a.id || 0) - Number(b.id || 0)
+                );
+
+            const orderedProducts = [...window.products].sort((a, b) =>
+                String(a.category || '').localeCompare(String(b.category || '')) ||
+                Number(a.sort || 0) - Number(b.sort || 0) ||
+                Number(a.id || 0) - Number(b.id || 0)
+            );
+
+            const result = await apiRequest('/api/save-and-publish', {
+                method: 'POST',
+                body: JSON.stringify({
+                    games: orderedGames,
+                    products: orderedProducts,
+                    commit_message: `CMS update ${new Date().toLocaleString('ja-JP')}`
+                })
+            });
+
+            if (result.publish && result.publish.ok) {
+                document.getElementById('adminSaveState').textContent =
+                    `保存・GitHub公開完了 ${result.saved_at || ''}`;
+                document.getElementById('adminSaveState').style.color = '#16C784';
+            } else {
+                const reason = result.publish && result.publish.error
+                    ? result.publish.error
+                    : 'GitHub公開に失敗しました';
+                document.getElementById('adminSaveState').textContent =
+                    `サーバー保存完了 / GitHub公開失敗: ${reason}`;
+                document.getElementById('adminSaveState').style.color = '#F4A340';
+                alert(
+                    'Win7サーバーへの保存は完了しています。\n\n' +
+                    'GitHubへの公開だけ失敗しました。\n' +
+                    reason
+                );
+            }
+
+            await checkApiStatus();
+        } catch (error) {
+            document.getElementById('adminSaveState').textContent =
+                `サーバー保存失敗: ${error.message}`;
+            document.getElementById('adminSaveState').style.color = '#FF6B6B';
+
+            alert(
+                'サーバーへ保存できませんでした。\n\n' +
+                'Win7で server\\start_api.bat を起動し、Win11から http://${location.hostname}:8765/api/status が開けるか確認してください。\n\n' +
+                error.message
+            );
+        } finally {
+            setBusy(false);
+        }
+    }
+
+    document.getElementById('adminProductForm').addEventListener('submit', event => {
+        event.preventDefault();
+
+        const category = document.getElementById('adminProductCategory').value;
+        const values = {
+            category,
+            title: document.getElementById('adminProductTitle').value.trim(),
+            description: document.getElementById('adminProductDescription').value.trim(),
+            price: document.getElementById('adminProductPrice').value.trim(),
+            status: document.getElementById('adminProductStatus').value,
+            image: document.getElementById('adminProductImage').value.trim(),
+            sort: Number(document.getElementById('adminProductSort').value || 0)
+        };
+
+        if (!values.title) {
+            alert('商品タイトルを入力してください。');
+            return;
+        }
+
+        if (editingProductId == null) {
+            window.products.push({
+                id: nextProductId(),
+                ...values
+            });
+        } else {
+            const index = window.products.findIndex(
+                item => Number(item.id) === Number(editingProductId)
+            );
+            if (index !== -1) {
+                window.products[index] = {
+                    ...window.products[index],
+                    ...values
+                };
+            }
+        }
+
+        closeProductEditor();
+        showProductPopup(category, currentGameName, currentGameIcon);
+        markUnsaved();
+    });
+
+    document.getElementById('adminDeleteProduct').addEventListener('click', () => {
+        if (editingProductId == null) return;
+        if (!confirm('この商品を完全に削除しますか？')) return;
+
+        const category = document.getElementById('adminProductCategory').value;
+        window.products = window.products.filter(
+            item => Number(item.id) !== Number(editingProductId)
+        );
+
+        closeProductEditor();
+        showProductPopup(category, currentGameName, currentGameIcon);
+        markUnsaved();
+    });
+
+    document.getElementById('adminCancelEdit').addEventListener('click', closeProductEditor);
+
+    document.getElementById('adminEditModal').addEventListener('click', event => {
+        if (event.target === document.getElementById('adminEditModal')) {
+            closeProductEditor();
+        }
+    });
+
+    document.getElementById('adminPreviewBtn').addEventListener('click', () => {
+        window.open('../', '_blank');
+    });
+
+    document.getElementById('adminDownloadBtn').addEventListener('click', () => {
+        const orderedProducts = [...window.products].sort((a, b) =>
+            Number(a.sort || 0) - Number(b.sort || 0) ||
+            Number(a.id || 0) - Number(b.id || 0)
+        );
+
+        const blob = new Blob(
+            [JSON.stringify(orderedProducts, null, 2)],
+            { type: 'application/json;charset=utf-8' }
+        );
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'products.json';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+
+        document.getElementById('adminSaveState').textContent = 'products.json保存済み';
+        document.getElementById('adminSaveState').style.color = '#16C784';
+    });
+
+
+    function nextGameId() {
+        return window.games.reduce((max, game) => {
+            const id = Number(game.id);
+            return Number.isFinite(id) ? Math.max(max, id) : max;
+        }, 0) + 1;
+    }
+
+    function nextGameSort() {
+        return window.games.reduce((max, game) => {
+            const sort = Number(game.sort);
+            return Number.isFinite(sort) ? Math.max(max, sort) : max;
+        }, 0) + 1;
+    }
+
+    function nextCategory() {
+        let maxCategory = -1;
+        window.games.forEach(game => {
+            const match = String(game.category || '').match(/^cat_(\d+)$/);
+            if (match) maxCategory = Math.max(maxCategory, Number(match[1]));
+        });
+        return `cat_${maxCategory + 1}`;
+    }
+
+    function openNewTitleModal() {
+        document.getElementById('adminNewGameName').value = '';
+        clearSelectedIcon();
+        document.getElementById('adminNewGameIcon').value = '';
+        document.getElementById('adminNewProductTitle').value = '';
+        document.getElementById('adminNewProductPrice').value = '';
+        document.getElementById('adminNewProductDescription').value = '';
+        document.getElementById('adminNewProductStatus').value = 'sale';
+        document.getElementById('adminNewGameSort').value = nextGameSort();
+        document.getElementById('adminNewGameIconPreview').src = window.DEFAULT_GAME_ICON;
+        document.getElementById('adminNewTitleModal').style.display = 'block';
+        document.getElementById('adminNewGameName').focus();
+    }
+
+    function closeNewTitleModal() {
+        document.getElementById('adminNewTitleModal').style.display = 'none';
+    }
+
+    document.getElementById('adminOpenNewTitle').addEventListener('click', openNewTitleModal);
+    document.getElementById('adminCancelNewTitle').addEventListener('click', closeNewTitleModal);
+
+    document.getElementById('adminNewTitleModal').addEventListener('click', event => {
+        if (event.target === document.getElementById('adminNewTitleModal')) {
+            closeNewTitleModal();
+        }
+    });
+
+
+    function sanitizeImageFileName(fileName) {
+        const dot = fileName.lastIndexOf('.');
+        const baseRaw = dot >= 0 ? fileName.slice(0, dot) : fileName;
+        const extRaw = dot >= 0 ? fileName.slice(dot + 1).toLowerCase() : 'png';
+        const ext = ['png','jpg','jpeg','webp'].includes(extRaw) ? extRaw : 'png';
+        const base = baseRaw.normalize('NFKC')
+            .replace(/[^a-zA-Z0-9_-]+/g, '-')
+            .replace(/^-+|-+$/g, '')
+            .toLowerCase() || `game-icon-${Date.now()}`;
+        return `${base}.${ext}`;
+    }
+
+    function formatFileSize(size) {
+        if (size < 1024) return `${size} B`;
+        if (size < 1024 * 1024) return `${(size / 1024).toFixed(1)} KB`;
+        return `${(size / 1024 / 1024).toFixed(1)} MB`;
+    }
+
+    function clearSelectedIcon() {
+        if (selectedIconObjectUrl) URL.revokeObjectURL(selectedIconObjectUrl);
+        selectedIconFile = null;
+        selectedIconObjectUrl = null;
+        const input = document.getElementById('adminNewGameIconFile');
+        if (input) input.value = '';
+        const box = document.getElementById('adminIconSelection');
+        if (box) box.hidden = true;
+    }
+
+    function selectIconFile(file) {
+        if (!file) return;
+        const ext = String(file.name || '').split('.').pop().toLowerCase();
+        if (!['png','jpg','jpeg','webp'].includes(ext)) {
+            alert('PNG、JPG、JPEG、WebP形式の画像を選択してください。');
+            return;
+        }
+        if (file.size > 5 * 1024 * 1024) {
+            alert('画像サイズは5MB以下にしてください。');
+            return;
+        }
+
+        clearSelectedIcon();
+        selectedIconFile = file;
+        selectedIconObjectUrl = URL.createObjectURL(file);
+        const safeName = sanitizeImageFileName(file.name);
+
+        document.getElementById('adminNewGameIconPreview').src = selectedIconObjectUrl;
+        document.getElementById('adminIconFileName').textContent = safeName;
+        document.getElementById('adminIconFileSize').textContent = formatFileSize(file.size);
+        document.getElementById('adminIconOutputPath').textContent = `登録先: /images/${safeName}`;
+        document.getElementById('adminIconSelection').hidden = false;
+        document.getElementById('adminNewGameIcon').value = `/images/${safeName}`;
+    }
+
+    function queueSelectedIconUpload() {
+        if (!selectedIconFile) return null;
+        const safeName = sanitizeImageFileName(selectedIconFile.name);
+        pendingImageUploads.set(safeName, selectedIconFile);
+        return safeName;
+    }
+
+    const iconDropZone = document.getElementById('adminIconDropZone');
+    const iconFileInput = document.getElementById('adminNewGameIconFile');
+
+    iconDropZone.addEventListener('click', () => iconFileInput.click());
+    iconDropZone.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            iconFileInput.click();
+        }
+    });
+    iconFileInput.addEventListener('change', event => {
+        selectIconFile(event.target.files && event.target.files[0]);
+    });
+    ['dragenter','dragover'].forEach(type => {
+        iconDropZone.addEventListener(type, event => {
+            event.preventDefault();
+            iconDropZone.classList.add('dragover');
+        });
+    });
+    ['dragleave','drop'].forEach(type => {
+        iconDropZone.addEventListener(type, event => {
+            event.preventDefault();
+            iconDropZone.classList.remove('dragover');
+        });
+    });
+    iconDropZone.addEventListener('drop', event => {
+        selectIconFile(event.dataTransfer.files && event.dataTransfer.files[0]);
+    });
+    document.getElementById('adminClearIconFile').addEventListener('click', () => {
+        clearSelectedIcon();
+        document.getElementById('adminNewGameIcon').value = '';
+    });
+
+    document.getElementById('adminNewTitleForm').addEventListener('submit', event => {
+        event.preventDefault();
+
+        const gameName = document.getElementById('adminNewGameName').value.trim();
+        let gameIcon = document.getElementById('adminNewGameIcon').value.trim();
+        const productTitle = document.getElementById('adminNewProductTitle').value.trim();
+        const productPrice = document.getElementById('adminNewProductPrice').value.trim();
+        const productDescription = document.getElementById('adminNewProductDescription').value.trim();
+        const productStatus = document.getElementById('adminNewProductStatus').value;
+        const gameSort = Number(document.getElementById('adminNewGameSort').value || nextGameSort());
+
+        if (!gameName || !productTitle || !productPrice) {
+            alert('ゲームタイトル、商品タイトル、価格を入力してください。');
+            return;
+        }
+
+        const duplicate = window.games.some(game =>
+            String(game.name || '').trim().toLowerCase() === gameName.toLowerCase()
+        );
+        if (duplicate) {
+            alert('同じゲームタイトルがすでに登録されています。');
+            return;
+        }
+
+        const category = nextCategory();
+        const gameId = nextGameId();
+
+        if (selectedIconFile) {
+            const queuedName = queueSelectedIconUpload();
+            gameIcon = `/images/${queuedName}`;
+        }
+
+        const newGame = {
+            id: gameId,
+            category,
+            name: gameName,
+            image: gameIcon,
+            sort: gameSort,
+            visible: true
+        };
+
+        const newProduct = {
+            id: nextProductId(),
+            category,
+            title: productTitle,
+            description: productDescription,
+            price: productPrice,
+            status: productStatus,
+            image: '',
+            sort: 1
+        };
+
+        window.games.push(newGame);
+        window.products.push(newProduct);
+
+        window.games.sort((a, b) =>
+            Number(a.sort || 999999) - Number(b.sort || 999999) ||
+            Number(a.id || 0) - Number(b.id || 0)
+        );
+
+        closeNewTitleModal();
+        renderGameTitles();
+
+        markUnsaved(
+            selectedIconFile
+                ? '画像と新規タイトルが未保存です'
+                : '新規タイトルが未保存です'
+        );
+
+        setTimeout(() => {
+            showProductPopup(category, gameName, gameIcon || window.DEFAULT_GAME_ICON);
+        }, 50);
+    });
+
+
+    document.getElementById('adminUploadBtn').addEventListener('click', async () => {
+        setBusy(true);
+        try {
+            const result = await uploadPendingImages();
+            document.getElementById('adminSaveState').textContent =
+                result.uploaded > 0
+                    ? `画像${result.uploaded}件アップロード完了`
+                    : '未アップロード画像はありません';
+            document.getElementById('adminSaveState').style.color = '#16C784';
+        } catch (error) {
+            document.getElementById('adminSaveState').textContent =
+                `画像アップロード失敗: ${error.message}`;
+            document.getElementById('adminSaveState').style.color = '#FF6B6B';
+            alert('画像アップロードに失敗しました。\n' + error.message);
+        } finally {
+            setBusy(false);
+        }
+    });
+
+    document.getElementById('adminServerSaveBtn').addEventListener('click', saveAllToServer);
+
+    document.getElementById('adminGamesDownloadBtn').addEventListener('click', () => {
+        const orderedGames = [...window.games].sort((a, b) =>
+            Number(a.sort || 999999) - Number(b.sort || 999999) ||
+            Number(a.id || 0) - Number(b.id || 0)
+        );
+
+        const blob = new Blob(
+            [JSON.stringify(orderedGames, null, 2)],
+            { type: 'application/json;charset=utf-8' }
+        );
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'games.json';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+
+        document.getElementById('adminSaveState').textContent = 'games.json保存済み';
+        document.getElementById('adminSaveState').style.color = '#16C784';
+    });
+
+    Promise.all([loadGames(), loadProducts(), loadFAQ(), loadSiteInfo()])
+        .then(async () => {
+            document.getElementById('adminSaveState').textContent = 'JSON読込成功';
+            await checkApiStatus();
+        })
+        .catch(() => {
+            document.getElementById('adminSaveState').textContent = 'JSON読込失敗';
+            document.getElementById('adminSaveState').style.color = '#FF6B6B';
+        });
+})();
+</script>
+
+</body>
+</html>
