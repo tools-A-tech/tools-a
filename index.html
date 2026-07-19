@@ -593,7 +593,7 @@ function showResult() {
         if (value.startsWith('/')) return value;
         if (value.startsWith('../')) return value.replace(/^\.\.\//, '/');
         if (value.startsWith('./')) return '/' + value.slice(2);
-        return '/' + value;
+        return value;
     }
 
     function renderGameTitles() {
