@@ -190,16 +190,6 @@
     "sort": 138
   },
   {
-    "id": 139,
-    "category": "cat_109",
-    "title": "石垢",
-    "description": "石1000",
-    "price": "1000",
-    "status": "sale",
-    "image": "",
-    "sort": 1
-  },
-  {
     "id": 29,
     "category": "cat_11",
     "title": "iOS版",
