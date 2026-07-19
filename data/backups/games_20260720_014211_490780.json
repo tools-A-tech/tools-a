@@ -870,13 +870,5 @@
     "image": "https://i.imgur.com/ZPAoniw.png",
     "status": "show",
     "sort": 109
-  },
-  {
-    "id": 110,
-    "category": "cat_109",
-    "name": "あｓｄ",
-    "image": "images/download.jpg",
-    "sort": 110,
-    "visible": true
   }
 ]
