@@ -53,6 +53,35 @@ def safe_image_name(filename):
     return safe_stem + ext
 
 
+def normalize_image_paths(items):
+    """
+    GitHub Pages のプロジェクトサイト配下でも動くように、
+    /images/xxx を images/xxx に統一する。
+    管理画面側が先頭 / を付けても、保存直前にAPI側で補正する。
+    """
+    normalized = []
+
+    for item in items:
+        if not isinstance(item, dict):
+            normalized.append(item)
+            continue
+
+        copied = dict(item)
+        image = copied.get("image")
+
+        if isinstance(image, str):
+            image = image.strip()
+
+            if image.startswith("/images/"):
+                image = image[1:]
+
+            copied["image"] = image
+
+        normalized.append(copied)
+
+    return normalized
+
+
 def atomic_write_json(path, data):
     path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -333,6 +362,9 @@ class Handler(BaseHTTPRequestHandler):
 
                 if not isinstance(products, list):
                     raise ValueError("productsデータが不正です")
+
+                games = normalize_image_paths(games)
+                products = normalize_image_paths(products)
 
                 atomic_write_json(DATA_DIR / "games.json", games)
                 atomic_write_json(DATA_DIR / "products.json", products)
