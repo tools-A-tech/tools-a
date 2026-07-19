@@ -2,7 +2,7 @@
   {
     "id": 1,
     "category": "cat_0",
-    "title": "ガチャ星5~6キャラ数ランダムt",
+    "title": "ガチャ星5~6キャラ数ランダム",
     "description": "ルシファー確定\nオーブ1600個以上～/1000円\nオーブ2000個以上～/2000円",
     "price": "1000円～2000円",
     "status": "sale",
@@ -90,6 +90,186 @@
     "sort": 9
   },
   {
+    "id": 10,
+    "category": "cat_2",
+    "title": "iOS版 石5000個前後+かけら1200前後",
+    "description": "",
+    "price": "1000円",
+    "status": "sale",
+    "image": "",
+    "sort": 10
+  },
+  {
+    "id": 11,
+    "category": "cat_2",
+    "title": "iOS版 石5000個前後+かけら2400前後",
+    "description": "",
+    "price": "2000円",
+    "status": "sale",
+    "image": "",
+    "sort": 11
+  },
+  {
+    "id": 12,
+    "category": "cat_2",
+    "title": "クザン確定(数量限定)",
+    "description": "石5000個前後+かけら3000前後",
+    "price": "3000円",
+    "status": "sale",
+    "image": "",
+    "sort": 12
+  },
+  {
+    "id": 13,
+    "category": "cat_2",
+    "title": "黒ガープ確定",
+    "description": "石5000個前後+かけら2400前後",
+    "price": "3000円",
+    "status": "sale",
+    "image": "",
+    "sort": 13
+  },
+  {
+    "id": 14,
+    "category": "cat_2",
+    "title": "勝者島ロー 白ニカ 黄猿 黒ひげ 1体指定",
+    "description": "石5000個前後+かけら1800以上",
+    "price": "4000円",
+    "status": "sale",
+    "image": "",
+    "sort": 14
+  },
+  {
+    "id": 15,
+    "category": "cat_2",
+    "title": "上記以外の超フェス1体指定",
+    "description": "石5000個前後+かけら1200前後",
+    "price": "2000円",
+    "status": "sale",
+    "image": "",
+    "sort": 15
+  },
+  {
+    "id": 16,
+    "category": "cat_2",
+    "title": "超フェス1体指定（かけら多め）",
+    "description": "石5000個前後+かけら1800前後",
+    "price": "4000円",
+    "status": "sale",
+    "image": "",
+    "sort": 16
+  },
+  {
+    "id": 17,
+    "category": "cat_2",
+    "title": "iOS 超フェス2体指定",
+    "description": "石5000個前後+かけら1200前後",
+    "price": "4000円",
+    "status": "sale",
+    "image": "",
+    "sort": 17
+  },
+  {
+    "id": 18,
+    "category": "cat_2",
+    "title": "iOS 超フェス4体~指定",
+    "description": "石5000個前後+かけら大量垢 /金額相談\nお問い合わせ時は必ず予算をお伝えください",
+    "price": "相談",
+    "status": "sale",
+    "image": "",
+    "sort": 18
+  },
+  {
+    "id": 19,
+    "category": "cat_2",
+    "title": "iOS 超フェス多数石垢（参考）",
+    "description": "超フェス8体 石5000+かけら2500",
+    "price": "10000円",
+    "status": "sale",
+    "image": "",
+    "sort": 19
+  },
+  {
+    "id": 20,
+    "category": "cat_2",
+    "title": "Android版",
+    "description": "石5000個前後+かけら5000～7000程度\niOS版へのガチャ代行は+1000円で対応\n(代行の場合は石は0でのお渡しとなります)",
+    "price": "3000円～",
+    "status": "sale",
+    "image": "",
+    "sort": 20
+  },
+  {
+    "id": 21,
+    "category": "cat_3",
+    "title": "Android版のみ",
+    "description": "石2700前後",
+    "price": "3000円",
+    "status": "sale",
+    "image": "",
+    "sort": 21
+  },
+  {
+    "id": 22,
+    "category": "cat_4",
+    "title": "石垢",
+    "description": "石17万前後",
+    "price": "2000円",
+    "status": "sale",
+    "image": "",
+    "sort": 22
+  },
+  {
+    "id": 23,
+    "category": "cat_5",
+    "title": "ダイヤ+キューブ",
+    "description": "ダイヤ3900 キューブ1300\nダイヤ4800 キューブ1200\nサーバーはお問い合わせください",
+    "price": "2000円～3000円",
+    "status": "sale",
+    "image": "",
+    "sort": 23
+  },
+  {
+    "id": 24,
+    "category": "cat_6",
+    "title": "石垢",
+    "description": "石7400個前後\n石10000個前後",
+    "price": "3000円～5000円",
+    "status": "sale",
+    "image": "",
+    "sort": 24
+  },
+  {
+    "id": 25,
+    "category": "cat_7",
+    "title": "石垢（純正原石換算分含む）",
+    "description": "石160000前後/5000円\n石300000前後/8000円\n石400000前後/12000円",
+    "price": "5000円～11000円",
+    "status": "sale",
+    "image": "",
+    "sort": 25
+  },
+  {
+    "id": 26,
+    "category": "cat_8",
+    "title": "キャラ指定リセマラ垢",
+    "description": "進行済み石垢もありますがBANリスク大\nDMにてご相談下さい",
+    "price": "金額要相談",
+    "status": "sale",
+    "image": "",
+    "sort": 26
+  },
+  {
+    "id": 27,
+    "category": "cat_9",
+    "title": "石垢",
+    "description": "石87000前後/2000円\n石120000前後/7000円",
+    "price": "2000～7000円",
+    "status": "sale",
+    "image": "",
+    "sort": 27
+  },
+  {
     "id": 28,
     "category": "cat_10",
     "title": "石垢",
@@ -98,96 +278,6 @@
     "status": "sale",
     "image": "",
     "sort": 28
-  },
-  {
-    "id": 130,
-    "category": "cat_100",
-    "title": "石27000前後+チケット合計200以上",
-    "description": "",
-    "price": "3000円",
-    "status": "sale",
-    "image": "",
-    "sort": 130
-  },
-  {
-    "id": 131,
-    "category": "cat_101",
-    "title": "石19000前後",
-    "description": "",
-    "price": "1000円",
-    "status": "sale",
-    "image": "",
-    "sort": 131
-  },
-  {
-    "id": 132,
-    "category": "cat_102",
-    "title": "石30000個前後",
-    "description": "",
-    "price": "1000円",
-    "status": "sale",
-    "image": "",
-    "sort": 132
-  },
-  {
-    "id": 133,
-    "category": "cat_103",
-    "title": "装備指定リセマラ垢",
-    "description": "",
-    "price": "1000円～",
-    "status": "sale",
-    "image": "",
-    "sort": 133
-  },
-  {
-    "id": 134,
-    "category": "cat_104",
-    "title": "石52000前後",
-    "description": "",
-    "price": "3000円",
-    "status": "sale",
-    "image": "",
-    "sort": 134
-  },
-  {
-    "id": 135,
-    "category": "cat_105",
-    "title": "キャラ指定リセマラ垢",
-    "description": "",
-    "price": "1000円～",
-    "status": "sale",
-    "image": "",
-    "sort": 135
-  },
-  {
-    "id": 136,
-    "category": "cat_106",
-    "title": "キャラ指定リセマラ垢",
-    "description": "",
-    "price": "1000円～",
-    "status": "sale",
-    "image": "",
-    "sort": 136
-  },
-  {
-    "id": 137,
-    "category": "cat_107",
-    "title": "石20万前後 /2000円\n石65万前後 /3000円",
-    "description": "",
-    "price": "2000円～3000円",
-    "status": "sale",
-    "image": "",
-    "sort": 137
-  },
-  {
-    "id": 138,
-    "category": "cat_108",
-    "title": "iosのみ対応\n在庫変動が多いためDMで確認お願いします",
-    "description": "",
-    "price": "3000円～",
-    "status": "sale",
-    "image": "",
-    "sort": 138
   },
   {
     "id": 29,
@@ -310,116 +400,6 @@
     "sort": 40
   },
   {
-    "id": 10,
-    "category": "cat_2",
-    "title": "iOS版 石5000個前後+かけら1200前後",
-    "description": "",
-    "price": "1000円",
-    "status": "sale",
-    "image": "",
-    "sort": 10
-  },
-  {
-    "id": 11,
-    "category": "cat_2",
-    "title": "iOS版 石5000個前後+かけら2400前後",
-    "description": "",
-    "price": "2000円",
-    "status": "sale",
-    "image": "",
-    "sort": 11
-  },
-  {
-    "id": 12,
-    "category": "cat_2",
-    "title": "クザン確定(数量限定)",
-    "description": "石5000個前後+かけら3000前後",
-    "price": "3000円",
-    "status": "sale",
-    "image": "",
-    "sort": 12
-  },
-  {
-    "id": 13,
-    "category": "cat_2",
-    "title": "黒ガープ確定",
-    "description": "石5000個前後+かけら2400前後",
-    "price": "3000円",
-    "status": "sale",
-    "image": "",
-    "sort": 13
-  },
-  {
-    "id": 14,
-    "category": "cat_2",
-    "title": "勝者島ロー 白ニカ 黄猿 黒ひげ 1体指定",
-    "description": "石5000個前後+かけら1800以上",
-    "price": "4000円",
-    "status": "sale",
-    "image": "",
-    "sort": 14
-  },
-  {
-    "id": 15,
-    "category": "cat_2",
-    "title": "上記以外の超フェス1体指定",
-    "description": "石5000個前後+かけら1200前後",
-    "price": "2000円",
-    "status": "sale",
-    "image": "",
-    "sort": 15
-  },
-  {
-    "id": 16,
-    "category": "cat_2",
-    "title": "超フェス1体指定（かけら多め）",
-    "description": "石5000個前後+かけら1800前後",
-    "price": "4000円",
-    "status": "sale",
-    "image": "",
-    "sort": 16
-  },
-  {
-    "id": 17,
-    "category": "cat_2",
-    "title": "iOS 超フェス2体指定",
-    "description": "石5000個前後+かけら1200前後",
-    "price": "4000円",
-    "status": "sale",
-    "image": "",
-    "sort": 17
-  },
-  {
-    "id": 18,
-    "category": "cat_2",
-    "title": "iOS 超フェス4体~指定",
-    "description": "石5000個前後+かけら大量垢 /金額相談\nお問い合わせ時は必ず予算をお伝えください",
-    "price": "相談",
-    "status": "sale",
-    "image": "",
-    "sort": 18
-  },
-  {
-    "id": 19,
-    "category": "cat_2",
-    "title": "iOS 超フェス多数石垢（参考）",
-    "description": "超フェス8体 石5000+かけら2500",
-    "price": "10000円",
-    "status": "sale",
-    "image": "",
-    "sort": 19
-  },
-  {
-    "id": 20,
-    "category": "cat_2",
-    "title": "Android版",
-    "description": "石5000個前後+かけら5000～7000程度\niOS版へのガチャ代行は+1000円で対応\n(代行の場合は石は0でのお渡しとなります)",
-    "price": "3000円～",
-    "status": "sale",
-    "image": "",
-    "sort": 20
-  },
-  {
     "id": 41,
     "category": "cat_20",
     "title": "石垢",
@@ -528,16 +508,6 @@
     "status": "sale",
     "image": "",
     "sort": 51
-  },
-  {
-    "id": 21,
-    "category": "cat_3",
-    "title": "Android版のみ",
-    "description": "石2700前後",
-    "price": "3000円",
-    "status": "sale",
-    "image": "",
-    "sort": 21
   },
   {
     "id": 52,
@@ -650,16 +620,6 @@
     "sort": 62
   },
   {
-    "id": 22,
-    "category": "cat_4",
-    "title": "石垢",
-    "description": "石17万前後",
-    "price": "2000円",
-    "status": "sale",
-    "image": "",
-    "sort": 22
-  },
-  {
     "id": 63,
     "category": "cat_40",
     "title": "石垢",
@@ -758,16 +718,6 @@
     "status": "sale",
     "image": "",
     "sort": 72
-  },
-  {
-    "id": 23,
-    "category": "cat_5",
-    "title": "ダイヤ+キューブ",
-    "description": "ダイヤ3900 キューブ1300\nダイヤ4800 キューブ1200\nサーバーはお問い合わせください",
-    "price": "2000円～3000円",
-    "status": "sale",
-    "image": "",
-    "sort": 23
   },
   {
     "id": 73,
@@ -900,16 +850,6 @@
     "sort": 85
   },
   {
-    "id": 24,
-    "category": "cat_6",
-    "title": "石垢",
-    "description": "石7400個前後\n石10000個前後",
-    "price": "3000円～5000円",
-    "status": "sale",
-    "image": "",
-    "sort": 24
-  },
-  {
     "id": 86,
     "category": "cat_60",
     "title": "石垢",
@@ -1040,16 +980,6 @@
     "sort": 98
   },
   {
-    "id": 25,
-    "category": "cat_7",
-    "title": "石垢（純正原石換算分含む）",
-    "description": "石160000前後/5000円\n石300000前後/8000円\n石400000前後/12000円",
-    "price": "5000円～11000円",
-    "status": "sale",
-    "image": "",
-    "sort": 25
-  },
-  {
     "id": 99,
     "category": "cat_70",
     "title": "石垢",
@@ -1160,16 +1090,6 @@
     "sort": 109
   },
   {
-    "id": 26,
-    "category": "cat_8",
-    "title": "キャラ指定リセマラ垢",
-    "description": "進行済み石垢もありますがBANリスク大\nDMにてご相談下さい",
-    "price": "金額要相談",
-    "status": "sale",
-    "image": "",
-    "sort": 26
-  },
-  {
     "id": 110,
     "category": "cat_80",
     "title": "進行済み石垢",
@@ -1270,16 +1190,6 @@
     "sort": 119
   },
   {
-    "id": 27,
-    "category": "cat_9",
-    "title": "石垢",
-    "description": "石87000前後/2000円\n石120000前後/7000円",
-    "price": "2000～7000円",
-    "status": "sale",
-    "image": "",
-    "sort": 27
-  },
-  {
     "id": 120,
     "category": "cat_90",
     "title": "石垢",
@@ -1378,5 +1288,95 @@
     "status": "sale",
     "image": "",
     "sort": 129
+  },
+  {
+    "id": 130,
+    "category": "cat_100",
+    "title": "石27000前後+チケット合計200以上",
+    "description": "",
+    "price": "3000円",
+    "status": "sale",
+    "image": "",
+    "sort": 130
+  },
+  {
+    "id": 131,
+    "category": "cat_101",
+    "title": "石19000前後",
+    "description": "",
+    "price": "1000円",
+    "status": "sale",
+    "image": "",
+    "sort": 131
+  },
+  {
+    "id": 132,
+    "category": "cat_102",
+    "title": "石30000個前後",
+    "description": "",
+    "price": "1000円",
+    "status": "sale",
+    "image": "",
+    "sort": 132
+  },
+  {
+    "id": 133,
+    "category": "cat_103",
+    "title": "装備指定リセマラ垢",
+    "description": "",
+    "price": "1000円～",
+    "status": "sale",
+    "image": "",
+    "sort": 133
+  },
+  {
+    "id": 134,
+    "category": "cat_104",
+    "title": "石52000前後",
+    "description": "",
+    "price": "3000円",
+    "status": "sale",
+    "image": "",
+    "sort": 134
+  },
+  {
+    "id": 135,
+    "category": "cat_105",
+    "title": "キャラ指定リセマラ垢",
+    "description": "",
+    "price": "1000円～",
+    "status": "sale",
+    "image": "",
+    "sort": 135
+  },
+  {
+    "id": 136,
+    "category": "cat_106",
+    "title": "キャラ指定リセマラ垢",
+    "description": "",
+    "price": "1000円～",
+    "status": "sale",
+    "image": "",
+    "sort": 136
+  },
+  {
+    "id": 137,
+    "category": "cat_107",
+    "title": "石20万前後 /2000円\n石65万前後 /3000円",
+    "description": "",
+    "price": "2000円～3000円",
+    "status": "sale",
+    "image": "",
+    "sort": 137
+  },
+  {
+    "id": 138,
+    "category": "cat_108",
+    "title": "iosのみ対応\n在庫変動が多いためDMで確認お願いします",
+    "description": "",
+    "price": "3000円～",
+    "status": "sale",
+    "image": "",
+    "sort": 138
   }
 ]
