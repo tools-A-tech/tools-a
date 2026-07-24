@@ -1699,9 +1699,9 @@ function showResult() {
         document.getElementById('adminNewGameIconPreview').src = selectedIconObjectUrl;
         document.getElementById('adminIconFileName').textContent = safeName;
         document.getElementById('adminIconFileSize').textContent = formatFileSize(file.size);
-        document.getElementById('adminIconOutputPath').textContent = `登録先: images/${safeName}`;
+        document.getElementById('adminIconOutputPath').textContent = `登録先: /images/${safeName}`;
         document.getElementById('adminIconSelection').hidden = false;
-        document.getElementById('adminNewGameIcon').value = `images/${safeName}`;
+        document.getElementById('adminNewGameIcon').value = `/images/${safeName}`;
     }
 
     function queueSelectedIconUpload() {

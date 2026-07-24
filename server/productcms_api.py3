@@ -363,45 +363,6 @@ class Handler(BaseHTTPRequestHandler):
                 })
                 return
 
-            if path == "/api/account/upload":
-                filename = safe_image_name(payload.get("filename"))
-                encoded = payload.get("content_base64")
-                upload_type = str(payload.get("type") or "product").strip().lower()
-
-                if upload_type not in ("icon", "product"):
-                    raise ValueError("画像種別が不正です")
-
-                if not isinstance(encoded, str) or not encoded:
-                    raise ValueError("画像データがありません")
-
-                try:
-                    content = base64.b64decode(encoded, validate=True)
-                except Exception:
-                    raise ValueError("画像データを読み取れません")
-
-                if len(content) > MAX_IMAGE_BYTES:
-                    raise ValueError("画像は5MB以下にしてください")
-
-                if upload_type == "icon":
-                    target_dir = ACCOUNT_ICON_DIR
-                    public_dir = "/images/accounts/icons/"
-                else:
-                    target_dir = ACCOUNT_PRODUCT_IMAGE_DIR
-                    public_dir = "/images/accounts/products/"
-
-                target = target_dir / filename
-                with open(str(target), "wb") as handle:
-                    handle.write(content)
-
-                self._send_json(200, {
-                    "ok": True,
-                    "type": upload_type,
-                    "filename": filename,
-                    "path": public_dir + filename,
-                    "size": len(content)
-                })
-                return
-
             if path in ("/api/save", "/api/save-and-publish"):
                 games = payload.get("games")
                 products = payload.get("products")

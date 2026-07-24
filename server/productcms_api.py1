@@ -24,18 +24,15 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 IMAGE_DIR = ROOT / "images"
 BACKUP_DIR = DATA_DIR / "backups"
-
 ACCOUNT_IMAGE_DIR = IMAGE_DIR / "accounts"
 ACCOUNT_ICON_DIR = ACCOUNT_IMAGE_DIR / "icons"
 ACCOUNT_PRODUCT_IMAGE_DIR = ACCOUNT_IMAGE_DIR / "products"
-
 MAX_IMAGE_BYTES = 5 * 1024 * 1024
 ALLOWED_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp"}
 
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 IMAGE_DIR.mkdir(parents=True, exist_ok=True)
 BACKUP_DIR.mkdir(parents=True, exist_ok=True)
-
 ACCOUNT_IMAGE_DIR.mkdir(parents=True, exist_ok=True)
 ACCOUNT_ICON_DIR.mkdir(parents=True, exist_ok=True)
 ACCOUNT_PRODUCT_IMAGE_DIR.mkdir(parents=True, exist_ok=True)
@@ -60,19 +57,6 @@ def safe_image_name(filename):
         safe_stem = "game-icon-" + datetime.now().strftime("%Y%m%d%H%M%S")
 
     return safe_stem + ext
-
-
-def load_json_list(path):
-    if not path.exists():
-        return []
-
-    with open(str(path), "r", encoding="utf-8") as handle:
-        data = json.load(handle)
-
-    if not isinstance(data, list):
-        raise ValueError("%s の内容が配列ではありません" % path.name)
-
-    return data
 
 
 def atomic_write_json(path, data):
@@ -311,23 +295,6 @@ class Handler(BaseHTTPRequestHandler):
             })
             return
 
-        if path == "/api/account/load":
-            try:
-                games = load_json_list(DATA_DIR / "account_games.json")
-                accounts = load_json_list(DATA_DIR / "accounts.json")
-
-                self._send_json(200, {
-                    "ok": True,
-                    "games": games,
-                    "accounts": accounts
-                })
-            except Exception as exc:
-                self._send_json(400, {
-                    "ok": False,
-                    "error": str(exc)
-                })
-            return
-
         self._send_json(404, {"ok": False, "error": "Not found"})
 
     def do_POST(self):
@@ -363,45 +330,6 @@ class Handler(BaseHTTPRequestHandler):
                 })
                 return
 
-            if path == "/api/account/upload":
-                filename = safe_image_name(payload.get("filename"))
-                encoded = payload.get("content_base64")
-                upload_type = str(payload.get("type") or "product").strip().lower()
-
-                if upload_type not in ("icon", "product"):
-                    raise ValueError("画像種別が不正です")
-
-                if not isinstance(encoded, str) or not encoded:
-                    raise ValueError("画像データがありません")
-
-                try:
-                    content = base64.b64decode(encoded, validate=True)
-                except Exception:
-                    raise ValueError("画像データを読み取れません")
-
-                if len(content) > MAX_IMAGE_BYTES:
-                    raise ValueError("画像は5MB以下にしてください")
-
-                if upload_type == "icon":
-                    target_dir = ACCOUNT_ICON_DIR
-                    public_dir = "/images/accounts/icons/"
-                else:
-                    target_dir = ACCOUNT_PRODUCT_IMAGE_DIR
-                    public_dir = "/images/accounts/products/"
-
-                target = target_dir / filename
-                with open(str(target), "wb") as handle:
-                    handle.write(content)
-
-                self._send_json(200, {
-                    "ok": True,
-                    "type": upload_type,
-                    "filename": filename,
-                    "path": public_dir + filename,
-                    "size": len(content)
-                })
-                return
-
             if path in ("/api/save", "/api/save-and-publish"):
                 games = payload.get("games")
                 products = payload.get("products")
@@ -428,27 +356,6 @@ class Handler(BaseHTTPRequestHandler):
                     )
 
                 self._send_json(200, response)
-                return
-
-            if path == "/api/account/save":
-                games = payload.get("games")
-                accounts = payload.get("accounts")
-
-                if not isinstance(games, list):
-                    raise ValueError("account gamesデータが不正です")
-
-                if not isinstance(accounts, list):
-                    raise ValueError("accountsデータが不正です")
-
-                atomic_write_json(DATA_DIR / "account_games.json", games)
-                atomic_write_json(DATA_DIR / "accounts.json", accounts)
-
-                self._send_json(200, {
-                    "ok": True,
-                    "saved_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                    "games_count": len(games),
-                    "accounts_count": len(accounts)
-                })
                 return
 
             self._send_json(404, {"ok": False, "error": "Not found"})
@@ -501,6 +408,9 @@ def run_self_test():
 
 def main():
     lan_ip = get_lan_ip()
+
+    print("PYTHON FILE:", Path(__file__).resolve())
+    print("ACCOUNT IMAGE DIR:", ACCOUNT_IMAGE_DIR)
 
     print("=" * 68)
     print(" ProductSiteCMS V1.1 Save API")

@@ -363,45 +363,6 @@ class Handler(BaseHTTPRequestHandler):
                 })
                 return
 
-            if path == "/api/account/upload":
-                filename = safe_image_name(payload.get("filename"))
-                encoded = payload.get("content_base64")
-                upload_type = str(payload.get("type") or "product").strip().lower()
-
-                if upload_type not in ("icon", "product"):
-                    raise ValueError("画像種別が不正です")
-
-                if not isinstance(encoded, str) or not encoded:
-                    raise ValueError("画像データがありません")
-
-                try:
-                    content = base64.b64decode(encoded, validate=True)
-                except Exception:
-                    raise ValueError("画像データを読み取れません")
-
-                if len(content) > MAX_IMAGE_BYTES:
-                    raise ValueError("画像は5MB以下にしてください")
-
-                if upload_type == "icon":
-                    target_dir = ACCOUNT_ICON_DIR
-                    public_dir = "/images/accounts/icons/"
-                else:
-                    target_dir = ACCOUNT_PRODUCT_IMAGE_DIR
-                    public_dir = "/images/accounts/products/"
-
-                target = target_dir / filename
-                with open(str(target), "wb") as handle:
-                    handle.write(content)
-
-                self._send_json(200, {
-                    "ok": True,
-                    "type": upload_type,
-                    "filename": filename,
-                    "path": public_dir + filename,
-                    "size": len(content)
-                })
-                return
-
             if path in ("/api/save", "/api/save-and-publish"):
                 games = payload.get("games")
                 products = payload.get("products")
@@ -428,27 +389,6 @@ class Handler(BaseHTTPRequestHandler):
                     )
 
                 self._send_json(200, response)
-                return
-
-            if path == "/api/account/save":
-                games = payload.get("games")
-                accounts = payload.get("accounts")
-
-                if not isinstance(games, list):
-                    raise ValueError("account gamesデータが不正です")
-
-                if not isinstance(accounts, list):
-                    raise ValueError("accountsデータが不正です")
-
-                atomic_write_json(DATA_DIR / "account_games.json", games)
-                atomic_write_json(DATA_DIR / "accounts.json", accounts)
-
-                self._send_json(200, {
-                    "ok": True,
-                    "saved_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                    "games_count": len(games),
-                    "accounts_count": len(accounts)
-                })
                 return
 
             self._send_json(404, {"ok": False, "error": "Not found"})
