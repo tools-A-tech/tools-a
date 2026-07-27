@@ -101,9 +101,6 @@
         <div class="info-section"><div class="info-title">💳 支払い方法</div><div class="info-content" id="paymentInfo"></div></div>
     </div>
 </div>
-    localStorage.setItem('fortune_played_date', getTodayString());
-}
-</script>
 <!-- ゲームタイトル一覧 -->
 <div class="game-grid" id="gameContainer"></div>
 
@@ -280,8 +277,7 @@
     }
     
     // アコーディオンイベント
-    document.getElementById('accordionHeaderBuy').addEventListener('click', () => { document.getElementById('accordionBodyBuy').classList.toggle('open'); document.querySelector('.iconBuy').style.transform = document.getElementById('accordionBodyBuy').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
-    document.getElementById('accordionHeader1').addEventListener('click', () => { document.getElementById('accordionBody1').classList.toggle('open'); document.querySelector('.icon1').style.transform = document.getElementById('accordionBody1').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
+document.getElementById('accordionHeader1').addEventListener('click', () => { document.getElementById('accordionBody1').classList.toggle('open'); document.querySelector('.icon1').style.transform = document.getElementById('accordionBody1').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
     document.getElementById('accordionHeader2').addEventListener('click', () => { document.getElementById('accordionBody2').classList.toggle('open'); document.querySelector('.icon2').style.transform = document.getElementById('accordionBody2').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
     document.getElementById('accordionHeader3').addEventListener('click', () => { document.getElementById('accordionBody3').classList.toggle('open'); document.querySelector('.icon3').style.transform = document.getElementById('accordionBody3').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
     document.getElementById('accordionHeaderFaq').addEventListener('click', () => { document.getElementById('accordionBodyFaq').classList.toggle('open'); document.querySelector('.iconFaq').style.transform = document.getElementById('accordionBodyFaq').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
