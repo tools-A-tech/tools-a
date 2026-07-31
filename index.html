@@ -20,6 +20,24 @@
         .info-title { font-weight: 600; color: #1DA1F2; margin-bottom: 6px; font-size: 14px; }
         .info-content { font-size: 13px; color: #8899A6; line-height: 1.5; }
         .info-content a { color: #1DA1F2; text-decoration: none; }
+        .box-account-link {
+            display: block;
+            background: linear-gradient(135deg, #1DA1F2, #0D8BD9);
+            color: #FFFFFF !important;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 14px;
+            padding: 13px 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(29, 161, 242, 0.22);
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        .box-account-link:hover { transform: translateY(-2px); opacity: 0.92; }
+        .box-account-text { color: #C5CCD3; font-size: 13px; line-height: 1.75; }
+        .box-account-note { margin-top: 14px; color: #E7E9EA; font-weight: 600; }
+        .box-account-titles { margin-top: 14px; padding: 12px 14px; background: #192734; border: 1px solid #2D3A48; border-radius: 14px; }
+        .box-account-titles strong { display: block; color: #1DA1F2; margin-bottom: 6px; font-size: 14px; }
         
         /* FAQ内のQ&A表示用（アコーディオンの中身） */
         .faq-item { margin-bottom: 20px; border-bottom: 1px solid #2D3A48; padding-bottom: 16px; }
@@ -101,6 +119,33 @@
         <div class="info-section"><div class="info-title">💳 支払い方法</div><div class="info-content" id="paymentInfo"></div></div>
     </div>
 </div>
+
+<!-- アコーディオン：強石垢・BOX公開アカウント -->
+<div class="info-accordion">
+    <div class="accordion-header" id="accordionHeaderBoxAccounts">
+        <span>強石垢 BOX公開アカウント はこちら</span>
+        <span class="accordion-icon iconBoxAccounts">▼</span>
+    </div>
+    <div class="accordion-body" id="accordionBodyBoxAccounts">
+        <div class="info-content">
+            <a class="box-account-link" href="https://tools-a-tech.github.io/tools-a-accounts/" target="_blank" rel="noopener noreferrer">強石垢・BOX公開アカウントを見る</a>
+            <div class="box-account-text">
+                限定キャラ複数所持の各種石垢はこちらに掲載をしております。<br>
+                高額なものも多くなるため、予算がある方はDMまでお問い合わせください。<br>
+                お値段は相談に応じます。
+
+                <div class="box-account-note">記載にない組み合わせは別途ご相談ください。</div>
+
+                <div class="box-account-titles">
+                    <strong>現在の記載タイトル</strong>
+                    バウンティ（iOS・Android）／ファンパレ／FGO／プロスピ<br>
+                    掲載タイトルは今後増やしていく予定です。
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- ゲームタイトル一覧 -->
 <div class="game-grid" id="gameContainer"></div>
 
@@ -278,6 +323,7 @@
     
     // アコーディオンイベント
 document.getElementById('accordionHeader1').addEventListener('click', () => { document.getElementById('accordionBody1').classList.toggle('open'); document.querySelector('.icon1').style.transform = document.getElementById('accordionBody1').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
+    document.getElementById('accordionHeaderBoxAccounts').addEventListener('click', () => { document.getElementById('accordionBodyBoxAccounts').classList.toggle('open'); document.querySelector('.iconBoxAccounts').style.transform = document.getElementById('accordionBodyBoxAccounts').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
     document.getElementById('accordionHeader2').addEventListener('click', () => { document.getElementById('accordionBody2').classList.toggle('open'); document.querySelector('.icon2').style.transform = document.getElementById('accordionBody2').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
     document.getElementById('accordionHeader3').addEventListener('click', () => { document.getElementById('accordionBody3').classList.toggle('open'); document.querySelector('.icon3').style.transform = document.getElementById('accordionBody3').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
     document.getElementById('accordionHeaderFaq').addEventListener('click', () => { document.getElementById('accordionBodyFaq').classList.toggle('open'); document.querySelector('.iconFaq').style.transform = document.getElementById('accordionBodyFaq').classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'; });
