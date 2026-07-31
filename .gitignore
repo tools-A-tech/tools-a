@@ -1,0 +1,15 @@
+# BEGIN ProductSiteCMS public-only rules
+/admin/
+/server/
+/data/backups/
+/README_V*.txt
+/iisstart.htm
+/iisstart.png
+/welcome.png
+/web.config
+/index - *.html
+/images/*.txt
+__pycache__/
+*.pyc
+.env
+# END ProductSiteCMS public-only rules

@@ -1,8 +1,0 @@
-{
-  "enabled": true,
-  "branch": "main",
-  "remote": "origin",
-  "repository_url": "https://github.com/tools-A-tech/tools-a.git",
-  "commit_name": "ProductSiteCMS",
-  "commit_email": "productsitecms@localhost"
-}
