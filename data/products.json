@@ -482,22 +482,12 @@
   {
     "id": 48,
     "category": "cat_27",
-    "title": "確定垢",
-    "description": "アルティメットエスカノール+背信者メリオダス確定\n+石700個 /1000円\n+石1200個 /2000円",
-    "price": "1000円～",
+    "title": "石垢",
+    "description": "グラクロ\n石1200個 /2000円\n石1700個 /4000円\n石2300個 /8000円",
+    "price": "2000円～",
     "status": "sale",
     "image": "",
     "sort": 48
-  },
-  {
-    "id": 49,
-    "category": "cat_27",
-    "title": "UR24以上所持",
-    "description": "石1700個 /5000円\n石2200個 /7000円",
-    "price": "4000～円",
-    "status": "sale",
-    "image": "",
-    "sort": 49
   },
   {
     "id": 50,
