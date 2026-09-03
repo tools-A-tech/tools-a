@@ -190,6 +190,17 @@
     "sort": 138
   },
   {
+    "id": 143,
+    "category": "cat_109",
+    "title": "ホロドリ リセマラ垢",
+    "description": "下記リンクからアカウントをお選びください",
+    "price": "1000円～",
+    "url": "https://tools-a-tech.github.io/holo/",
+    "status": "sale",
+    "image": "",
+    "sort": 1
+  },
+  {
     "id": 29,
     "category": "cat_11",
     "title": "iOS版",
