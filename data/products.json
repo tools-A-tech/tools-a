@@ -323,82 +323,57 @@
   {
     "id": 10,
     "category": "cat_2",
-    "title": "iOS版 石5000個前後+かけら1500前後",
+    "title": "iOS版 石5000個前後+かけら1700前後",
     "description": "",
     "price": "1000円",
     "status": "sale",
     "image": "",
-    "sort": 10
+    "sort": 10,
+    "url": ""
   },
   {
     "id": 11,
     "category": "cat_2",
-    "title": "iOS版 石5000個前後+かけら2600前後",
+    "title": "iOS版 石5000個前後+かけら3000前後",
     "description": "",
     "price": "2000円",
     "status": "sale",
     "image": "",
-    "sort": 11
+    "sort": 11,
+    "url": ""
   },
   {
     "id": 12,
     "category": "cat_2",
-    "title": "クザン確定(数量限定)",
+    "title": "クザン/黒ガープ/サボ 1体指定",
     "description": "石5000個前後+かけら3000前後",
     "price": "3000円",
     "status": "sale",
     "image": "",
-    "sort": 12
+    "sort": 12,
+    "url": ""
   },
   {
     "id": 139,
     "category": "cat_2",
-    "title": "iOS版 石5000個前後+かけら2000前後",
-    "description": "ランダム超フェスキャラ4体所持",
-    "price": "4000円",
-    "status": "sale",
-    "image": "",
-    "sort": 12
-  },
-  {
-    "id": 13,
-    "category": "cat_2",
-    "title": "黒ガープ確定",
-    "description": "石5000個前後+かけら2400前後",
+    "title": "iOS版 ランダム超フェスキャラ3体所持",
+    "description": "石5000個前後+かけら2000個前後",
     "price": "3000円",
     "status": "sale",
     "image": "",
-    "sort": 13
-  },
-  {
-    "id": 15,
-    "category": "cat_2",
-    "title": "上記以外の超フェス1体指定",
-    "description": "石5000個前後+かけら1500前後",
-    "price": "2000円",
-    "status": "sale",
-    "image": "",
-    "sort": 15
+    "sort": 12,
+    "url": ""
   },
   {
     "id": 16,
     "category": "cat_2",
-    "title": "超フェス1体指定（かけら多め）",
-    "description": "石5000個前後+かけら2000前後",
+    "title": "超フェス1体指定+超フェスランダム1体",
+    "description": "石5000個前後+かけら3000前後",
     "price": "4000円",
     "status": "sale",
     "image": "",
-    "sort": 16
-  },
-  {
-    "id": 17,
-    "category": "cat_2",
-    "title": "iOS 超フェス2体指定",
-    "description": "石5000個前後+かけら1500前後",
-    "price": "4000円",
-    "status": "sale",
-    "image": "",
-    "sort": 17
+    "sort": 16,
+    "url": ""
   },
   {
     "id": 18,
