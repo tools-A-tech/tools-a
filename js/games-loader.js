@@ -1,4 +1,3 @@
-/* ProductSiteCMS V0.2 - ゲーム一覧JSON読込 */
 (function () {
     'use strict';
 

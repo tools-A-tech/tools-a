@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tools-a-tech.github.io/tools-a/sitemap.xml

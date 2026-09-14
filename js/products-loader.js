@@ -1,4 +1,3 @@
-/* ProductSiteCMS V0.1 - 商品JSONローダー */
 (function () {
     'use strict';
 

@@ -1,4 +1,3 @@
-/* ProductSiteCMS V0.3 - FAQ JSON loader */
 (function () {
     'use strict';
 
