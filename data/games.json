@@ -488,14 +488,6 @@
     "sort": 63
   },
   {
-    "id": 64,
-    "category": "cat_63",
-    "name": "ひぐらしのなく頃に 命",
-    "image": "https://i.imgur.com/N6aW0ip.png",
-    "status": "show",
-    "sort": 64
-  },
-  {
     "id": 65,
     "category": "cat_64",
     "name": "FGO",
@@ -558,14 +550,6 @@
     "image": "https://i.imgur.com/u25wQ26.png",
     "status": "show",
     "sort": 72
-  },
-  {
-    "id": 73,
-    "category": "cat_72",
-    "name": "FF7 EVER CRISIS",
-    "image": "https://i.imgur.com/ycGoksj.png",
-    "status": "show",
-    "sort": 73
   },
   {
     "id": 74,
