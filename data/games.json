@@ -768,14 +768,6 @@
     "sort": 101
   },
   {
-    "id": 102,
-    "category": "cat_101",
-    "name": "ジャンブラ",
-    "image": "https://i.imgur.com/ZaSE64J.png",
-    "status": "show",
-    "sort": 102
-  },
-  {
     "id": 103,
     "category": "cat_102",
     "name": "ステラソラ",
