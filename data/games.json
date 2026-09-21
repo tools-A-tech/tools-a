@@ -838,5 +838,69 @@
     "image": "images/thumb_de6923ed-808d-4220-a2c9-77ad9a58cf43.png",
     "sort": 110,
     "visible": true
+  },
+  {
+    "id": 111,
+    "category": "cat_110",
+    "name": "恋姫大戦",
+    "image": "images/icon-1789994380419-thumb_7aad8586-1318-4b67-93d3-428cf4557b75.png",
+    "sort": 111,
+    "visible": true
+  },
+  {
+    "id": 112,
+    "category": "cat_111",
+    "name": "クラッシュフィーバー",
+    "image": "images/icon-1789994551108-thumb_crashfever.png",
+    "sort": 112,
+    "visible": true
+  },
+  {
+    "id": 113,
+    "category": "cat_112",
+    "name": "ヒロサバ",
+    "image": "images/icon-1789994648424-thumb_cf679007-03e4-4f45-8cdf-41929c06eb7d.png",
+    "sort": 113,
+    "visible": true
+  },
+  {
+    "id": 114,
+    "category": "cat_113",
+    "name": "ドットアビス",
+    "image": "images/icon-1789994792297-thumb_afb461a6-e560-4924-9556-5b55ae524888.png",
+    "sort": 114,
+    "visible": true
+  },
+  {
+    "id": 115,
+    "category": "cat_114",
+    "name": "クロエコ 無職転生",
+    "image": "images/icon-1789994940242-thumb_330b322b-2d46-4548-8905-fda26c2af5eb.png",
+    "sort": 115,
+    "visible": true
+  },
+  {
+    "id": 116,
+    "category": "cat_115",
+    "name": "ゼンゼロ",
+    "image": "images/icon-1789995052269-thumb_4ae60b61-c297-4a0f-af3a-9162937022a7.png",
+    "sort": 116,
+    "visible": true
+  },
+  {
+    "id": 117,
+    "category": "cat_116",
+    "name": "アンリベ(東京リベンジャーズ)",
+    "image": "images/icon-1789995156665-thumb_70bdd873-2a5d-445d-8154-53deb0ef2d42.png",
+    "sort": 117,
+    "visible": true
+  },
+  {
+    "id": 118,
+    "category": "cat_117",
+    "name": "ポケチャン(Pokémon Champions)",
+    "image": "images/icon-1789995371282-thumb_dd8e6858-2f09-4b43-81ef-eaa399343328.png",
+    "sort": 118,
+    "visible": true
   }
 ]
