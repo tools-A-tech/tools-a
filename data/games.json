@@ -5,7 +5,8 @@
     "name": "モンスト",
     "image": "https://i.imgur.com/3m0t0yL.png",
     "status": "show",
-    "sort": 1
+    "sort": 1,
+    "slug": "monster-strike"
   },
   {
     "id": 2,
@@ -13,7 +14,8 @@
     "name": "ファンパレ",
     "image": "https://i.imgur.com/Vo9OmpJ.png",
     "status": "show",
-    "sort": 2
+    "sort": 2,
+    "slug": "fanpare"
   },
   {
     "id": 3,
@@ -21,7 +23,8 @@
     "name": "バウンティラッシュ",
     "image": "https://i.imgur.com/T8uBNWo.png",
     "status": "show",
-    "sort": 3
+    "sort": 3,
+    "slug": "bounty-rush"
   },
   {
     "id": 52,
@@ -29,7 +32,8 @@
     "name": "ドカバト",
     "image": "https://i.imgur.com/4JLHKwG.png",
     "status": "show",
-    "sort": 4
+    "sort": 4,
+    "slug": "dokkan-battle"
   },
   {
     "id": 4,
@@ -37,7 +41,8 @@
     "name": "アイドリッシュセブン",
     "image": "https://i.imgur.com/QPeWwzk.png",
     "status": "show",
-    "sort": 5
+    "sort": 5,
+    "slug": "アイドリッシュセブン"
   },
   {
     "id": 5,
@@ -45,7 +50,8 @@
     "name": "IDOLY PRIDE",
     "image": "https://i.imgur.com/l7RCd1I.png",
     "status": "show",
-    "sort": 6
+    "sort": 6,
+    "slug": "idoly-pride"
   },
   {
     "id": 6,
@@ -53,7 +59,8 @@
     "name": "アズレン",
     "image": "https://i.imgur.com/attWJZV.png",
     "status": "show",
-    "sort": 7
+    "sort": 7,
+    "slug": "アズレン"
   },
   {
     "id": 7,
@@ -61,7 +68,8 @@
     "name": "あんスタ！！Music",
     "image": "https://i.imgur.com/HMr5WTx.png",
     "status": "show",
-    "sort": 8
+    "sort": 8,
+    "slug": "あんスタ-music"
   },
   {
     "id": 117,
@@ -69,7 +77,8 @@
     "name": "アンリベ(東京リベンジャーズ)",
     "image": "images/icon-1789995156665-thumb_70bdd873-2a5d-445d-8154-53deb0ef2d42.png",
     "sort": 9,
-    "visible": true
+    "visible": true,
+    "slug": "アンリベ-東京リベンジャーズ"
   },
   {
     "id": 8,
@@ -77,7 +86,8 @@
     "name": "アークナイツ",
     "image": "https://i.imgur.com/4afLGbA.png",
     "status": "show",
-    "sort": 10
+    "sort": 10,
+    "slug": "アークナイツ"
   },
   {
     "id": 9,
@@ -85,7 +95,8 @@
     "name": "アークナイツエンドフィールド",
     "image": "https://i.imgur.com/aj4XPud.png",
     "status": "show",
-    "sort": 11
+    "sort": 11,
+    "slug": "アークナイツエンドフィールド"
   },
   {
     "id": 10,
@@ -93,7 +104,8 @@
     "name": "アナザーエデン",
     "image": "https://i.imgur.com/8p26r22.png",
     "status": "show",
-    "sort": 12
+    "sort": 12,
+    "slug": "アナザーエデン"
   },
   {
     "id": 11,
@@ -101,7 +113,8 @@
     "name": "アウプレ",
     "image": "https://i.imgur.com/9yn1TZs.png",
     "status": "show",
-    "sort": 13
+    "sort": 13,
+    "slug": "アウプレ"
   },
   {
     "id": 12,
@@ -109,7 +122,8 @@
     "name": "efootball",
     "image": "https://i.imgur.com/LKrLLZe.png",
     "status": "show",
-    "sort": 14
+    "sort": 14,
+    "slug": "efootball"
   },
   {
     "id": 13,
@@ -117,7 +131,8 @@
     "name": "ウマ娘",
     "image": "https://i.imgur.com/dqqHpky.png",
     "status": "show",
-    "sort": 15
+    "sort": 15,
+    "slug": "ウマ娘"
   },
   {
     "id": 14,
@@ -125,7 +140,8 @@
     "name": "ウィンヒロ",
     "image": "https://i.imgur.com/r3Vtcza.png",
     "status": "show",
-    "sort": 16
+    "sort": 16,
+    "slug": "ウィンヒロ"
   },
   {
     "id": 15,
@@ -133,7 +149,8 @@
     "name": "ウィズダフネ",
     "image": "https://i.imgur.com/k6WvEnm.png",
     "status": "show",
-    "sort": 17
+    "sort": 17,
+    "slug": "ウィズダフネ"
   },
   {
     "id": 16,
@@ -141,7 +158,8 @@
     "name": "SDガンダムGジェネエターナル",
     "image": "https://i.imgur.com/rwUZpWy.png",
     "status": "show",
-    "sort": 18
+    "sort": 18,
+    "slug": "sdガンダムgジェネエターナル"
   },
   {
     "id": 17,
@@ -149,7 +167,8 @@
     "name": "エレスト",
     "image": "https://i.imgur.com/FobOB8k.png",
     "status": "show",
-    "sort": 19
+    "sort": 19,
+    "slug": "エレスト"
   },
   {
     "id": 18,
@@ -157,7 +176,8 @@
     "name": "エイトリ 18TRIP",
     "image": "https://i.imgur.com/LwWmw5Y.png",
     "status": "show",
-    "sort": 20
+    "sort": 20,
+    "slug": "エイトリ-18trip"
   },
   {
     "id": 19,
@@ -165,7 +185,8 @@
     "name": "MLB RIVALS",
     "image": "https://i.imgur.com/LJk27fO.png",
     "status": "show",
-    "sort": 21
+    "sort": 21,
+    "slug": "mlb-rivals"
   },
   {
     "id": 20,
@@ -173,7 +194,8 @@
     "name": "俺アラ",
     "image": "https://i.imgur.com/JJjP3RJ.png",
     "status": "show",
-    "sort": 22
+    "sort": 22,
+    "slug": "俺アラ"
   },
   {
     "id": 21,
@@ -181,7 +203,8 @@
     "name": "オバマス",
     "image": "https://i.imgur.com/rbWXzwk.png",
     "status": "show",
-    "sort": 23
+    "sort": 23,
+    "slug": "オバマス"
   },
   {
     "id": 22,
@@ -189,7 +212,8 @@
     "name": "オセロニア",
     "image": "https://i.imgur.com/K53OeuJ.png",
     "status": "show",
-    "sort": 24
+    "sort": 24,
+    "slug": "オセロニア"
   },
   {
     "id": 100,
@@ -197,7 +221,8 @@
     "name": "オラドラ",
     "image": "https://i.imgur.com/FTEC3N2.png",
     "status": "show",
-    "sort": 25
+    "sort": 25,
+    "slug": "オラドラ"
   },
   {
     "id": 23,
@@ -205,7 +230,8 @@
     "name": "怪獣8号 THE GAME",
     "image": "https://i.imgur.com/Pp043Rw.png",
     "status": "show",
-    "sort": 26
+    "sort": 26,
+    "slug": "怪獣8号-the-game"
   },
   {
     "id": 101,
@@ -213,7 +239,8 @@
     "name": "カオスゼロナイトメア",
     "image": "https://i.imgur.com/lgbmMvF.png",
     "status": "show",
-    "sort": 27
+    "sort": 27,
+    "slug": "カオスゼロナイトメア"
   },
   {
     "id": 24,
@@ -221,7 +248,8 @@
     "name": "学園アイドルマスター",
     "image": "https://i.imgur.com/M0Cg7fY.png",
     "status": "show",
-    "sort": 28
+    "sort": 28,
+    "slug": "学園アイドルマスター"
   },
   {
     "id": 25,
@@ -229,7 +257,8 @@
     "name": "カゲマス",
     "image": "https://i.imgur.com/zZYivnZ.png",
     "status": "show",
-    "sort": 29
+    "sort": 29,
+    "slug": "カゲマス"
   },
   {
     "id": 26,
@@ -237,7 +266,8 @@
     "name": "ガデテル",
     "image": "https://i.imgur.com/aSUvJux.png",
     "status": "show",
-    "sort": 30
+    "sort": 30,
+    "slug": "ガデテル"
   },
   {
     "id": 27,
@@ -245,7 +275,8 @@
     "name": "キングダム頂点",
     "image": "https://i.imgur.com/QPUspju.png",
     "status": "show",
-    "sort": 31
+    "sort": 31,
+    "slug": "キングダム頂点"
   },
   {
     "id": 112,
@@ -253,7 +284,8 @@
     "name": "クラッシュフィーバー",
     "image": "images/icon-1789994551108-thumb_crashfever.png",
     "sort": 32,
-    "visible": true
+    "visible": true,
+    "slug": "クラッシュフィーバー"
   },
   {
     "id": 28,
@@ -261,7 +293,8 @@
     "name": "グラクロ",
     "image": "https://i.imgur.com/6ZWwi4v.png",
     "status": "show",
-    "sort": 33
+    "sort": 33,
+    "slug": "グラクロ"
   },
   {
     "id": 29,
@@ -269,7 +302,8 @@
     "name": "グラブル",
     "image": "https://i.imgur.com/2CqYBIs.png",
     "status": "show",
-    "sort": 34
+    "sort": 34,
+    "slug": "グラブル"
   },
   {
     "id": 30,
@@ -277,7 +311,8 @@
     "name": "グラサマ",
     "image": "https://i.imgur.com/a8MifJI.png",
     "status": "show",
-    "sort": 35
+    "sort": 35,
+    "slug": "グラサマ"
   },
   {
     "id": 31,
@@ -285,7 +320,8 @@
     "name": "クッキーランキングダム",
     "image": "https://i.imgur.com/GnxIIfG.png",
     "status": "show",
-    "sort": 36
+    "sort": 36,
+    "slug": "クッキーランキングダム"
   },
   {
     "id": 115,
@@ -293,7 +329,8 @@
     "name": "クロエコ 無職転生",
     "image": "images/icon-1789994940242-thumb_330b322b-2d46-4548-8905-fda26c2af5eb.png",
     "sort": 37,
-    "visible": true
+    "visible": true,
+    "slug": "クロエコ-無職転生"
   },
   {
     "id": 32,
@@ -301,7 +338,8 @@
     "name": "原神",
     "image": "https://i.imgur.com/5sA4rYW.png",
     "status": "show",
-    "sort": 38
+    "sort": 38,
+    "slug": "genshin"
   },
   {
     "id": 33,
@@ -309,7 +347,8 @@
     "name": "剣と魔法のログレス",
     "image": "https://i.imgur.com/7eykuf3.png",
     "status": "show",
-    "sort": 39
+    "sort": 39,
+    "slug": "剣と魔法のログレス"
   },
   {
     "id": 111,
@@ -317,7 +356,8 @@
     "name": "恋姫大戦",
     "image": "images/icon-1789994380419-thumb_7aad8586-1318-4b67-93d3-428cf4557b75.png",
     "sort": 40,
-    "visible": true
+    "visible": true,
+    "slug": "恋姫大戦"
   },
   {
     "id": 34,
@@ -325,7 +365,8 @@
     "name": "コトダマン",
     "image": "https://i.imgur.com/u6Wrb6i.png",
     "status": "show",
-    "sort": 41
+    "sort": 41,
+    "slug": "コトダマン"
   },
   {
     "id": 36,
@@ -333,7 +374,8 @@
     "name": "サモンズボード",
     "image": "https://i.imgur.com/OpYqcwK.png",
     "status": "show",
-    "sort": 42
+    "sort": 42,
+    "slug": "サモンズボード"
   },
   {
     "id": 37,
@@ -341,7 +383,8 @@
     "name": "実況パワフルプロ野球",
     "image": "https://i.imgur.com/EFqCp9R.png",
     "status": "show",
-    "sort": 43
+    "sort": 43,
+    "slug": "実況パワフルプロ野球"
   },
   {
     "id": 38,
@@ -349,7 +392,8 @@
     "name": "シャドバビヨンド",
     "image": "https://i.imgur.com/qWkeuvo.png",
     "status": "show",
-    "sort": 44
+    "sort": 44,
+    "slug": "シャドバビヨンド"
   },
   {
     "id": 39,
@@ -357,7 +401,8 @@
     "name": "白猫プロジェクト",
     "image": "https://i.imgur.com/MBCqieU.png",
     "status": "show",
-    "sort": 45
+    "sort": 45,
+    "slug": "白猫プロジェクト"
   },
   {
     "id": 40,
@@ -365,7 +410,8 @@
     "name": "城ドラ",
     "image": "https://i.imgur.com/yKtDKQP.png",
     "status": "show",
-    "sort": 46
+    "sort": 46,
+    "slug": "城ドラ"
   },
   {
     "id": 41,
@@ -373,7 +419,8 @@
     "name": "シャニマス",
     "image": "https://i.imgur.com/oF2UFqb.png",
     "status": "show",
-    "sort": 47
+    "sort": 47,
+    "slug": "シャニマス"
   },
   {
     "id": 42,
@@ -381,7 +428,8 @@
     "name": "シャニソン",
     "image": "https://i.imgur.com/Wq6kZIM.png",
     "status": "show",
-    "sort": 48
+    "sort": 48,
+    "slug": "シャニソン"
   },
   {
     "id": 43,
@@ -389,7 +437,8 @@
     "name": "スーパーロボット大戦DD",
     "image": "https://i.imgur.com/nJACodb.png",
     "status": "show",
-    "sort": 49
+    "sort": 49,
+    "slug": "スーパーロボット大戦dd"
   },
   {
     "id": 44,
@@ -397,7 +446,8 @@
     "name": "進撃の巨人ブレオダ",
     "image": "https://i.imgur.com/yKIh6x4.png",
     "status": "show",
-    "sort": 50
+    "sort": 50,
+    "slug": "進撃の巨人ブレオダ"
   },
   {
     "id": 103,
@@ -405,7 +455,8 @@
     "name": "ステラソラ",
     "image": "https://i.imgur.com/uO634zd.png",
     "status": "show",
-    "sort": 51
+    "sort": 51,
+    "slug": "ステラソラ"
   },
   {
     "id": 104,
@@ -413,7 +464,8 @@
     "name": "スマグロ",
     "image": "https://i.imgur.com/92rW9Py.png",
     "status": "show",
-    "sort": 52
+    "sort": 52,
+    "slug": "スマグロ"
   },
   {
     "id": 116,
@@ -421,7 +473,8 @@
     "name": "ゼンゼロ",
     "image": "images/icon-1789995052269-thumb_4ae60b61-c297-4a0f-af3a-9162937022a7.png",
     "sort": 53,
-    "visible": true
+    "visible": true,
+    "slug": "zenless-zone-zero"
   },
   {
     "id": 45,
@@ -429,7 +482,8 @@
     "name": "ツイステ",
     "image": "https://i.imgur.com/LRrjcGk.png",
     "status": "show",
-    "sort": 54
+    "sort": 54,
+    "slug": "ツイステ"
   },
   {
     "id": 46,
@@ -437,7 +491,8 @@
     "name": "デュエプレ",
     "image": "https://i.imgur.com/TCJySEO.png",
     "status": "show",
-    "sort": 55
+    "sort": 55,
+    "slug": "デュエプレ"
   },
   {
     "id": 47,
@@ -445,7 +500,8 @@
     "name": "デレステ",
     "image": "https://i.imgur.com/TSGV4Ru.png",
     "status": "show",
-    "sort": 56
+    "sort": 56,
+    "slug": "デレステ"
   },
   {
     "id": 48,
@@ -453,7 +509,8 @@
     "name": "ティンクルスターナイツ",
     "image": "https://i.imgur.com/XaTjpqP.png",
     "status": "show",
-    "sort": 57
+    "sort": 57,
+    "slug": "ティンクルスターナイツ"
   },
   {
     "id": 50,
@@ -461,7 +518,8 @@
     "name": "D4DJグルミク",
     "image": "https://i.imgur.com/7XP7g4U.png",
     "status": "show",
-    "sort": 58
+    "sort": 58,
+    "slug": "d4djグルミク"
   },
   {
     "id": 51,
@@ -469,7 +527,8 @@
     "name": "DQタクト",
     "image": "https://i.imgur.com/WEqfzDr.png",
     "status": "show",
-    "sort": 59
+    "sort": 59,
+    "slug": "dqタクト"
   },
   {
     "id": 108,
@@ -477,7 +536,8 @@
     "name": "東京ディバンカー",
     "image": "https://i.imgur.com/0YHrg7Y.png",
     "status": "show",
-    "sort": 60
+    "sort": 60,
+    "slug": "東京ディバンカー"
   },
   {
     "id": 53,
@@ -485,7 +545,8 @@
     "name": "ドラゴンボールレジェンズ",
     "image": "https://i.imgur.com/EaTAJzJ.png",
     "status": "show",
-    "sort": 61
+    "sort": 61,
+    "slug": "ドラゴンボールレジェンズ"
   },
   {
     "id": 114,
@@ -493,7 +554,8 @@
     "name": "ドットアビス",
     "image": "images/icon-1789994792297-thumb_afb461a6-e560-4924-9556-5b55ae524888.png",
     "sort": 62,
-    "visible": true
+    "visible": true,
+    "slug": "ドットアビス"
   },
   {
     "id": 54,
@@ -501,7 +563,8 @@
     "name": "トレクル",
     "image": "https://i.imgur.com/ZfbPVAw.png",
     "status": "show",
-    "sort": 63
+    "sort": 63,
+    "slug": "トレクル"
   },
   {
     "id": 105,
@@ -509,7 +572,8 @@
     "name": "トリッカル もちもちほっペ大作戦",
     "image": "https://i.imgur.com/KWZQhGc.png",
     "status": "show",
-    "sort": 64
+    "sort": 64,
+    "slug": "トリッカル-もちもちほっペ大作戦"
   },
   {
     "id": 55,
@@ -517,7 +581,8 @@
     "name": "東方ロストワード",
     "image": "https://i.imgur.com/aZlAnRt.png",
     "status": "show",
-    "sort": 65
+    "sort": 65,
+    "slug": "東方ロストワード"
   },
   {
     "id": 56,
@@ -525,7 +590,8 @@
     "name": "ドルフィンウェーブ",
     "image": "https://i.imgur.com/njp6E2t.png",
     "status": "show",
-    "sort": 66
+    "sort": 66,
+    "slug": "ドルフィンウェーブ"
   },
   {
     "id": 106,
@@ -533,7 +599,8 @@
     "name": "ナナオリ",
     "image": "https://i.imgur.com/swzfrpt.png",
     "status": "show",
-    "sort": 67
+    "sort": 67,
+    "slug": "ナナオリ"
   },
   {
     "id": 57,
@@ -541,7 +608,8 @@
     "name": "にゃんこ大戦争",
     "image": "https://i.imgur.com/hAS1aOP.png",
     "status": "show",
-    "sort": 68
+    "sort": 68,
+    "slug": "にゃんこ大戦争"
   },
   {
     "id": 58,
@@ -549,7 +617,8 @@
     "name": "NIKKE",
     "image": "https://i.imgur.com/oyiLc2j.png",
     "status": "show",
-    "sort": 69
+    "sort": 69,
+    "slug": "nikke"
   },
   {
     "id": 107,
@@ -557,7 +626,8 @@
     "name": "ネバエバ (NTE)",
     "image": "https://i.imgur.com/wpgVaGq.png",
     "status": "show",
-    "sort": 70
+    "sort": 70,
+    "slug": "ネバエバ-nte"
   },
   {
     "id": 59,
@@ -565,7 +635,8 @@
     "name": "パズドラ",
     "image": "https://i.imgur.com/PzopAL4.png",
     "status": "show",
-    "sort": 71
+    "sort": 71,
+    "slug": "puzzle-and-dragons"
   },
   {
     "id": 60,
@@ -573,7 +644,8 @@
     "name": "バンドリ",
     "image": "https://i.imgur.com/OaQWt3J.png",
     "status": "show",
-    "sort": 72
+    "sort": 72,
+    "slug": "バンドリ"
   },
   {
     "id": 61,
@@ -581,7 +653,8 @@
     "name": "ハイキュー!! TOUCH THE DREAM",
     "image": "https://i.imgur.com/7uKbOtO.png",
     "status": "show",
-    "sort": 73
+    "sort": 73,
+    "slug": "ハイキュー-touch-the-dream"
   },
   {
     "id": 62,
@@ -589,7 +662,8 @@
     "name": "ぱずりべ",
     "image": "https://i.imgur.com/eg3vWvd.png",
     "status": "show",
-    "sort": 74
+    "sort": 74,
+    "slug": "ぱずりべ"
   },
   {
     "id": 63,
@@ -597,7 +671,8 @@
     "name": "ヒプマイ",
     "image": "https://i.imgur.com/Fc3FxBm.png",
     "status": "show",
-    "sort": 75
+    "sort": 75,
+    "slug": "ヒプマイ"
   },
   {
     "id": 113,
@@ -605,7 +680,8 @@
     "name": "ヒロサバ",
     "image": "images/icon-1789994648424-thumb_cf679007-03e4-4f45-8cdf-41929c06eb7d.png",
     "sort": 76,
-    "visible": true
+    "visible": true,
+    "slug": "ヒロサバ"
   },
   {
     "id": 65,
@@ -613,7 +689,8 @@
     "name": "FGO",
     "image": "https://i.imgur.com/tNe0I5L.png",
     "status": "show",
-    "sort": 77
+    "sort": 77,
+    "slug": "fgo"
   },
   {
     "id": 66,
@@ -621,7 +698,8 @@
     "name": "プロセカ",
     "image": "https://i.imgur.com/6LNoZmg.png",
     "status": "show",
-    "sort": 78
+    "sort": 78,
+    "slug": "プロセカ"
   },
   {
     "id": 67,
@@ -629,7 +707,8 @@
     "name": "プリコネ",
     "image": "https://i.imgur.com/zkIBFYg.png",
     "status": "show",
-    "sort": 79
+    "sort": 79,
+    "slug": "プリコネ"
   },
   {
     "id": 68,
@@ -637,7 +716,8 @@
     "name": "ブルアカ",
     "image": "https://i.imgur.com/tTWnEHA.png",
     "status": "show",
-    "sort": 80
+    "sort": 80,
+    "slug": "blue-archive"
   },
   {
     "id": 69,
@@ -645,7 +725,8 @@
     "name": "ブレソル",
     "image": "https://i.imgur.com/IzjTjDh.png",
     "status": "show",
-    "sort": 81
+    "sort": 81,
+    "slug": "ブレソル"
   },
   {
     "id": 70,
@@ -653,7 +734,8 @@
     "name": "プロスピ",
     "image": "https://i.imgur.com/XgbW3Sx.png",
     "status": "show",
-    "sort": 82
+    "sort": 82,
+    "slug": "prospi-a"
   },
   {
     "id": 71,
@@ -661,7 +743,8 @@
     "name": "ブルーロック Project: World Champion",
     "image": "https://i.imgur.com/3jpOeYm.png",
     "status": "show",
-    "sort": 83
+    "sort": 83,
+    "slug": "ブルーロック-project-world-champion"
   },
   {
     "id": 72,
@@ -669,7 +752,8 @@
     "name": "ブレイクマイケース",
     "image": "https://i.imgur.com/u25wQ26.png",
     "status": "show",
-    "sort": 84
+    "sort": 84,
+    "slug": "ブレイクマイケース"
   },
   {
     "id": 74,
@@ -677,7 +761,8 @@
     "name": "ファイアーエムブレム ヒーローズ",
     "image": "https://i.imgur.com/sAAoWsx.png",
     "status": "show",
-    "sort": 85
+    "sort": 85,
+    "slug": "ファイアーエムブレム-ヒーローズ"
   },
   {
     "id": 75,
@@ -685,7 +770,8 @@
     "name": "ヘブバン",
     "image": "https://i.imgur.com/NmkIHv5.png",
     "status": "show",
-    "sort": 86
+    "sort": 86,
+    "slug": "ヘブバン"
   },
   {
     "id": 76,
@@ -693,7 +779,8 @@
     "name": "崩壊スターレイル",
     "image": "https://i.imgur.com/ef3yJv0.png",
     "status": "show",
-    "sort": 87
+    "sort": 87,
+    "slug": "honkai-star-rail"
   },
   {
     "id": 77,
@@ -701,7 +788,8 @@
     "name": "ポコダン",
     "image": "https://i.imgur.com/hFp2kOX.png",
     "status": "show",
-    "sort": 88
+    "sort": 88,
+    "slug": "ポコダン"
   },
   {
     "id": 118,
@@ -709,7 +797,8 @@
     "name": "ポケチャン(Pokémon Champions)",
     "image": "images/icon-1789995371282-thumb_dd8e6858-2f09-4b43-81ef-eaa399343328.png",
     "sort": 89,
-    "visible": true
+    "visible": true,
+    "slug": "ポケチャン-pokémon-champions"
   },
   {
     "id": 78,
@@ -717,7 +806,8 @@
     "name": "ポケポケ",
     "image": "https://i.imgur.com/VeVm5BN.png",
     "status": "show",
-    "sort": 90
+    "sort": 90,
+    "slug": "ポケポケ"
   },
   {
     "id": 79,
@@ -725,7 +815,8 @@
     "name": "ポケマス",
     "image": "https://i.imgur.com/P7GXHjT.png",
     "status": "show",
-    "sort": 91
+    "sort": 91,
+    "slug": "ポケマス"
   },
   {
     "id": 80,
@@ -733,7 +824,8 @@
     "name": "ポケモンユナイト",
     "image": "https://i.imgur.com/ObYkBR4.png",
     "status": "show",
-    "sort": 92
+    "sort": 92,
+    "slug": "ポケモンユナイト"
   },
   {
     "id": 110,
@@ -741,7 +833,8 @@
     "name": "ホロドリ",
     "image": "images/thumb_de6923ed-808d-4220-a2c9-77ad9a58cf43.png",
     "sort": 93,
-    "visible": true
+    "visible": true,
+    "slug": "ホロドリ"
   },
   {
     "id": 81,
@@ -749,7 +842,8 @@
     "name": "まどドラ",
     "image": "https://i.imgur.com/kXcmgDu.png",
     "status": "show",
-    "sort": 94
+    "sort": 94,
+    "slug": "まどドラ"
   },
   {
     "id": 82,
@@ -757,7 +851,8 @@
     "name": "まおりゅう",
     "image": "https://i.imgur.com/G4MQYqE.png",
     "status": "show",
-    "sort": 95
+    "sort": 95,
+    "slug": "まおりゅう"
   },
   {
     "id": 83,
@@ -765,7 +860,8 @@
     "name": "魔法使いの約束",
     "image": "https://i.imgur.com/VbyAvTT.png",
     "status": "show",
-    "sort": 96
+    "sort": 96,
+    "slug": "魔法使いの約束"
   },
   {
     "id": 84,
@@ -773,7 +869,8 @@
     "name": "メメントモリ",
     "image": "https://i.imgur.com/X10QKtP.png",
     "status": "show",
-    "sort": 97
+    "sort": 97,
+    "slug": "メメントモリ"
   },
   {
     "id": 85,
@@ -781,7 +878,8 @@
     "name": "メジャスピ",
     "image": "https://i.imgur.com/0IVqXxu.png",
     "status": "show",
-    "sort": 98
+    "sort": 98,
+    "slug": "メジャスピ"
   },
   {
     "id": 86,
@@ -789,7 +887,8 @@
     "name": "鳴潮",
     "image": "https://i.imgur.com/m9CbYkd.png",
     "status": "show",
-    "sort": 99
+    "sort": 99,
+    "slug": "wuthering-waves"
   },
   {
     "id": 88,
@@ -797,7 +896,8 @@
     "name": "UCエンゲージ",
     "image": "https://i.imgur.com/AVXyGnE.png",
     "status": "show",
-    "sort": 100
+    "sort": 100,
+    "slug": "ucエンゲージ"
   },
   {
     "id": 89,
@@ -805,7 +905,8 @@
     "name": "遊戯王マスターデュエル",
     "image": "https://i.imgur.com/sDRWWrw.png",
     "status": "show",
-    "sort": 101
+    "sort": 101,
+    "slug": "遊戯王マスターデュエル"
   },
   {
     "id": 90,
@@ -813,7 +914,8 @@
     "name": "妖怪ウォッチぷにぷに",
     "image": "https://i.imgur.com/anLvOA2.png",
     "status": "show",
-    "sort": 102
+    "sort": 102,
+    "slug": "妖怪ウォッチぷにぷに"
   },
   {
     "id": 91,
@@ -821,7 +923,8 @@
     "name": "ラストクラウディア",
     "image": "https://i.imgur.com/zocU07m.png",
     "status": "show",
-    "sort": 103
+    "sort": 103,
+    "slug": "ラストクラウディア"
   },
   {
     "id": 109,
@@ -829,7 +932,8 @@
     "name": "リヴリーアイランド",
     "image": "https://i.imgur.com/ZPAoniw.png",
     "status": "show",
-    "sort": 104
+    "sort": 104,
+    "slug": "リヴリーアイランド"
   },
   {
     "id": 92,
@@ -837,7 +941,8 @@
     "name": "リリステ",
     "image": "https://i.imgur.com/EAoo1MF.png",
     "status": "show",
-    "sort": 105
+    "sort": 105,
+    "slug": "リリステ"
   },
   {
     "id": 93,
@@ -845,7 +950,8 @@
     "name": "りばりば",
     "image": "https://i.imgur.com/yp7mPzP.png",
     "status": "show",
-    "sort": 106
+    "sort": 106,
+    "slug": "りばりば"
   },
   {
     "id": 94,
@@ -853,7 +959,8 @@
     "name": "Limbus Company",
     "image": "https://i.imgur.com/IeZt6MJ.png",
     "status": "show",
-    "sort": 107
+    "sort": 107,
+    "slug": "limbus-company"
   },
   {
     "id": 95,
@@ -861,7 +968,8 @@
     "name": "龍が如くオンライン",
     "image": "https://i.imgur.com/aPQNFbR.png",
     "status": "show",
-    "sort": 108
+    "sort": 108,
+    "slug": "龍が如くオンライン"
   },
   {
     "id": 96,
@@ -869,7 +977,8 @@
     "name": "レスレリ",
     "image": "https://i.imgur.com/fKhfWjR.png",
     "status": "show",
-    "sort": 109
+    "sort": 109,
+    "slug": "レスレリ"
   },
   {
     "id": 97,
@@ -877,7 +986,8 @@
     "name": "れじぇくろ！",
     "image": "https://i.imgur.com/v4n1m5k.png",
     "status": "show",
-    "sort": 110
+    "sort": 110,
+    "slug": "れじぇくろ"
   },
   {
     "id": 98,
@@ -885,7 +995,8 @@
     "name": "ロマサガRS",
     "image": "https://i.imgur.com/MNpnx1h.png",
     "status": "show",
-    "sort": 111
+    "sort": 111,
+    "slug": "ロマサガrs"
   },
   {
     "id": 99,
@@ -893,6 +1004,7 @@
     "name": "ロススト",
     "image": "https://i.imgur.com/sz9JG9h.png",
     "status": "show",
-    "sort": 112
+    "sort": 112,
+    "slug": "ロススト"
   }
 ]
