@@ -1006,5 +1006,14 @@
     "status": "show",
     "sort": 112,
     "slug": "ロススト"
+  },
+  {
+    "id": 119,
+    "category": "cat_118",
+    "name": "モンスターハンターアウトランダーズ(MHO)",
+    "image": "images/thumb_2d580bc0-0e25-4fe4-bb3e-90bb11539898.png",
+    "sort": 113,
+    "visible": true,
+    "slug": "モンスターハンターアウトランダーズ-mho"
   }
 ]
