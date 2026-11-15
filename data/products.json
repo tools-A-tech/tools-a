@@ -1041,7 +1041,7 @@
     "id": 90,
     "category": "cat_64",
     "title": "初期垢",
-    "description": "石1400前後 オベロン+マーリン/1000円\n石3000前後 呼符150前後キャラランダム /2000円",
+    "description": "石1400前後 オベロン+マーリン/1000円",
     "price": "1000円～",
     "status": "sale",
     "image": "https://tools-a-tech.github.io/tools-a-accounts/",
@@ -1051,34 +1051,24 @@
   {
     "id": 91,
     "category": "cat_64",
-    "title": "進行済み 奏2",
-    "description": "キャストリア+オベロン+コヤンスカヤなど 石5000個前後相当",
-    "price": "3000円",
+    "title": "FGO 宝具5所持石垢在庫",
+    "description": "在庫変動がある場合があります\nリンク先から選んでいただき、DMでご相談ください",
+    "price": "3000円～",
     "status": "sale",
     "image": "",
-    "sort": 91
+    "sort": 91,
+    "url": "https://tools-a-tech.github.io/fgo/"
   },
   {
     "id": 92,
     "category": "cat_64",
     "title": "進行済み 奏4",
-    "description": "キャストリア+オベロン+コヤンスカヤなどキャラ多数 \n石6000個前後相当",
-    "price": "5000円",
+    "description": "良キャラ多数 石8000個～10000個程度\n\n予算が大丈夫な方のみDMまでお問い合わせください\nリンク先のサイトに掲載しているものよりも所持アイテムや素材数が豊富なアカウントになります(内容はランダムです)\n希望のキャラ宝具5でお探しします\n\n予算をお知らせいただけましたらこちらからご提案をさせていただきます",
+    "price": "10000円以上",
     "status": "sale",
     "image": "",
     "sort": 92,
     "url": ""
-  },
-  {
-    "id": 141,
-    "category": "cat_64",
-    "title": "進行済み 奏2～4 宝具5所持石垢",
-    "description": "オルガマリー宝具5所持\nリリス宝具5所持 などなど...\n下記リンクから各種用意可能です\n3000円からと格安品をそろえております\n\n石7000以上など高額品は別途DMにてお問い合わせください",
-    "price": "3000円～",
-    "status": "sale",
-    "image": "",
-    "sort": 93,
-    "url": "https://tools-a-tech.github.io/fgo/"
   },
   {
     "id": 93,
