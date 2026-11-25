@@ -700,21 +700,23 @@
     "id": 60,
     "category": "cat_38",
     "title": "初期垢",
-    "description": "ジュエル9000 /3000円\nジュエル23000 /9000円",
+    "description": "ジュエル9000 /4000円\nジュエル23000 /10000円",
     "price": "3000円～9000円",
     "status": "sale",
     "image": "",
-    "sort": 60
+    "sort": 60,
+    "url": ""
   },
   {
     "id": 61,
     "category": "cat_38",
     "title": "進行済み",
-    "description": "ジュエル16000 /5000円\nジュエル25000 /7000円",
+    "description": "ジュエル16000 /5000円\nジュエル25000 /8000円",
     "price": "5000円～7000円",
     "status": "sale",
     "image": "",
-    "sort": 61
+    "sort": 61,
+    "url": ""
   },
   {
     "id": 62,
